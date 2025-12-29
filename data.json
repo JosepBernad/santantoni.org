@@ -1,0 +1,96 @@
+{
+  "featured": {
+    "year": 2025,
+    "title": "Sant Antoni 2025",
+    "subtitle": "Dimonis, foguerons i beneïdes",
+    "coverUrl": "https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg",
+    "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXX",
+    "duration": "14 min"
+  },
+  "videos": [
+    {
+      "year": 2025,
+      "coverUrl": "https://uh.gsstatic.es/sfAttachPlugin/2695437.jpg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXX",
+      "duration": "14 min"
+    },
+    {
+      "year": 2024,
+      "coverUrl": "https://españaenfiestas.es/images/fiestas/188/_thumb2/fiesta-sant-antoni-arta.jpg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "12 min"
+    },
+    {
+      "year": 2023,
+      "coverUrl": "https://www.mallorcadiario.com/wp-content/uploads/2021/12/www.mallorcadiario.com__fotos_1_445274_fiestas-sant-antoni-arta.jpg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "15 min"
+    },
+    {
+      "year": 2022,
+      "coverUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ78YkVLKiQmkhgm9MDxFwUFoskH4RlW2sU0Q&s",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "10 min"
+    },
+    {
+      "year": 2020,
+      "coverUrl": "https://imatges.vilaweb.cat/nacional/wp-content/uploads/2019/01/diables-darta-15180936.jpeg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "14 min"
+    },
+    {
+      "year": 2019,
+      "coverUrl": "https://lh5.googleusercontent.com/proxy/lEQ_tNVjhGD7tnbQMK6nWUqZSrLH3UOhA8eAXyLvVbXhP7pssSZ9Cf9QTLT9Z3Tz6a3jcBHP2XPTEkcjGvRL6q71AzGGUf2y9WWXsiHjq0M86EidPl8m76VRkvWMu3E",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "11 min"
+    },
+    {
+      "year": 2018,
+      "coverUrl": "https://static1.ara.cat/clip/b7852e52-7c77-4fdc-a8dd-c71c15d6eea8_16-9-aspect-ratio_default_0.jpg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "9 min"
+    },
+    {
+      "year": 2017,
+      "coverUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTClHppl13X4qvxeoof-gbG_vot7ZkjaV33ag&s",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "13 min"
+    },
+    {
+      "year": 2016,
+      "coverUrl": "https://estaticos-cdn.prensaiberica.es/clip/50518c85-4a17-49b8-8c75-ed0ac99c1354_16-9-discover-aspect-ratio_default_0.jpg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "10 min"
+    },
+    {
+      "year": 2015,
+      "coverUrl": "https://www.revistacaramella.cat/wp-content/uploads/2018/02/c20_cabrer.jpg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "8 min"
+    },
+    {
+      "year": 2014,
+      "coverUrl": "https://estaticos-cdn.prensaiberica.es/clip/98ce8f47-ddac-4f43-bb74-71d556a0d504_16-9-aspect-ratio_default_0.jpg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "7 min"
+    },
+    {
+      "year": 2010,
+      "coverUrl": "https://uh.gsstatic.es/sfAttachPlugin/2695437.jpg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "6 min"
+    },
+    {
+      "year": 2005,
+      "coverUrl": "https://imatges.vilaweb.cat/nacional/wp-content/uploads/2019/01/diables-darta-15180936.jpeg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "5 min"
+    },
+    {
+      "year": 2000,
+      "coverUrl": "https://www.revistacaramella.cat/wp-content/uploads/2018/02/c20_cabrer.jpg",
+      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
+      "duration": "4 min"
+    }
+  ]
+}
