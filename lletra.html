@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lletra de Completes · Sant Antoni d'Artà</title>
+    <meta name="description" content="Lletra de la cançó de Sant Antoni d'Artà. Cançó tradicional de les festes de Sant Antoni.">
+    <meta property="og:title" content="Lletra de Completes · Sant Antoni d'Artà">
+    <meta property="og:description" content="Lletra de la cançó de Sant Antoni d'Artà. Cançó tradicional de les festes de Sant Antoni.">
+    <meta property="og:image" content="https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lletra de Completes · Sant Antoni d'Artà">
+    <meta name="twitter:description" content="Lletra de la cançó de Sant Antoni d'Artà. Cançó tradicional de les festes de Sant Antoni.">
+    <meta name="twitter:image" content="https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vermell-foc: #9B1B30;
+            --vermell-intens: #B22340;
+            --vermell-brillant: #C92A4A;
+            --negre-nit: #0A0A0A;
+            --negre-dimoni: #141414;
+            --negre-suau: #1F1F1F;
+            --blanc-camisa: #F5F5F5;
+            --blanc-pur: #FFFFFF;
+            --gris-fum: #808080;
+            
+            --bg-primary: var(--negre-nit);
+            --bg-secondary: var(--negre-dimoni);
+            --bg-tertiary: var(--negre-suau);
+            --text-primary: var(--blanc-camisa);
+            --text-secondary: var(--gris-fum);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #F8F5F2;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #EDE8E3;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-primary);
+            transition: background 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 0.05em;
+            color: var(--vermell-intens);
+            text-shadow: 0 0 30px rgba(198, 30, 30, 0.5);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--vermell-foc);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0.6rem;
+            border-radius: 4px;
+            background: var(--bg-tertiary);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+            font-family: inherit;
+            outline: none;
+        }
+
+        [data-theme="light"] .theme-toggle {
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-secondary);
+            border-color: var(--vermell-foc);
+        }
+
+        .theme-toggle-icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover .theme-toggle-icon svg {
+            transform: rotate(15deg);
+        }
+
+        .icon-moon { display: block; }
+        .icon-sun { display: none; }
+        [data-theme="light"] .icon-moon { display: none; }
+        [data-theme="light"] .icon-sun { display: block; }
+
+        /* Main Content */
+        main {
+            padding: 8rem 3rem 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--vermell-foc);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Lyrics */
+        .lyrics-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .stanza {
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .stanza p {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1.25rem;
+            line-height: 2;
+        }
+
+        .last-stanza p {
+            font-weight: 700;
+        }
+
+        .highlight-visca {
+            text-decoration: underline;
+            text-decoration-color: var(--vermell-foc);
+            text-decoration-thickness: 8px;
+            text-underline-offset: 4px;
+            font-weight: 900;
+        }
+
+        /* Font Size Controls */
+        .font-controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 100;
+            animation: slideInFromRight 0.5s ease-out forwards;
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .font-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .font-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        [data-theme="light"] .font-btn {
+            border-color: rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .font-btn:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--vermell-foc);
+            transform: scale(1.05);
+        }
+
+        .font-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 768px) {
+            .font-controls {
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+        }
+
+        /* Decorative */
+        .divider {
+            width: 60px;
+            height: 4px;
+            background: var(--vermell-foc);
+            margin: 0 auto 4rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem;
+            text-align: center;
+            background: var(--bg-primary);
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--vermell-foc);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Fire decoration */
+        .fire-decoration {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                var(--vermell-foc),
+                var(--vermell-brillant),
+                var(--vermell-foc)
+            );
+            z-index: 1000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            main {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .stanza p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">SANT ANTONI D'ARTÀ</a>
+        <div class="header-right">
+            <nav class="nav-links">
+                <a href="index.html">Vídeos</a>
+                <a href="lletra.html" class="active">Lletra</a>
+            </nav>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Canviar tema">
+            <span class="theme-toggle-icon">
+                <svg class="icon-moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </span>
+        </button>
+        </div>
+    </header>
+
+    <main>
+        <h1 class="page-title">Lletra de Completes</h1>
+        <p class="page-subtitle">Cançó de Sant Antoni d'Artà</p>
+        <div class="divider"></div>
+
+        <div class="lyrics-container">
+            <div class="stanza">
+                <p>Habitants i moradors</p>
+                <p>De dins la vila d'Artà,</p>
+                <p>Tots plegats hem d'invocar</p>
+                <p>Sant Antoni gloriós.</p>
+            </div>
+
+            <div class="stanza">
+                <p>A desset, és Sant Antoni</p>
+                <p>i, a vint, Sant Sebastià;</p>
+                <p>qui bones obres farà,</p>
+                <p>no tendrà por del dimoni.</p>
+            </div>
+
+            <div class="stanza">
+                <p>Sant Antoni gloriós</p>
+                <p>de Viana anomenat,</p>
+                <p>siau es nostro advocat</p>
+                <p>de tot perill guardau-mos.</p>
+            </div>
+
+            <div class="stanza">
+                <p>Dia desset de gener</p>
+                <p>trobam la vostra diada,</p>
+                <p>amb la capella emmurtada,</p>
+                <p>corregudes pes carrer.</p>
+            </div>
+
+            <div class="stanza">
+                <p>Tots los obrers i clavaris</p>
+                <p>qui tan bé cuiden de Vós,</p>
+                <p>Sant Antoni, assistiu-los</p>
+                <p>en tots los seus necessaris.</p>
+            </div>
+
+            <div class="stanza">
+                <p>Beneiu-mos, Sant Antoni,</p>
+                <p>som es pagesos d'Artà,</p>
+                <p>l'any qui ve volem tornar,</p>
+                <p>No mos assusta el dimoni.</p>
+            </div>
+
+            <div class="stanza last-stanza">
+                <p>Assistiu a lo elogi</p>
+                <p>del Sant que hem de venerar</p>
+                <p>i, ara, per acabar</p>
+                <p>diguem: <span class="highlight-visca">Visca Sant Antoni!</span></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-logo">SANT ANTONI D'ARTÀ</div>
+        <p class="footer-text">16 i 17 de Gener · Artà, Mallorca</p>
+    </footer>
+
+    <div class="fire-decoration"></div>
+
+    <div class="font-controls">
+        <button class="font-btn" onclick="changeFontSize(1)" aria-label="Augmentar mida de font">
+            <svg viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                <line x1="11" y1="8" x2="11" y2="14"/>
+                <line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+        </button>
+        <button class="font-btn" onclick="changeFontSize(-1)" aria-label="Reduir mida de font">
+            <svg viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                <line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        let currentFontSize = 1.25;
+        const minFontSize = 0.9;
+        const maxFontSize = 2;
+        const step = 0.15;
+
+        function changeFontSize(direction) {
+            currentFontSize = Math.min(maxFontSize, Math.max(minFontSize, currentFontSize + (direction * step)));
+            document.querySelectorAll('.stanza p').forEach(p => {
+                p.style.fontSize = currentFontSize + 'rem';
+            });
+            localStorage.setItem('lyricsFontSize', currentFontSize);
+        }
+
+        // Carregar mida de font guardada
+        (function() {
+            const savedSize = localStorage.getItem('lyricsFontSize');
+            if (savedSize) {
+                currentFontSize = parseFloat(savedSize);
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.querySelectorAll('.stanza p').forEach(p => {
+                        p.style.fontSize = currentFontSize + 'rem';
+                    });
+                });
+            }
+        })();
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Carregar tema guardat
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (!prefersDark) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+</body>
+</html>

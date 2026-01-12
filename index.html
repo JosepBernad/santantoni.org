@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sant Antoni d'Artà · Recopilatoris</title>
+    <meta name="description" content="Recopilatori de vídeos i documentals de Sant Antoni d'Artà. Dimonis, foguerons i beneïdes.">
+    <meta property="og:title" content="Sant Antoni d'Artà · Recopilatoris">
+    <meta property="og:description" content="Recopilatori de vídeos i documentals de Sant Antoni d'Artà. Dimonis, foguerons i beneïdes.">
+    <meta property="og:image" content="https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sant Antoni d'Artà · Recopilatoris">
+    <meta name="twitter:description" content="Recopilatori de vídeos i documentals de Sant Antoni d'Artà. Dimonis, foguerons i beneïdes.">
+    <meta name="twitter:image" content="https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -64,6 +73,12 @@
             justify-content: space-between;
             background: var(--bg-primary);
             transition: background 0.3s ease;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
         }
 
         /* Theme Toggle */
@@ -135,6 +150,25 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--vermell-foc);
         }
 
         .logo-icon {
@@ -539,7 +573,6 @@
         footer {
             padding: 3rem;
             text-align: center;
-            border-top: 1px solid var(--bg-tertiary);
             background: var(--bg-primary);
             transition: all 0.3s ease;
         }
@@ -700,10 +733,15 @@
 </head>
 <body>
     <header>
-        <div class="logo">
+        <a href="index.html" class="logo">
             SANT ANTONI D'ARTÀ
-        </div>
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Canviar tema">
+        </a>
+        <div class="header-right">
+            <nav class="nav-links">
+                <a href="index.html" class="active">Vídeos</a>
+                <a href="lletra.html">Lletra</a>
+            </nav>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Canviar tema">
             <span class="theme-toggle-icon">
                 <svg class="icon-moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -721,6 +759,7 @@
                 </svg>
             </span>
         </button>
+        </div>
     </header>
 
     <main>
