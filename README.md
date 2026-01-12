@@ -1,4 +1,4 @@
-# Sant Antoni Artà
+# Sant Antoni d'Artà
 
 Pàgina web recopilatòria de vídeos de les festes de Sant Antoni d'Artà, Mallorca.
 
@@ -57,7 +57,7 @@ Per afegir nous vídeos, edita el fitxer `data.json`:
 
 Tens vídeos de Sant Antoni d'Artà? Ajuda'ns a completar l'arxiu!
 
-👉 [github.com/JosepBernad/santantoni.org](https://github.com/JosepBernad/santantoni.org)
+👉 [Envia el teu vídeo](https://docs.google.com/forms/d/1h6vbYXmCvvxjFR4umYMbLnveB5PMXL6miGIOKThD0Og/preview)
 
 ---
 

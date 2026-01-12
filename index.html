@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sant Antoni Artà · Recopilatoris</title>
+    <title>Sant Antoni d'Artà · Recopilatoris</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -573,21 +573,33 @@
 
         /* Video Modal */
         .video-modal {
-            display: none;
             position: fixed;
             inset: 0;
             z-index: 2000;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0);
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            display: flex;
+            pointer-events: none;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .video-modal.active {
-            display: flex;
+            background: rgba(0, 0, 0, 0.95);
+            pointer-events: auto;
             opacity: 1;
+        }
+
+        .video-modal .video-modal-wrapper {
+            transform: scale(0.95);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+        }
+
+        .video-modal.active .video-modal-wrapper {
+            transform: scale(1);
         }
 
         .video-modal-wrapper {
@@ -689,7 +701,7 @@
 <body>
     <header>
         <div class="logo">
-            SANT ANTONI ARTÀ
+            SANT ANTONI D'ARTÀ
         </div>
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="Canviar tema">
             <span class="theme-toggle-icon">
@@ -753,9 +765,9 @@
     </main>
 
     <footer>
-        <div class="footer-logo">SANT ANTONI ARTÀ</div>
+        <div class="footer-logo">SANT ANTONI D'ARTÀ</div>
         <p class="footer-text">16 i 17 de Gener · Artà, Mallorca</p>
-        <a href="https://github.com/JosepBernad/santantoni.org" target="_blank" class="footer-link">
+        <a href="https://docs.google.com/forms/d/1h6vbYXmCvvxjFR4umYMbLnveB5PMXL6miGIOKThD0Og/preview" target="_blank" class="footer-link">
             Tens vídeos? Col·labora al projecte →
         </a>
     </footer>
@@ -787,8 +799,11 @@
             const modal = document.getElementById('videoModal');
             const iframe = document.getElementById('videoFrame');
             modal.classList.remove('active');
-            iframe.src = '';
             document.body.style.overflow = '';
+            // Esperar que acabi l'animació abans de treure el vídeo
+            setTimeout(() => {
+                iframe.src = '';
+            }, 500);
         }
 
         // Close modal with Escape key
