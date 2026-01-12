@@ -3,94 +3,170 @@
     "year": 2025,
     "title": "Sant Antoni 2025",
     "subtitle": "Dimonis, foguerons i beneïdes",
-    "coverUrl": "https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg",
-    "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXX",
-    "duration": "14 min"
+    "videoId": "iWGhiAcHitM",
+    "coverUrl": "https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg"
   },
-  "videos": [
+  "pelicules": [
     {
       "year": 2025,
+      "videoId": "iWGhiAcHitM",
       "coverUrl": "https://uh.gsstatic.es/sfAttachPlugin/2695437.jpg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXX",
-      "duration": "14 min"
-    },
-    {
-      "year": 2024,
-      "coverUrl": "https://españaenfiestas.es/images/fiestas/188/_thumb2/fiesta-sant-antoni-arta.jpg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "12 min"
-    },
-    {
-      "year": 2023,
-      "coverUrl": "https://www.mallorcadiario.com/wp-content/uploads/2021/12/www.mallorcadiario.com__fotos_1_445274_fiestas-sant-antoni-arta.jpg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "15 min"
+      "duration": "39 min"
     },
     {
       "year": 2022,
-      "coverUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ78YkVLKiQmkhgm9MDxFwUFoskH4RlW2sU0Q&s",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "10 min"
+      "videoId": "uZOVksYWdwk",
+      "coverUrl": "https://img.youtube.com/vi/uZOVksYWdwk/hqdefault.jpg",
+      "duration": "23 min"
+    },
+    {
+      "year": 2009,
+      "videoId": "xXuIj5rj-gQ",
+      "coverUrl": "https://img.youtube.com/vi/xXuIj5rj-gQ/hqdefault.jpg",
+      "duration": "4 min"
+    },
+    {
+      "year": 1981,
+      "videoId": "WfAfAAF4IO0",
+      "coverUrl": "https://img.youtube.com/vi/WfAfAAF4IO0/hqdefault.jpg",
+      "duration": "7 min"
+    }
+  ],
+  "clips": [
+    {
+      "year": 2025,
+      "title": "Acapte",
+      "videoId": "UvTicUowC84"
+    },
+    {
+      "year": 2024,
+      "title": "Sa Banda",
+      "videoId": "6Xk4Wn-Olb0"
+    },
+    {
+      "year": 2023,
+      "title": "Ball a Sa Plaça",
+      "videoId": "4OVC4PPMlo8"
     },
     {
       "year": 2020,
-      "coverUrl": "https://imatges.vilaweb.cat/nacional/wp-content/uploads/2019/01/diables-darta-15180936.jpeg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "14 min"
+      "title": "Conversa Miquel Montoro i Borja Viejo",
+      "videoId": "qBjLP6Kk4m0"
     },
     {
       "year": 2019,
-      "coverUrl": "https://lh5.googleusercontent.com/proxy/lEQ_tNVjhGD7tnbQMK6nWUqZSrLH3UOhA8eAXyLvVbXhP7pssSZ9Cf9QTLT9Z3Tz6a3jcBHP2XPTEkcjGvRL6q71AzGGUf2y9WWXsiHjq0M86EidPl8m76VRkvWMu3E",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "11 min"
+      "title": "Primer Ball",
+      "videoId": "VDwMHpuXYao"
     },
     {
       "year": 2018,
-      "coverUrl": "https://static1.ara.cat/clip/b7852e52-7c77-4fdc-a8dd-c71c15d6eea8_16-9-aspect-ratio_default_0.jpg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "9 min"
+      "title": "L'Oferta",
+      "videoId": "XlnhA2WApfY"
+    },
+    {
+      "year": 2018,
+      "title": "A nes Corté",
+      "videoId": "YMRNOQEFo38"
     },
     {
       "year": 2017,
-      "coverUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTClHppl13X4qvxeoof-gbG_vot7ZkjaV33ag&s",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "13 min"
+      "title": "Ball a nes Coll de n'Abrines",
+      "videoId": "Anb5j7czrww"
+    },
+    {
+      "year": 2017,
+      "title": "Xisco Mosca IB3",
+      "videoId": "L4ew7sLD4us"
     },
     {
       "year": 2016,
-      "coverUrl": "https://estaticos-cdn.prensaiberica.es/clip/50518c85-4a17-49b8-8c75-ed0ac99c1354_16-9-discover-aspect-ratio_default_0.jpg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "10 min"
+      "title": "Completes",
+      "videoId": "o05bvI0VJ70"
+    },
+    {
+      "year": 2016,
+      "title": "Beneïdes a sa Plaça de S'Aigua",
+      "videoId": "dHFjyVzGtFQ"
     },
     {
       "year": 2015,
-      "coverUrl": "https://www.revistacaramella.cat/wp-content/uploads/2018/02/c20_cabrer.jpg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "8 min"
+      "title": "Ball a Ca Ses Monjes",
+      "videoId": "JUgjItCC5SA"
+    },
+    {
+      "year": 2015,
+      "title": "IB3 Notícies",
+      "videoId": "JQ9kpMcA3LA"
     },
     {
       "year": 2014,
-      "coverUrl": "https://estaticos-cdn.prensaiberica.es/clip/98ce8f47-ddac-4f43-bb74-71d556a0d504_16-9-aspect-ratio_default_0.jpg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "7 min"
+      "title": "Completes a IB3",
+      "videoId": "pj6hh_SDK9I"
     },
     {
-      "year": 2010,
-      "coverUrl": "https://uh.gsstatic.es/sfAttachPlugin/2695437.jpg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "6 min"
+      "year": 2013,
+      "title": "A ca l'Obrer",
+      "videoId": "aIxHXnuHEvA"
     },
     {
-      "year": 2005,
-      "coverUrl": "https://imatges.vilaweb.cat/nacional/wp-content/uploads/2019/01/diables-darta-15180936.jpeg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "5 min"
+      "year": 2012,
+      "title": "Ball a Sa Plaça",
+      "videoId": "lO_WUVYXegQ"
     },
     {
-      "year": 2000,
-      "coverUrl": "https://www.revistacaramella.cat/wp-content/uploads/2018/02/c20_cabrer.jpg",
-      "sourceUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX",
-      "duration": "4 min"
+      "year": 2009,
+      "title": "Primer Ball",
+      "videoId": "xXuIj5rj-gQ"
+    },
+    {
+      "year": 2006,
+      "title": "Beneïdes",
+      "videoId": "FVh1AcaYsKU"
+    },
+    {
+      "year": 2004,
+      "title": "Ball de Ses Beneïdes",
+      "videoId": "oZonf9O6WFU"
+    },
+    {
+      "year": 2003,
+      "title": "Acapte",
+      "videoId": "einDULuDinw"
+    },
+    {
+      "year": 2002,
+      "title": "Ball a l'Església",
+      "videoId": "VBJkd67Hkyg"
+    },
+    {
+      "year": 1999,
+      "title": "Ball a s'Ajuntament",
+      "videoId": "5jP61NK-TNI"
+    },
+    {
+      "year": 1981,
+      "title": "Entrevista a Don Toni Gili | Miquel Mestre",
+      "videoId": "whdvZ6LeHYo"
+    },
+    {
+      "year": 1981,
+      "title": "Beneïdes",
+      "videoId": "WfAfAAF4IO0"
+    },
+    {
+      "year": 1981,
+      "title": "A Na Crema",
+      "videoId": "Lk8h8gcU57s"
+    },
+    {
+      "year": 1981,
+      "title": "Gloses i Foguerons",
+      "videoId": "ZD-6qxBSfec"
+    },
+    {
+      "year": 1981,
+      "title": "Ballant al Fogueró",
+      "videoId": "SNkdXD4S1CU"
     }
   ]
 }

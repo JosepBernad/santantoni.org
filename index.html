@@ -62,30 +62,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: var(--bg-primary);
             transition: background 0.3s ease;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--header-gradient);
-            z-index: -1;
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 200%;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
-            z-index: -2;
-            pointer-events: none;
         }
 
         /* Theme Toggle */
@@ -377,6 +355,45 @@
             display: none;
         }
 
+        /* Clips Grid (no carousel) */
+        .clips-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 0.5rem 3rem;
+            overflow-x: visible;
+        }
+
+        .clips-grid .video-card {
+            flex-shrink: 0;
+            width: calc(25% - 0.75rem);
+            min-width: 200px;
+            opacity: 0.85;
+        }
+
+        .clips-grid .card-info {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 1200px) {
+            .clips-grid .video-card {
+                width: calc(33.333% - 0.67rem);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .clips-grid .video-card {
+                width: calc(50% - 0.5rem);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .clips-grid .video-card {
+                width: 100%;
+            }
+        }
+
         /* Video Cards */
         .video-card {
             flex-shrink: 0;
@@ -435,6 +452,9 @@
             right: 0;
             padding: 1rem;
             z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
         }
 
         .video-card:hover .card-info {
@@ -456,8 +476,10 @@
         }
 
         .card-duration {
-            font-size: 0.8rem;
-            color: var(--gris-fum);
+            font-size: 0.85rem;
+            color: var(--blanc-camisa);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+            font-weight: 600;
         }
 
         .play-icon {
@@ -532,6 +554,73 @@
         .footer-text {
             color: var(--text-secondary);
             font-size: 0.85rem;
+        }
+
+        /* Video Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .video-modal-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .video-modal-content {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .video-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: -56px;
+            right: 0;
+            background: var(--vermell-foc);
+            border: none;
+            color: var(--blanc-pur);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+
+        .video-modal-close:hover {
+            background: var(--vermell-brillant);
+            transform: scale(1.1);
         }
 
         /* Responsive */
@@ -610,276 +699,39 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1 class="hero-title">Sant Antoni 2025</h1>
-                <p class="hero-subtitle">
-                    Dimonis, foguerons i beneïdes
-                </p>
+                <h1 class="hero-title"></h1>
+                <p class="hero-subtitle"></p>
                 <div class="hero-meta">
-                    <span class="year">2025</span>
+                    <span class="year"></span>
                     <span>Artà</span>
-                    <span>14 min</span>
+                    <span class="duration"></span>
                 </div>
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-play">
+                    <a href="javascript:void(0)" class="btn btn-play">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M8 5v14l11-7z"/>
                         </svg>
                         Reproduir
                     </a>
-                    <a href="#" class="btn btn-info">Més informació</a>
                 </div>
             </div>
         </section>
 
         <section class="content-section">
-            <!-- Primer carrusel - tots els anys del JSON -->
+            <!-- Pel·lícules completes -->
             <div class="row">
-                <div class="cards-container">
-                    <article class="video-card">
-                        <img src="https://uh.gsstatic.es/sfAttachPlugin/2695437.jpg" alt="Sant Antoni 2025">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2025</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://españaenfiestas.es/images/fiestas/188/_thumb2/fiesta-sant-antoni-arta.jpg" alt="Sant Antoni 2024">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2024</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://www.mallorcadiario.com/wp-content/uploads/2021/12/www.mallorcadiario.com__fotos_1_445274_fiestas-sant-antoni-arta.jpg" alt="Sant Antoni 2023">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2023</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ78YkVLKiQmkhgm9MDxFwUFoskH4RlW2sU0Q&s" alt="Sant Antoni 2022">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2022</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://imatges.vilaweb.cat/nacional/wp-content/uploads/2019/01/diables-darta-15180936.jpeg" alt="Sant Antoni 2020">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2020</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://lh5.googleusercontent.com/proxy/lEQ_tNVjhGD7tnbQMK6nWUqZSrLH3UOhA8eAXyLvVbXhP7pssSZ9Cf9QTLT9Z3Tz6a3jcBHP2XPTEkcjGvRL6q71AzGGUf2y9WWXsiHjq0M86EidPl8m76VRkvWMu3E" alt="Sant Antoni 2019">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2019</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://static1.ara.cat/clip/b7852e52-7c77-4fdc-a8dd-c71c15d6eea8_16-9-aspect-ratio_default_0.jpg" alt="Sant Antoni 2018">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2018</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTClHppl13X4qvxeoof-gbG_vot7ZkjaV33ag&s" alt="Sant Antoni 2017">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2017</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://estaticos-cdn.prensaiberica.es/clip/50518c85-4a17-49b8-8c75-ed0ac99c1354_16-9-discover-aspect-ratio_default_0.jpg" alt="Sant Antoni 2016">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2016</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://www.revistacaramella.cat/wp-content/uploads/2018/02/c20_cabrer.jpg" alt="Sant Antoni 2015">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2015</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://estaticos-cdn.prensaiberica.es/clip/98ce8f47-ddac-4f43-bb74-71d556a0d504_16-9-aspect-ratio_default_0.jpg" alt="Sant Antoni 2014">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2014</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://uh.gsstatic.es/sfAttachPlugin/2695437.jpg" alt="Sant Antoni 2010">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2010</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://imatges.vilaweb.cat/nacional/wp-content/uploads/2019/01/diables-darta-15180936.jpeg" alt="Sant Antoni 2005">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2005</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://www.revistacaramella.cat/wp-content/uploads/2018/02/c20_cabrer.jpg" alt="Sant Antoni 2000">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2000</div>
-                        </div>
-                    </article>
+                <div class="cards-container" id="pelicules-container">
+                    <!-- Generat dinàmicament -->
                 </div>
             </div>
 
-            <!-- Anys 2020s -->
+            <!-- Clips -->
             <div class="row">
                 <div class="row-header">
-                    <h2 class="row-title">Anys 2020</h2>
-                    <span class="row-subtitle">La festa recent</span>
+                    <h2 class="row-title">Clips</h2>
                 </div>
-                <div class="cards-container">
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2024">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2024</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">12 min</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2023">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2023</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">15 min</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2022">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2022</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">10 min</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2020">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2020</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">14 min</div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-            <!-- Anys 2010s -->
-            <div class="row">
-                <div class="row-header">
-                    <h2 class="row-title">Anys 2010</h2>
-                    <span class="row-subtitle">Una dècada de tradició</span>
-                </div>
-                <div class="cards-container">
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2019">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2019</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">11 min</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2018">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2018</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">9 min</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2017">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2017</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">13 min</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2016">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2016</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">10 min</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2015">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2015</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">8 min</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2014">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2014</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">7 min</div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-            <!-- Arxiu Històric -->
-            <div class="row">
-                <div class="row-header">
-                    <h2 class="row-title">Arxiu Històric</h2>
-                    <span class="row-subtitle">Memòria de la festa</span>
-                </div>
-                <div class="cards-container">
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2010">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2010</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">6 min</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2005">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2005</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">5 min</div>
-                        </div>
-                    </article>
-                    <article class="video-card">
-                        <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" alt="Sant Antoni 2000">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">2000</div>
-                            <div class="card-title">Recopilatori</div>
-                            <div class="card-duration">4 min</div>
-                        </div>
-                    </article>
+                <div class="clips-grid" id="clips-container">
+                    <!-- Generat dinàmicament -->
                 </div>
             </div>
         </section>
@@ -892,7 +744,40 @@
 
     <div class="fire-decoration"></div>
 
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal" onclick="closeModal(event)">
+        <div class="video-modal-wrapper" onclick="event.stopPropagation()">
+            <button class="video-modal-close" onclick="closeModal()">&times;</button>
+            <div class="video-modal-content">
+                <iframe id="videoFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Video Modal Functions
+        function openVideo(videoId) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoFrame');
+            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget) return;
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoFrame');
+            modal.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = '';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -913,6 +798,63 @@
                 document.documentElement.setAttribute('data-theme', 'light');
             }
         })();
+
+        // Carregar dades dinàmicament
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                const data = await response.json();
+                
+                // Actualitzar Hero
+                const featured = data.featured;
+                document.querySelector('.hero-title').textContent = featured.title;
+                document.querySelector('.hero-subtitle').textContent = featured.subtitle;
+                document.querySelector('.hero-meta .year').textContent = featured.year;
+                document.querySelector('.hero-meta .duration').textContent = data.pelicules.find(p => p.year === featured.year)?.duration || '';
+                document.querySelector('.btn-play').onclick = () => openVideo(featured.videoId);
+                
+                // Generar Pel·lícules
+                const peliculesContainer = document.getElementById('pelicules-container');
+                data.pelicules.forEach(peli => {
+                    const card = document.createElement('article');
+                    card.className = 'video-card';
+                    card.onclick = () => openVideo(peli.videoId);
+                    card.innerHTML = `
+                        <img src="${peli.coverUrl}" alt="Sant Antoni ${peli.year}">
+                        <div class="play-icon"></div>
+                        <div class="card-info">
+                            <div class="card-year">${peli.year}</div>
+                            <div class="card-duration">${peli.duration}</div>
+                        </div>
+                    `;
+                    peliculesContainer.appendChild(card);
+                });
+                
+                // Generar Clips (barrejats aleatòriament)
+                const clipsContainer = document.getElementById('clips-container');
+                const shuffledClips = [...data.clips].sort(() => Math.random() - 0.5);
+                shuffledClips.forEach(clip => {
+                    const card = document.createElement('article');
+                    card.className = 'video-card';
+                    card.onclick = () => openVideo(clip.videoId);
+                    card.innerHTML = `
+                        <img src="https://img.youtube.com/vi/${clip.videoId}/hqdefault.jpg" alt="Clip Sant Antoni ${clip.year}">
+                        <div class="play-icon"></div>
+                        <div class="card-info">
+                            <div class="card-year">${clip.year}</div>
+                            <div class="card-title">${clip.title}</div>
+                        </div>
+                    `;
+                    clipsContainer.appendChild(card);
+                });
+                
+            } catch (error) {
+                console.error('Error carregant dades:', error);
+            }
+        }
+        
+        // Carregar dades quan la pàgina estigui llesta
+        document.addEventListener('DOMContentLoaded', loadData);
     </script>
 </body>
 </html>
