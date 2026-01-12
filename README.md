@@ -53,4 +53,12 @@ Per afegir nous vídeos, edita el fitxer `data.json`:
 
 ---
 
+## 🤝 Col·labora
+
+Tens vídeos de Sant Antoni d'Artà? Ajuda'ns a completar l'arxiu!
+
+👉 [github.com/JosepBernad/santantoni.org](https://github.com/JosepBernad/santantoni.org)
+
+---
+
 **JOSEP BERNAD**
