@@ -388,6 +388,66 @@
         .row {
             margin-bottom: 2.5rem;
             overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 50%;
+            color: var(--blanc-pur);
+            cursor: pointer;
+            z-index: 150;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease, background 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .carousel-nav.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .carousel-nav:hover {
+            background: var(--vermell-foc);
+        }
+
+        .carousel-nav svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .carousel-nav-left {
+            left: 0.5rem;
+        }
+
+        .carousel-nav-right {
+            right: 0.5rem;
+        }
+
+        [data-theme="light"] .carousel-nav {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="light"] .carousel-nav:hover {
+            background: var(--vermell-foc);
+            color: var(--blanc-pur);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-nav {
+                display: none;
+            }
         }
 
         .row-header {
@@ -838,9 +898,19 @@
         <section class="content-section">
             <!-- Pel·lícules completes -->
             <div class="row">
+                <button class="carousel-nav carousel-nav-left" id="carousel-nav-left" aria-label="Anterior">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
                 <div class="cards-container" id="pelicules-container">
                     <!-- Generat dinàmicament -->
                 </div>
+                <button class="carousel-nav carousel-nav-right" id="carousel-nav-right" aria-label="Següent">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                </button>
             </div>
 
             <!-- Clips -->
@@ -971,10 +1041,52 @@
                     `;
                     clipsContainer.appendChild(card);
                 });
+
+                // Inicialitzar navegació del carrusel
+                initCarouselNav();
                 
             } catch (error) {
                 console.error('Error carregant dades:', error);
             }
+        }
+
+        // Carousel Navigation
+        function initCarouselNav() {
+            const container = document.getElementById('pelicules-container');
+            const leftBtn = document.getElementById('carousel-nav-left');
+            const rightBtn = document.getElementById('carousel-nav-right');
+
+            function updateNavButtons() {
+                const scrollLeft = container.scrollLeft;
+                const maxScroll = container.scrollWidth - container.clientWidth;
+
+                if (scrollLeft <= 0) {
+                    leftBtn.classList.remove('visible');
+                } else {
+                    leftBtn.classList.add('visible');
+                }
+
+                if (scrollLeft >= maxScroll - 1) {
+                    rightBtn.classList.remove('visible');
+                } else {
+                    rightBtn.classList.add('visible');
+                }
+            }
+
+            function scrollCarousel(direction) {
+                const scrollAmount = container.clientWidth * 0.8;
+                container.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+
+            leftBtn.addEventListener('click', () => scrollCarousel(-1));
+            rightBtn.addEventListener('click', () => scrollCarousel(1));
+            container.addEventListener('scroll', updateNavButtons);
+
+            // Actualitzar botons inicialment
+            updateNavButtons();
         }
         
         // Carregar dades quan la pàgina estigui llesta
