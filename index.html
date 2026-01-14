@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vídeos · Sant Antoni d'Artà</title>
-    <meta name="description" content="Recopilatori de vídeos i documentals de Sant Antoni d'Artà. Dimonis, foguerons i beneïdes.">
-    <meta property="og:title" content="Sant Antoni d'Artà · Recopilatoris">
-    <meta property="og:description" content="Recopilatori de vídeos i documentals de Sant Antoni d'Artà. Dimonis, foguerons i beneïdes.">
+    <title>Sant Antoni d'Artà · Festes populars</title>
+    <meta name="description" content="Sant Antoni d'Artà - Dimonis, foguerons i beneïdes. Vídeos, lletres i informació de les festes més emblemàtiques de Mallorca.">
+    <meta property="og:title" content="Sant Antoni d'Artà · Festes populars">
+    <meta property="og:description" content="Dimonis, foguerons i beneïdes. Vídeos, lletres i informació de les festes més emblemàtiques de Mallorca.">
     <meta property="og:image" content="https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Sant Antoni d'Artà · Recopilatoris">
-    <meta name="twitter:description" content="Recopilatori de vídeos i documentals de Sant Antoni d'Artà. Dimonis, foguerons i beneïdes.">
+    <meta name="twitter:title" content="Sant Antoni d'Artà · Festes populars">
+    <meta name="twitter:description" content="Dimonis, foguerons i beneïdes. Vídeos, lletres i informació de les festes més emblemàtiques de Mallorca.">
     <meta name="twitter:image" content="https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
@@ -39,9 +39,7 @@
             --text-primary: var(--blanc-camisa);
             --text-secondary: var(--gris-fum);
             
-            /* Hover variables - default for touch devices */
             --hover-underline: 0;
-            --header-gradient: linear-gradient(to bottom, var(--negre-nit) 0%, transparent 100%);
         }
 
         [data-theme="light"] {
@@ -50,7 +48,6 @@
             --bg-tertiary: #EDE8E3;
             --text-primary: #1A1A1A;
             --text-secondary: #666666;
-            --header-gradient: linear-gradient(to bottom, #F8F5F2 0%, transparent 100%);
             --header-bg: rgba(255,255,255,0.98);
             --header-border: rgba(0,0,0,0.08);
         }
@@ -88,14 +85,57 @@
 
         .logo {
             margin-right: auto;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--vermell-intens);
+            text-decoration: none;
         }
 
         .nav-links {
             order: 3;
             width: 100%;
             margin-top: 0.5rem;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
 
+        .nav-links a {
+            font-family: 'Literata', serif;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
+            padding: 0.3rem 0;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--vermell-foc);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: var(--hover-underline);
+        }
+
+        .nav-links a:hover {
+            color: var(--vermell-foc);
+        }
+
+        @media (hover: hover) {
+            :root { --hover-underline: 100%; }
+        }
 
         /* Theme Toggle */
         .theme-toggle {
@@ -141,526 +181,320 @@
             transform: rotate(15deg);
         }
 
-        .icon-moon {
-            display: block;
-        }
-
-        .icon-sun {
-            display: none;
-        }
-
-        [data-theme="light"] .icon-moon {
-            display: none;
-        }
-
-        [data-theme="light"] .icon-sun {
-            display: block;
-        }
-
-        .logo {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            color: var(--vermell-intens);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-family: 'Literata', serif;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 1.1rem;
-            letter-spacing: 0.02em;
-            padding: 0.3rem 0;
-            position: relative;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--vermell-foc);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: var(--hover-underline);
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--vermell-foc);
-        }
-
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        /* Enable hover effects only on devices with hover capability */
-        @media (hover: hover) {
-            :root {
-                --hover-underline: 100%;
-            }
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-        }
-
-        .nav-info {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            font-size: 0.9rem;
-            color: var(--gris-fum);
-        }
-
-        .nav-info span {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        .icon-moon { display: block; }
+        .icon-sun { display: none; }
+        [data-theme="light"] .icon-moon { display: none; }
+        [data-theme="light"] .icon-sun { display: block; }
 
         /* Hero Section */
         .hero {
             position: relative;
-            height: 85vh;
+            min-height: 100vh;
             display: flex;
-            align-items: flex-end;
-            padding: 0 3rem 4rem;
-            background: linear-gradient(
-                to right,
-                var(--bg-primary) 0%,
-                transparent 50%
-            ),
-            linear-gradient(
-                to top,
-                var(--bg-primary) 0%,
-                transparent 60%
-            ),
-            url('https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg') center/cover;
-            transition: background 0.3s ease;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 3rem 4rem;
+            background: 
+                linear-gradient(to bottom, var(--bg-primary) 0%, transparent 30%),
+                linear-gradient(to top, var(--bg-primary) 0%, transparent 40%),
+                linear-gradient(to right, var(--bg-primary) 0%, transparent 40%),
+                url('https://uh.gsstatic.es/sfAttachPlugin/2695437.jpg') center/cover;
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: 
-                radial-gradient(ellipse at 30% 80%, rgba(198, 30, 30, 0.15) 0%, transparent 50%),
-                linear-gradient(to bottom, transparent 60%, var(--bg-primary) 100%);
-            transition: background 0.3s ease;
+            background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 1000px;
+            text-align: center;
+            max-width: 900px;
         }
 
-        .hero-tag {
+        .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             background: var(--vermell-foc);
-            padding: 0.4rem 1rem;
-            font-size: 0.85rem;
+            color: var(--blanc-pur);
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
+            letter-spacing: 0.12em;
+            margin-bottom: 1.5rem;
+            border-radius: 2px;
         }
 
         .hero-title {
-            font-family: 'Literata', serif;
-            font-size: 5rem;
-            line-height: 0.95;
-            letter-spacing: 0.02em;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 5.5rem;
+            line-height: 1;
+            letter-spacing: -0.02em;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
-        }
-
-        [data-theme="light"] .hero-title {
-            text-shadow: 1px 1px 8px rgba(0,0,0,0.3);
+            color: var(--blanc-pur);
+            text-shadow: 2px 4px 30px rgba(0,0,0,0.8);
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 2px 10px rgba(0,0,0,0.5);
         }
 
-        .hero-meta {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            font-size: 0.95rem;
-        }
-
-        .hero-meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .hero-meta .year {
-            color: var(--vermell-brillant);
-            font-weight: 700;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.9rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-        }
-
-        .btn-play {
-            background: var(--blanc-camisa);
-            color: var(--negre-nit);
-        }
-
-        .btn-play:hover {
-            background: var(--blanc-pur);
-            transform: scale(1.02);
-        }
-
-        [data-theme="light"] .btn-play {
-            background: var(--negre-nit);
-            color: var(--blanc-pur);
-        }
-
-        [data-theme="light"] .btn-play:hover {
-            background: #2a2a2a;
-        }
-
-        .btn-info {
-            background: rgba(255,255,255,0.15);
-            color: var(--blanc-camisa);
-            backdrop-filter: blur(4px);
-        }
-
-        .btn-info:hover {
-            background: rgba(255,255,255,0.25);
-        }
-
-        [data-theme="light"] .btn-info {
-            background: rgba(20,20,20,0.85);
-            color: var(--blanc-pur);
-        }
-
-        [data-theme="light"] .btn-info:hover {
-            background: rgba(20,20,20,0.95);
-        }
-
-        /* Content Rows */
-        .content-section {
-            position: relative;
-            z-index: 10;
-            margin-top: 2rem;
-            padding: 0 0 4rem;
-        }
-
-        .row {
-            margin-bottom: 2.5rem;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .carousel-nav {
+        .scroll-indicator {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 48px;
-            height: 48px;
-            background: rgba(0, 0, 0, 0.7);
-            border: none;
-            border-radius: 50%;
-            color: var(--blanc-pur);
-            cursor: pointer;
-            z-index: 150;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.3s ease, background 0.3s ease;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .carousel-nav.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .carousel-nav:hover {
-            background: var(--vermell-foc);
-        }
-
-        .carousel-nav svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .carousel-nav-left {
-            left: 0.5rem;
-        }
-
-        .carousel-nav-right {
-            right: 0.5rem;
-        }
-
-        [data-theme="light"] .carousel-nav {
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--text-primary);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        [data-theme="light"] .carousel-nav:hover {
-            background: var(--vermell-foc);
-            color: var(--blanc-pur);
-        }
-
-        @media (max-width: 768px) {
-            .carousel-nav {
-                display: none;
-            }
-        }
-
-        .row-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .row-title {
-            font-family: 'Literata', serif;
-            font-size: 1.8rem;
-            letter-spacing: 0.05em;
-            display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 0.5rem;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
         }
 
-        .row-title::before {
-            content: '';
-            display: block;
-            width: 4px;
-            height: 1.5rem;
-            background: var(--vermell-foc);
+        .scroll-indicator svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
         }
 
-        .row-subtitle {
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* Sections Grid */
+        .sections {
+            padding: 6rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sections-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .sections-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3rem;
+            color: var(--vermell-foc);
+            margin-bottom: 0.5rem;
+        }
+
+        .sections-subtitle {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 1.1rem;
         }
 
-        .cards-container {
-            display: flex;
-            gap: 1rem;
-            padding: 0.5rem 3rem;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .cards-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Clips Grid (no carousel) */
-        .clips-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            padding: 0.5rem 3rem;
-            overflow-x: visible;
-        }
-
-        .clips-grid .video-card {
-            flex-shrink: 0;
-            width: calc(25% - 0.75rem);
-            min-width: 200px;
-            opacity: 0.85;
-        }
-
-        .clips-grid .card-info {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        @media (max-width: 1200px) {
-            .clips-grid .video-card {
-                width: calc(33.333% - 0.67rem);
-            }
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
         }
 
         @media (max-width: 900px) {
-            .clips-grid .video-card {
-                width: calc(50% - 0.5rem);
+            .sections-grid {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 600px) {
-            .clips-grid .video-card {
-                width: 100%;
-            }
-        }
-
-        /* Video Cards */
-        .video-card {
-            flex-shrink: 0;
-            width: 300px;
-            aspect-ratio: 16/9;
+        /* Section Cards */
+        .section-card {
             position: relative;
-            border-radius: 4px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
             overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--bg-tertiary);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
         }
 
-        .video-card:hover {
-            transform: scale(1.08);
-            z-index: 100;
-            box-shadow: 
-                0 0 0 2px var(--vermell-foc),
-                0 20px 40px rgba(0,0,0,0.6);
+        .section-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border-color: var(--vermell-foc);
         }
 
-        .video-card img {
+        [data-theme="light"] .section-card {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        [data-theme="light"] .section-card:hover {
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: opacity 0.3s ease;
+            transition: transform 0.5s ease;
         }
 
-        .video-card::after {
+        .section-card:hover .card-image img {
+            transform: scale(1.08);
+        }
+
+        .card-image::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(
-                to top,
-                rgba(0,0,0,0.95) 0%,
-                rgba(0,0,0,0.4) 40%,
-                transparent 70%
-            );
-            opacity: 1;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
+            background: linear-gradient(to top, var(--bg-secondary) 0%, transparent 50%);
         }
 
-        .video-card:hover::after {
-            background: linear-gradient(
-                to top,
-                rgba(0,0,0,0.98) 0%,
-                rgba(0,0,0,0.6) 50%,
-                transparent 80%
-            );
-        }
-
-        .card-info {
+        .card-icon {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem;
-            z-index: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-        }
-
-        .video-card:hover .card-info {
-            transform: translateY(0);
-        }
-
-        .card-year {
-            font-family: 'Literata', serif;
-            font-size: 2.2rem;
-            color: var(--blanc-pur);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7);
-            letter-spacing: 0.05em;
-        }
-
-        .card-title {
-            font-size: 0.9rem;
-            color: var(--blanc-camisa);
-            margin-bottom: 0.3rem;
-        }
-
-        .card-duration {
-            font-size: 0.85rem;
-            color: var(--blanc-camisa);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-            font-weight: 600;
-        }
-
-        .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.85);
-            width: 60px;
-            height: 60px;
+            top: 1rem;
+            right: 1rem;
+            width: 48px;
+            height: 48px;
             background: var(--vermell-foc);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 2;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 0 3px rgba(255,255,255,0.2);
-            opacity: 0.9;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
-        .play-icon::after {
-            content: '';
-            border-style: solid;
-            border-width: 10px 0 10px 18px;
-            border-color: transparent transparent transparent var(--blanc-pur);
-            margin-left: 4px;
+        .card-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--blanc-pur);
         }
 
-        .video-card:hover .play-icon {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-            box-shadow: 0 6px 30px rgba(0,0,0,0.7), 0 0 0 4px rgba(255,255,255,0.3);
+        .card-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Featured Card (larger) */
-        .video-card.featured {
-            width: 450px;
+        .card-tag {
+            display: inline-block;
+            background: rgba(155,27,48,0.15);
+            color: var(--vermell-brillant);
+            padding: 0.3rem 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+            align-self: flex-start;
+        }
+
+        .card-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.2rem;
+            color: var(--vermell-foc);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: gap 0.3s ease;
+        }
+
+        .section-card:hover .card-cta {
+            gap: 0.8rem;
+        }
+
+        .card-cta svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 3rem 6rem;
+            background: var(--bg-tertiary);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.2rem;
+            color: var(--vermell-foc);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .about-highlight {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .highlight-item {
+            text-align: center;
+        }
+
+        .highlight-number {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3rem;
+            color: var(--vermell-foc);
+            font-weight: 700;
+        }
+
+        .highlight-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         /* Footer */
@@ -669,7 +503,7 @@
             padding: 3rem;
             text-align: center;
             background: var(--bg-primary);
-            transition: all 0.3s ease;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         .footer-github {
@@ -703,100 +537,6 @@
             font-size: 0.85rem;
         }
 
-        .footer-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: var(--vermell-foc);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--vermell-brillant);
-            text-decoration: underline;
-        }
-
-        /* Video Modal */
-        .video-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 2000;
-            background: rgba(0, 0, 0, 0);
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            display: flex;
-            pointer-events: none;
-            opacity: 0;
-            transition: background 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-                        opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .video-modal.active {
-            background: rgba(0, 0, 0, 0.95);
-            pointer-events: auto;
-            opacity: 1;
-        }
-
-        .video-modal .video-modal-wrapper {
-            transform: scale(0.95);
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
-        }
-
-        .video-modal.active .video-modal-wrapper {
-            transform: scale(1);
-        }
-
-        .video-modal-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .video-modal-content {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-        }
-
-        .video-modal-content iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .video-modal-close {
-            position: absolute;
-            top: -56px;
-            right: 0;
-            background: var(--vermell-foc);
-            border: none;
-            color: var(--blanc-pur);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            font-size: 1.8rem;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.2s ease;
-            line-height: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            z-index: 10;
-        }
-
-        .video-modal-close:hover {
-            background: var(--vermell-brillant);
-            transform: scale(1.1);
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             header {
@@ -815,12 +555,8 @@
                 font-size: 0.9rem;
             }
 
-            .nav-info {
-                display: none;
-            }
-
             .hero {
-                padding: 0 1.5rem 3rem;
+                padding: 7rem 1.5rem 3rem;
             }
 
             .hero-title {
@@ -828,38 +564,36 @@
             }
 
             .hero-subtitle {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
-            .hero-buttons {
-                flex-direction: column;
+            .sections {
+                padding: 4rem 1.5rem;
             }
 
-            .row-header {
-                padding: 0 1.5rem;
+            .sections-title {
+                font-size: 2.2rem;
             }
 
-            .cards-container {
-                padding: 0.5rem 1.5rem;
+            .about {
+                padding: 3rem 1.5rem 4rem;
             }
 
-            .video-card {
-                width: 250px;
+            .about-highlight {
+                gap: 2rem;
             }
 
-            .video-card.featured {
-                width: 300px;
+            .highlight-number {
+                font-size: 2.2rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="/" class="logo">
-            Sant Antoni d'Artà
-        </a>
+        <a href="/" class="logo">Sant Antoni d'Artà</a>
         <nav class="nav-links">
-            <a href="/" class="active">Vídeos</a>
+            <a href="/videos">Vídeos</a>
             <a href="/lletra">Lletra</a>
             <a href="/info">Info 2026</a>
         </nav>
@@ -886,49 +620,95 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1 class="hero-title"></h1>
-                <p class="hero-subtitle"></p>
-                <div class="hero-meta">
-                    <span class="year"></span>
-                    <span>Artà</span>
-                    <span class="duration"></span>
-                </div>
-                <div class="hero-buttons">
-                    <a href="javascript:void(0)" class="btn btn-play">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M8 5v14l11-7z"/>
-                        </svg>
-                        Reproduir
-                    </a>
-                </div>
+                <span class="hero-badge">16 i 17 de gener · Artà, Mallorca</span>
+                <h1 class="hero-title">Sant Antoni d'Artà</h1>
+                <p class="hero-subtitle">Dimonis, foguerons i beneïdes.</p>
+            </div>
+            <div class="scroll-indicator">
+                <span>Descobreix</span>
+                <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5"/></svg>
             </div>
         </section>
 
-        <section class="content-section">
-            <!-- Pel·lícules completes -->
-            <div class="row">
-                <button class="carousel-nav carousel-nav-left" id="carousel-nav-left" aria-label="Anterior">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-                    </svg>
-                </button>
-                <div class="cards-container" id="pelicules-container">
-                    <!-- Generat dinàmicament -->
-                </div>
-                <button class="carousel-nav carousel-nav-right" id="carousel-nav-right" aria-label="Següent">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
-                    </svg>
-                </button>
+        <section class="sections">
+            <div class="sections-header">
+                <h2 class="sections-title">Explora Sant Antoni</h2>
+                <p class="sections-subtitle">Tot el que necessites per viure la festa</p>
             </div>
 
-            <!-- Clips -->
-            <div class="row">
-                <div class="row-header">
-                    <h2 class="row-title">Clips</h2>
-                </div>
-                <div class="clips-grid" id="clips-container">
-                    <!-- Generat dinàmicament -->
+            <div class="sections-grid">
+                <a href="/videos" class="section-card">
+                    <div class="card-image">
+                        <img src="https://estaticos-cdn.prensaiberica.es/clip/0e13793e-2cfb-4cd6-8815-12bdc53ce4b4_16-9-aspect-ratio_default_0.jpg" alt="Vídeos de Sant Antoni">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Recopilatori</span>
+                        <h3 class="card-title">Vídeos</h3>
+                        <p class="card-description">Documentals i pel·lícules de Sant Antoni des dels anys 80 fins avui. Reviu els millors moments de la festa.</p>
+                        <span class="card-cta">
+                            Veure vídeos
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="/lletra" class="section-card">
+                    <div class="card-image">
+                        <img src="https://i.ytimg.com/vi/o05bvI0VJ70/maxresdefault.jpg" alt="Lletra de Completes">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Tradicional</span>
+                        <h3 class="card-title">Lletra</h3>
+                        <p class="card-description">La lletra completa de la cançó de Completes. Aprèn-la i canta amb tot el poble!</p>
+                        <span class="card-cta">
+                            Llegir lletra
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </div>
+                </a>
+
+                <a href="/info" class="section-card">
+                    <div class="card-image">
+                        <img src="https://arta.cat/images/IMATGES_WEB/IMATGES_WEB-Ajuntament-Arta-1-VNQpBGngj441NXn.jpeg" alt="Info Sant Antoni 2026">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">2026</span>
+                        <h3 class="card-title">Info pràctica</h3>
+                        <p class="card-description">Itineraris, horaris, talls de trànsit i recomanacions oficials per viure Sant Antoni 2026.</p>
+                        <span class="card-cta">
+                            Veure info
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="about">
+            <div class="about-content">
+                <h2 class="about-title">La festa més viva de Mallorca</h2>
+                <p class="about-text">
+                    Sant Antoni d'Artà és una de les celebracions populars més antigues i autèntiques de l'illa. 
+                    Cada 16 i 17 de gener, el poble es transforma amb foguerons, dimonis, la cavalcada i les beneïdes.
+                </p>
+                <p class="about-text">
+                    Aquesta web neix amb l'objectiu de preservar i difondre el patrimoni audiovisual de la festa, 
+                    recopilant vídeos, documentals i informació per a tothom que vulgui viure o recordar Sant Antoni.
+                </p>
+                <div class="about-highlight">
+                    <div class="highlight-item">
+                        <div class="highlight-number">40+</div>
+                        <div class="highlight-label">Anys de vídeos</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -937,51 +717,12 @@
     <footer>
         <div class="footer-logo">SANT ANTONI D'ARTÀ</div>
         <p class="footer-text">16 i 17 de Gener · Artà, Mallorca</p>
-        <a href="https://docs.google.com/forms/d/1h6vbYXmCvvxjFR4umYMbLnveB5PMXL6miGIOKThD0Og/preview" target="_blank" class="footer-link">
-            Tens vídeos? Col·labora al projecte →
-        </a>
         <a href="https://github.com/JosepBernad/santantoni.org" target="_blank" rel="noopener" class="footer-github" aria-label="GitHub">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
     </footer>
 
-    <!-- Video Modal -->
-    <div class="video-modal" id="videoModal" onclick="closeModal(event)">
-        <div class="video-modal-wrapper" onclick="event.stopPropagation()">
-            <button class="video-modal-close" onclick="closeModal()">&times;</button>
-            <div class="video-modal-content">
-                <iframe id="videoFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Video Modal Functions
-        function openVideo(videoId) {
-            const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('videoFrame');
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3`;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(event) {
-            if (event && event.target !== event.currentTarget) return;
-            const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('videoFrame');
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-            // Esperar que acabi l'animació abans de treure el vídeo
-            setTimeout(() => {
-                iframe.src = '';
-            }, 500);
-        }
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
-        });
-
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -991,7 +732,6 @@
             localStorage.setItem('theme', newTheme);
         }
 
-        // Carregar tema guardat o detectar preferència del sistema
         (function() {
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -1002,106 +742,6 @@
                 document.documentElement.setAttribute('data-theme', 'light');
             }
         })();
-
-        // Carregar dades dinàmicament
-        async function loadData() {
-            try {
-                const response = await fetch('data.json');
-                const data = await response.json();
-                
-                // Actualitzar Hero
-                const featured = data.featured;
-                document.querySelector('.hero-title').textContent = featured.title;
-                document.querySelector('.hero-subtitle').textContent = featured.subtitle;
-                document.querySelector('.hero-meta .year').textContent = featured.year;
-                document.querySelector('.hero-meta .duration').textContent = data.pelicules.find(p => p.year === featured.year)?.duration || '';
-                document.querySelector('.btn-play').onclick = () => openVideo(featured.videoId);
-                
-                // Generar Pel·lícules
-                const peliculesContainer = document.getElementById('pelicules-container');
-                data.pelicules.forEach(peli => {
-                    const card = document.createElement('article');
-                    card.className = 'video-card';
-                    card.onclick = () => openVideo(peli.videoId);
-                    card.innerHTML = `
-                        <img src="${peli.coverUrl}" alt="Sant Antoni ${peli.year}">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">${peli.year}</div>
-                            <div class="card-duration">${peli.duration}</div>
-                        </div>
-                    `;
-                    peliculesContainer.appendChild(card);
-                });
-                
-                // Generar Clips (barrejats aleatòriament)
-                const clipsContainer = document.getElementById('clips-container');
-                const shuffledClips = [...data.clips].sort(() => Math.random() - 0.5);
-                shuffledClips.forEach(clip => {
-                    const card = document.createElement('article');
-                    card.className = 'video-card';
-                    card.onclick = () => openVideo(clip.videoId);
-                    card.innerHTML = `
-                        <img src="https://img.youtube.com/vi/${clip.videoId}/hqdefault.jpg" alt="Clip Sant Antoni ${clip.year}">
-                        <div class="play-icon"></div>
-                        <div class="card-info">
-                            <div class="card-year">${clip.year}</div>
-                            <div class="card-title">${clip.title}</div>
-                        </div>
-                    `;
-                    clipsContainer.appendChild(card);
-                });
-
-                // Inicialitzar navegació del carrusel
-                initCarouselNav();
-                
-            } catch (error) {
-                console.error('Error carregant dades:', error);
-            }
-        }
-
-        // Carousel Navigation
-        function initCarouselNav() {
-            const container = document.getElementById('pelicules-container');
-            const leftBtn = document.getElementById('carousel-nav-left');
-            const rightBtn = document.getElementById('carousel-nav-right');
-
-            function updateNavButtons() {
-                const scrollLeft = container.scrollLeft;
-                const maxScroll = container.scrollWidth - container.clientWidth;
-
-                if (scrollLeft <= 0) {
-                    leftBtn.classList.remove('visible');
-                } else {
-                    leftBtn.classList.add('visible');
-                }
-
-                if (scrollLeft >= maxScroll - 1) {
-                    rightBtn.classList.remove('visible');
-                } else {
-                    rightBtn.classList.add('visible');
-                }
-            }
-
-            function scrollCarousel(direction) {
-                const scrollAmount = container.clientWidth * 0.8;
-                container.scrollBy({
-                    left: direction * scrollAmount,
-                    behavior: 'smooth'
-                });
-            }
-
-            leftBtn.addEventListener('click', () => scrollCarousel(-1));
-            rightBtn.addEventListener('click', () => scrollCarousel(1));
-            container.addEventListener('scroll', updateNavButtons);
-
-            // Actualitzar botons inicialment
-            updateNavButtons();
-        }
-        
-        // Carregar dades quan la pàgina estigui llesta
-        document.addEventListener('DOMContentLoaded', loadData);
     </script>
 </body>
 </html>
-
