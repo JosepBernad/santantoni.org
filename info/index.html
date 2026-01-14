@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info 2026 · Sant Antoni d'Artà</title>
+    <meta name="description" content="Itineraris, talls de trànsit i avisos pràctics per a Sant Antoni 2026 a Artà.">
+    <meta property="og:title" content="Sant Antoni 2026 · Informació pràctica">
+    <meta property="og:description" content="Consulta recorreguts, autobusos, horaris i recomanacions oficials per viure Sant Antoni 2026 a Artà.">
+    <meta property="og:image" content="https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sant Antoni 2026 · Informació pràctica">
+    <meta name="twitter:description" content="Itineraris, talls de trànsit i avisos per Sant Antoni 2026 a Artà.">
+    <meta name="twitter:image" content="https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <style>
+        :root {
+            --vermell-foc: #9B1B30;
+            --vermell-intens: #B22340;
+            --vermell-brillant: #C92A4A;
+            --negre-nit: #0A0A0A;
+            --negre-dimoni: #141414;
+            --negre-suau: #1F1F1F;
+            --blanc-camisa: #F5F5F5;
+            --blanc-pur: #FFFFFF;
+            --gris-fum: #808080;
+            
+            --bg-primary: var(--negre-nit);
+            --bg-secondary: var(--negre-dimoni);
+            --bg-tertiary: var(--negre-suau);
+            --text-primary: var(--blanc-camisa);
+            --text-secondary: var(--gris-fum);
+            
+            --hover-underline: 0;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #F8F5F2;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #EDE8E3;
+            --text-primary: #1A1A1A;
+            --text-secondary: #666666;
+            --header-bg: rgba(255,255,255,0.98);
+            --header-border: rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Literata', serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            background: var(--header-bg, rgba(20,20,20,0.98));
+            transition: background 0.3s ease;
+            border-bottom: 1px solid var(--header-border, rgba(255,255,255,0.08));
+        }
+
+        .logo {
+            margin-right: auto;
+        }
+
+        .nav-links {
+            order: 3;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .logo {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--vermell-intens);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'Literata', serif;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
+            padding: 0.3rem 0;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--vermell-foc);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: var(--hover-underline);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--vermell-foc);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        @media (hover: hover) {
+            :root { --hover-underline: 100%; }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0.6rem;
+            border-radius: 4px;
+            background: var(--bg-tertiary);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+            font-family: inherit;
+            outline: none;
+        }
+
+        [data-theme="light"] .theme-toggle {
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-secondary);
+            border-color: var(--vermell-foc);
+        }
+
+        .theme-toggle-icon {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover .theme-toggle-icon svg {
+            transform: rotate(15deg);
+        }
+
+        .icon-moon { display: block; }
+        .icon-sun { display: none; }
+        [data-theme="light"] .icon-moon { display: none; }
+        [data-theme="light"] .icon-sun { display: block; }
+
+        /* Main Content */
+        main {
+            padding: 8rem 3rem 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 4rem;
+            color: var(--vermell-foc);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--vermell-foc), var(--vermell-brillant));
+            margin: 0 auto 2.5rem;
+            border-radius: 999px;
+        }
+
+        .intro-card {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .intro-card .pill {
+            margin-bottom: 1.25rem;
+        }
+
+        .intro-card > p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 1.05rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(155,27,48,0.12);
+            color: var(--vermell-brillant);
+            padding: 0.45rem 0.85rem;
+            border-radius: 999px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.8rem;
+        }
+
+        .highlight-card {
+            margin-top: 0.75rem;
+            background: linear-gradient(120deg, rgba(155,27,48,0.15), rgba(201,42,74,0.08));
+            border: 1px solid rgba(155,27,48,0.35);
+            border-radius: 14px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .highlight-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .highlight-title {
+            font-family: 'Literata', serif;
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            letter-spacing: 0.02em;
+            margin: 0;
+        }
+
+        .highlight-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .highlight-link:hover {
+            color: var(--vermell-brillant);
+        }
+
+        .highlight-link svg {
+            flex-shrink: 0;
+        }
+
+        .highlight-card .map-embed {
+            height: 180px;
+            min-height: unset;
+        }
+
+        .map-embed {
+            width: 100%;
+            min-height: 220px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+            z-index: 0;
+        }
+
+        .map-embed .leaflet-control-attribution {
+            background: rgba(0,0,0,0.6);
+            color: var(--text-secondary);
+            font-size: 0.65rem;
+        }
+
+        .map-embed .leaflet-control-attribution a {
+            color: var(--vermell-brillant);
+        }
+
+        .custom-marker {
+            background: var(--vermell-foc);
+            border: 3px solid var(--blanc-pur);
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .map-tooltip {
+            background: var(--vermell-foc);
+            color: var(--blanc-pur);
+            border: none;
+            border-radius: 6px;
+            padding: 0.35rem 0.6rem;
+            font-family: 'Literata', serif;
+            font-weight: 600;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .map-tooltip a {
+            display: block;
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 400;
+            margin-top: 0.15rem;
+        }
+
+        .map-tooltip a:hover {
+            color: var(--blanc-pur);
+            text-decoration: underline;
+        }
+
+        .map-tooltip::before {
+            border-top-color: var(--vermell-foc);
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.35rem 0.7rem;
+            border-radius: 10px;
+            background: var(--bg-tertiary);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            border-color: var(--vermell-brillant);
+            color: var(--text-primary);
+        }
+
+        .tag.active {
+            background: rgba(155,27,48,0.2);
+            border-color: var(--vermell-brillant);
+            color: var(--vermell-brillant);
+        }
+
+        /* Map Display */
+        .map-display {
+            margin-top: 1rem;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            border-radius: 14px;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .map-display img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-title {
+            font-family: 'Literata', serif;
+            font-size: 1.6rem;
+            color: var(--blanc-pur);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: calc(90vh - 80px);
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -2.5rem;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--blanc-pur);
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+            padding: 0.5rem;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--blanc-pur);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            opacity: 0.7;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-prev {
+            left: 1.5rem;
+        }
+
+        .lightbox-next {
+            right: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-nav {
+                padding: 0.8rem 1rem;
+                font-size: 1.5rem;
+            }
+
+            .lightbox-prev {
+                left: 0.5rem;
+            }
+
+            .lightbox-next {
+                right: 0.5rem;
+            }
+        }
+
+        .info-section {
+            margin-top: 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Literata', serif;
+            font-size: 2.2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-grid.two-cols {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 600px) {
+            .info-grid.two-cols {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-card {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 1.1rem 1.2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .info-card h3 {
+            margin-bottom: 0.4rem;
+            font-size: 1.1rem;
+            color: var(--vermell-brillant);
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 0.35rem;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .info-list li {
+            position: relative;
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .info-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--vermell-brillant);
+        }
+
+        .note-card {
+            margin-top: 1rem;
+            padding: 1rem 1.1rem;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px dashed rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+        }
+
+        .callout {
+            background: rgba(201,42,74,0.12);
+            border: 1px solid rgba(201,42,74,0.35);
+            color: var(--text-primary);
+            grid-column: 1 / -1;
+        }
+
+        .link-card {
+            margin-top: 10rem;
+            padding: 1.25rem;
+            border-radius: 14px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .link-card a {
+            color: var(--vermell-brillant);
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .link-card a:hover {
+            color: var(--vermell-foc);
+        }
+
+        footer {
+            position: relative;
+            padding: 2rem 3rem;
+            text-align: center;
+            color: var(--text-secondary);
+            background: var(--bg-primary);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 2.5rem;
+        }
+
+        .footer-github {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 2rem;
+            color: var(--text-secondary);
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-github:hover {
+            opacity: 1;
+        }
+
+        .footer-github svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .footer-logo {
+            font-family: 'Literata', serif;
+            font-size: 1.5rem;
+            color: var(--vermell-foc);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.7rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            main {
+                padding: 8rem 1.5rem 3rem;
+            }
+
+            .page-title {
+                font-size: 2.6rem;
+            }
+
+            .map-display {
+                aspect-ratio: 4 / 3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">Sant Antoni d'Artà</a>
+        <nav class="nav-links">
+            <a href="/">Vídeos</a>
+            <a href="/lletra">Lletra</a>
+            <a href="/info" class="active">Info 2026</a>
+        </nav>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Canviar tema">
+            <span class="theme-toggle-icon">
+                <svg class="icon-moon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <svg class="icon-sun" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </span>
+        </button>
+    </header>
+
+    <main>
+        <h1 class="page-title">Sant Antoni 2026</h1>
+        <p class="page-subtitle">Informació pràctica i recorreguts</p>
+        <div class="divider"></div>
+
+        <div class="intro-card">
+            <span class="pill">16 i 17 de gener · Artà</span>
+            <p>Sant Antoni ja s'acosta i, com cada any, l'Ajuntament, l'Obreria i els serveis implicats preparen la festa perquè tothom la visqui amb intensitat, seguretat i respecte.</p>
+            <div class="highlight-card">
+                <div class="highlight-header">
+                    <h3 class="highlight-title">Casa del trui</h3>
+                    <a href="https://www.google.com/maps/search/?api=1&query=39.6962,3.3498" target="_blank" rel="noopener" class="highlight-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Carrer de Na Caragol, 2
+                    </a>
+                </div>
+                <div id="map" class="map-embed" aria-label="Mapa de la Casa del trui, carrer de Na Caragol, 2"></div>
+            </div>
+            <div class="tag-list">
+                <span class="tag active" data-img="https://arta.cat/images/IMATGES_WEB/IMATGES_WEB-Ajuntament-Arta-1-VNQpBGngj441NXn.jpeg">Itinerari de l'acapte (16 de gener)</span>
+                <span class="tag" data-img="https://arta.cat/images/IMATGES_WEB/IMATGES_WEB-Ajuntament-Arta-1-Q6xzT6mczGymXZT.jpeg">Completes i foguerons (16 de gener)</span>
+                <span class="tag" data-img="https://arta.cat/images/IMATGES_WEB/IMATGES_WEB-Ajuntament-Arta-1-QvzT2m1zTJZPTkz.jpeg">Itinerari de la cavalcada (17 de gener)</span>
+                <span class="tag" data-img="https://arta.cat/images/IMATGES_WEB/IMATGES_WEB-Ajuntament-Arta-1-XSFWkQ0tsYQVpkm.jpeg">Vies d'accés i evacuació</span>
+            </div>
+            <div class="map-display">
+                <img id="map-display-img" src="https://arta.cat/images/IMATGES_WEB/IMATGES_WEB-Ajuntament-Arta-1-VNQpBGngj441NXn.jpeg" alt="Mapa seleccionat">
+            </div>
+        </div>
+
+        <section class="info-section">
+            <div class="section-header">
+                <span class="pill">16 de gener</span>
+                <h2 class="section-title">Acapte, completes i foguerons</h2>
+                <p class="section-subtitle">Matí d'acapte amb brigada de neteja; es demana col·laboració per mantenir els carrers nets.</p>
+            </div>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Trànsit</h3>
+                    <ul class="info-list">
+                        <li>Avinguda de Costa i Llobera tancada al trànsit d'11 h a 16 h.</li>
+                        <li>Itineraris alternatius senyalitzats.</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>Línies d'autobús</h3>
+                    <ul class="info-list">
+                        <li>Parada d'Avinguda de Costa i Llobera fora de servei de 8 h a 16 h.</li>
+                        <li>Línia 411: dues parades provisionals a la carretera de Son Servera (cap a Cala Rajada i Manacor).</li>
+                        <li>Línia 421: parada provisional al carrer d'Argentina amb carrer Ciutat.</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>Foguerons i serveis</h3>
+                    <ul class="info-list">
+                        <li>Foguerons només a partir de les 19.30h; encendre'ls abans pot impedir muntar-los l'any següent.</li>
+                        <li>Banys públics disponibles durant el dia i la nit (ubicacions als mapes municipals).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="section-header">
+                <span class="pill">17 de gener</span>
+                <h2 class="section-title">Cavalcada i beneïdes</h2>
+                <p class="section-subtitle">Beneïdes davant l'Ajuntament, ubicació habitual.</p>
+            </div>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Normes de circulació</h3>
+                    <ul class="info-list">
+                        <li>Fora del recorregut oficial no està permès viatjar damunt remolcs o camionets; fora del circuit només pot circular la persona conductora.</li>
+                        <li>Tractors: només la persona conductora i sense aturades que dificultin la cavalcada.</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>Participants</h3>
+                    <ul class="info-list">
+                        <li>Menors de 16 anys a cavall, poni o equins: autorització obligatòria (OAC, Cooperativa o Ca'n Mateu).</li>
+                        <li>Animals han d'estar en bones condicions; les aus han d'anar dins gàbies.</li>
+                        <li>Comportaments inadequats poden ser retirats immediatament per l'autoritat.</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>Espais i neteja</h3>
+                    <ul class="info-list">
+                        <li>A la zona de l'arreplegada: useu els contenidors habilitats.</li>
+                        <li>Deixeu espai als dimonis i a la Banda durant els balls.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="section-header">
+                <span class="pill">Altres avisos</span>
+                <h2 class="section-title">Servei públic i seguretat</h2>
+            </div>
+            <div class="info-grid two-cols">
+                <div class="info-card">
+                    <h3>Centre de Salut</h3>
+                    <ul class="info-list">
+                        <li>Del 15 al 20 de gener: accés pel carrer de la Puresa, carrer Major i carrer de na Batlessa (sentit contrari a l'habitual), degudament senyalitzat.</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>Parc Verd i àrees d'aportació</h3>
+                    <ul class="info-list">
+                        <li>Parc Verd d'Artà: obert dia 16 (8 h a 13 h) i tancat dia 17.</li>
+                        <li>Àrea d'Aportació Colònia de Sant Pere: tancada dia 16, oberta dia 17 (9 h a 14 h).</li>
+                    </ul>
+                </div>
+                <div class="info-card callout">
+                    <h3>Seguretat</h3>
+                    <ul class="info-list">
+                        <li>Prohibit l'ús de bombetes i pirotècnia no autoritzada.</li>
+                        <li>Artà és Poble Lliure d'Agressions Sexistes: davant qualsevol agressió o actitud inadequada, telefoneu al 112.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="link-card">
+            <div>
+                <strong>Font oficial:</strong> Ajuntament d'Artà
+                <p class="section-subtitle">Consulta els mapes i detalls complets a la notícia municipal.</p>
+            </div>
+            <a href="https://arta.cat/vivintArta/noticia.php?id=3399&fbclid=IwY2xjawPUYqZleHRuA2FlbQIxMABicmlkETFFYXhmMklpYkR4VGFSRk5Qc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHqG8d-3R-KJE5YDBm1QEpZEBLCcWuwUZu2N0JOKcd7stlDjbrsdVac040zHC_aem_KFMrgFvkZBnugsTeNkIuEg" target="_blank" rel="noopener">Obrir notícia</a>
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Anterior">&#10094;</button>
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Tancar">&times;</button>
+            <h3 class="lightbox-title" id="lightbox-title"></h3>
+            <img class="lightbox-img" id="lightbox-img" src="" alt="">
+        </div>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Següent">&#10095;</button>
+    </div>
+
+    <footer>
+        <div class="footer-logo">SANT ANTONI D'ARTÀ</div>
+        <p class="footer-text">16 i 17 de Gener · Artà, Mallorca</p>
+        <a href="https://github.com/JosepBernad/santantoni.org" target="_blank" rel="noopener" class="footer-github" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateMapTiles();
+        }
+
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            } else if (!prefersDark) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+
+        // Leaflet Map - Casa del Trui
+        const casaDelTrui = [39.6962, 3.3498];
+        const map = L.map('map', {
+            scrollWheelZoom: false
+        }).setView(casaDelTrui, 17);
+
+        const darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        });
+
+        const lightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        });
+
+        let currentTiles = null;
+
+        function updateMapTiles() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            if (currentTiles) {
+                map.removeLayer(currentTiles);
+            }
+            currentTiles = theme === 'light' ? lightTiles : darkTiles;
+            currentTiles.addTo(map);
+        }
+
+        updateMapTiles();
+
+        const markerIcon = L.divIcon({
+            className: 'custom-marker',
+            iconSize: [16, 16],
+            iconAnchor: [8, 8]
+        });
+
+        L.marker(casaDelTrui, { icon: markerIcon })
+            .addTo(map)
+            .bindTooltip('Casa del Trui<br><a href="https://www.google.com/maps/search/?api=1&query=39.6962,3.3498" target="_blank" rel="noopener">Carrer de Na Caragol, 2</a>', {
+                permanent: true,
+                direction: 'top',
+                offset: [0, -10],
+                className: 'map-tooltip',
+                interactive: true
+            });
+
+        // Tag-based map selector
+        let currentTitle = 'Itinerari de l\'acapte (16 de gener)';
+        
+        document.querySelectorAll('.tag[data-img]').forEach(tag => {
+            tag.addEventListener('click', function() {
+                const imgSrc = this.getAttribute('data-img');
+                const mapImg = document.getElementById('map-display-img');
+                
+                // Update map image
+                mapImg.src = imgSrc;
+                currentTitle = this.textContent;
+                
+                // Update active state
+                document.querySelectorAll('.tag[data-img]').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const lightboxPrev = document.getElementById('lightbox-prev');
+        const lightboxNext = document.getElementById('lightbox-next');
+        const mapDisplayImg = document.getElementById('map-display-img');
+        const tags = Array.from(document.querySelectorAll('.tag[data-img]'));
+        let currentIndex = 0;
+
+        function updateLightbox(index) {
+            currentIndex = index;
+            const tag = tags[index];
+            lightboxImg.src = tag.getAttribute('data-img');
+            lightboxTitle.textContent = tag.textContent;
+        }
+
+        mapDisplayImg.addEventListener('click', function() {
+            // Find current active tag index
+            const activeTag = document.querySelector('.tag[data-img].active');
+            currentIndex = tags.indexOf(activeTag);
+            if (currentIndex === -1) currentIndex = 0;
+            
+            updateLightbox(currentIndex);
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        function navigateLightbox(direction) {
+            let newIndex = currentIndex + direction;
+            if (newIndex < 0) newIndex = tags.length - 1;
+            if (newIndex >= tags.length) newIndex = 0;
+            updateLightbox(newIndex);
+        }
+
+        lightboxPrev.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigateLightbox(-1);
+        });
+
+        lightboxNext.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigateLightbox(1);
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (!lightbox.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                navigateLightbox(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateLightbox(1);
+            }
+        });
+    </script>
+</body>
+</html>
