@@ -9,6 +9,10 @@
     <meta property="og:description" content="Consulta recorreguts, autobusos, horaris i recomanacions oficials per viure Sant Antoni 2026 a Artà.">
     <meta property="og:image" content="https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://santantoni.org/info/">
+    <meta property="og:locale" content="ca_ES">
+    <meta property="og:site_name" content="Sant Antoni d'Artà">
+    <link rel="canonical" href="https://santantoni.org/info/">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Sant Antoni 2026 · Informació pràctica">
     <meta name="twitter:description" content="Itineraris, talls de trànsit i avisos per Sant Antoni 2026 a Artà.">
@@ -306,7 +310,7 @@
         }
 
         .highlight-card .map-embed {
-            height: 180px;
+            height: 350px;
             min-height: unset;
         }
 
@@ -708,6 +712,42 @@
             }
         }
     </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "@id": "https://santantoni.org/info/#event2026",
+        "url": "https://santantoni.org/info/",
+        "name": "Sant Antoni d'Artà 2026",
+        "description": "Informació pràctica per a Sant Antoni 2026: itineraris, horaris, talls de trànsit i recomanacions oficials.",
+        "startDate": "2026-01-16",
+        "endDate": "2026-01-17",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+            "@type": "Place",
+            "name": "Artà",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Carrer de na Caragol, 2",
+                "addressLocality": "Artà",
+                "postalCode": "07570",
+                "addressRegion": "Illes Balears",
+                "addressCountry": "ES"
+            },
+            "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 39.695980,
+                "longitude": 3.347450
+            }
+        },
+        "image": "https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg",
+        "inLanguage": "ca",
+        "isPartOf": {
+            "@id": "https://santantoni.org/#website"
+        }
+    }
+    </script>
 </head>
 <body>
     <header>
@@ -748,7 +788,7 @@
             <div class="highlight-card">
                 <div class="highlight-header">
                     <h3 class="highlight-title">Casa del trui</h3>
-                    <a href="https://www.google.com/maps/search/?api=1&query=39.6962,3.3498" target="_blank" rel="noopener" class="highlight-link">
+                    <a href="https://maps.app.goo.gl/57kacRwtLgmGfmZTA" target="_blank" rel="noopener" class="highlight-link">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                         Carrer de Na Caragol, 2
                     </a>
@@ -911,10 +951,11 @@
         })();
 
         // Leaflet Map - Casa del Trui
-        const casaDelTrui = [39.6962, 3.3498];
+        const casaDelTrui = [39.695980, 3.347450];
         const map = L.map('map', {
-            scrollWheelZoom: false
-        }).setView(casaDelTrui, 17);
+            scrollWheelZoom: false,
+            attributionControl: false
+        }).setView(casaDelTrui, 16);
 
         const darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
@@ -949,7 +990,7 @@
 
         L.marker(casaDelTrui, { icon: markerIcon })
             .addTo(map)
-            .bindTooltip('Casa del Trui<br><a href="https://www.google.com/maps/search/?api=1&query=39.6962,3.3498" target="_blank" rel="noopener">Carrer de Na Caragol, 2</a>', {
+            .bindTooltip('Casa del Trui<br><a href="https://maps.app.goo.gl/57kacRwtLgmGfmZTA" target="_blank" rel="noopener">Carrer de Na Caragol, 2</a>', {
                 permanent: true,
                 direction: 'top',
                 offset: [0, -10],
