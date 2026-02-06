@@ -985,7 +985,6 @@
         <nav class="nav-links">
             <a href="/videos" class="active">Vídeos</a>
             <a href="/lletra">Lletra</a>
-            <a href="/info">Info 2026</a>
         </nav>
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="Canviar tema">
             <span class="theme-toggle-icon">
@@ -1218,6 +1217,9 @@
                 
             } catch (error) {
                 console.error('Error carregant dades:', error);
+                // Clear skeletons on error
+                document.getElementById('pelicules-container').innerHTML = '<p style="color: var(--text-secondary); padding: 1rem;">Error carregant vídeos</p>';
+                document.getElementById('clips-container').innerHTML = '';
             }
         }
 

@@ -1,12 +1,18 @@
 {
   "featured": {
-    "year": 2025,
-    "title": "Sant Antoni 2025",
+    "year": 2026,
+    "title": "Sant Antoni 2026",
     "subtitle": "Dimonis, foguerons i beneïdes",
-    "videoId": "iWGhiAcHitM",
-    "coverUrl": "https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg"
+    "videoId": "xoqIP16AU0g",
+    "coverUrl": "https://img.youtube.com/vi/xoqIP16AU0g/hqdefault.jpg"
   },
   "pelicules": [
+    {
+      "year": 2026,
+      "videoId": "xoqIP16AU0g",
+      "coverUrl": "https://img.youtube.com/vi/xoqIP16AU0g/hqdefault.jpg",
+      "duration": "58 min"
+    },
     {
       "year": 2025,
       "videoId": "iWGhiAcHitM",
