@@ -841,7 +841,7 @@
             --media-brand: var(--vermell-foc);
             --media-focus-ring-color: var(--vermell-foc);
             --media-slider-track-fill-bg: var(--vermell-foc);
-            --media-slider-track-progress-bg: var(--vermell-brillant);
+            --media-slider-track-progress-bg: rgba(255, 255, 255, 0.3);
             --media-controls-color: white;
         }
 
@@ -872,9 +872,57 @@
             display: none !important;
         }
 
+        /* Add spacing to the left of the time display */
+        .video-modal-content .vds-time {
+            margin-left: 1rem !important;
+        }
+
         /* Push fullscreen button to the right */
         .video-modal-content .vds-fullscreen-button {
             margin-left: auto !important;
+        }
+
+        /* YouTube-style play/pause feedback */
+        .play-pause-feedback {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 64px;
+            height: 64px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 20;
+            opacity: 0;
+        }
+
+        .play-pause-feedback svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
+        }
+
+        .play-pause-feedback.animate {
+            animation: play-pause-pop 0.5s ease-out forwards;
+        }
+
+        @keyframes play-pause-pop {
+            0% {
+                opacity: 0.9;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
         }
 
         .video-modal-close {
@@ -896,6 +944,13 @@
             justify-content: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             z-index: 10;
+        }
+
+        @media (min-width: 1340px) {
+            .video-modal-close {
+                top: -56px;
+                right: -56px;
+            }
         }
 
         .video-modal-close:hover {
@@ -1087,8 +1142,12 @@
             <div class="video-modal-content">
                 <media-player id="videoPlayer" crossorigin playsinline>
                     <media-provider></media-provider>
-                    <media-video-layout thumbnails="" no-gestures no-title></media-video-layout>
+                    <media-video-layout thumbnails="" no-title></media-video-layout>
                 </media-player>
+                <div class="play-pause-feedback" id="playPauseFeedback">
+                    <svg class="feedback-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="feedback-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                </div>
             </div>
         </div>
     </div>
@@ -1096,10 +1155,35 @@
     <script type="module">
         // Vidstack Player Setup
         let player = null;
+        let firstPlay = true;
 
         // Wait for Vidstack to be ready
         customElements.whenDefined('media-player').then(() => {
             player = document.getElementById('videoPlayer');
+
+            // YouTube-style play/pause feedback
+            const feedback = document.getElementById('playPauseFeedback');
+            const feedbackPlay = feedback.querySelector('.feedback-play');
+            const feedbackPause = feedback.querySelector('.feedback-pause');
+
+            player.addEventListener('play', () => {
+                if (firstPlay) { firstPlay = false; return; }
+                feedbackPlay.style.display = '';
+                feedbackPause.style.display = 'none';
+                showFeedback();
+            });
+
+            player.addEventListener('pause', () => {
+                feedbackPlay.style.display = 'none';
+                feedbackPause.style.display = '';
+                showFeedback();
+            });
+
+            function showFeedback() {
+                feedback.classList.remove('animate');
+                void feedback.offsetWidth; // force reflow
+                feedback.classList.add('animate');
+            }
         });
 
         // Video Modal Functions
@@ -1109,6 +1193,7 @@
             document.body.style.overflow = 'hidden';
             
             if (player) {
+                firstPlay = true;
                 // Listen for can-play event before playing
                 const onCanPlay = () => {
                     player.play();
