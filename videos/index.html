@@ -9,6 +9,10 @@
     <meta property="og:description" content="Recopilatori de vídeos i documentals de Sant Antoni d'Artà. Dimonis, foguerons i beneïdes.">
     <meta property="og:image" content="https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://santantoni.org/videos/">
+    <meta property="og:locale" content="ca_ES">
+    <meta property="og:site_name" content="Sant Antoni d'Artà">
+    <link rel="canonical" href="https://santantoni.org/videos/">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Sant Antoni d'Artà · Recopilatoris">
     <meta name="twitter:description" content="Recopilatori de vídeos i documentals de Sant Antoni d'Artà. Dimonis, foguerons i beneïdes.">
@@ -21,6 +25,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Vidstack Player -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack@next/player/styles/base.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack@next/player/styles/default/theme.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack@next/player/styles/default/layouts/video.min.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/vidstack@next/cdn/with-layouts/vidstack.js"></script>
     <style>
         :root {
             --vermell-foc: #9B1B30;
@@ -537,6 +546,67 @@
             }
         }
 
+        /* Skeleton Loading */
+        .skeleton-card {
+            flex-shrink: 0;
+            width: 300px;
+            aspect-ratio: 16/9;
+            border-radius: 4px;
+            background: var(--bg-tertiary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skeleton-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255,255,255,0.08) 50%,
+                transparent 100%
+            );
+            animation: skeleton-shimmer 1.5s infinite;
+        }
+
+        [data-theme="light"] .skeleton-card::after {
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(0,0,0,0.06) 50%,
+                transparent 100%
+            );
+        }
+
+        @keyframes skeleton-shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .clips-grid .skeleton-card {
+            width: calc(25% - 0.75rem);
+            min-width: 200px;
+        }
+
+        @media (max-width: 1200px) {
+            .clips-grid .skeleton-card {
+                width: calc(33.333% - 0.67rem);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .clips-grid .skeleton-card {
+                width: calc(50% - 0.5rem);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .clips-grid .skeleton-card {
+                width: 100%;
+            }
+        }
+
         /* Video Cards */
         .video-card {
             flex-shrink: 0;
@@ -765,10 +835,46 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
         }
 
-        .video-modal-content iframe {
+        .video-modal-content media-player {
             width: 100%;
             height: 100%;
-            border: none;
+            --media-brand: var(--vermell-foc);
+            --media-focus-ring-color: var(--vermell-foc);
+            --media-slider-track-fill-bg: var(--vermell-foc);
+            --media-slider-track-progress-bg: var(--vermell-brillant);
+            --media-controls-color: white;
+        }
+
+        .video-modal-content media-player[data-view-type="video"] {
+            aspect-ratio: 16/9;
+        }
+
+        /* Ensure Vidstack controls are visible */
+        .video-modal-content media-video-layout {
+            display: contents;
+        }
+
+        .video-modal-content [data-media-controls] {
+            z-index: 10;
+        }
+
+        /* Hide video title */
+        .video-modal-content .vds-chapter-title,
+        .video-modal-content [data-part="title"],
+        .video-modal-content .vds-title {
+            display: none !important;
+        }
+
+        /* Hide settings/gear icon */
+        .video-modal-content .vds-settings-button,
+        .video-modal-content [data-part="settings"],
+        .video-modal-content .vds-menu-button {
+            display: none !important;
+        }
+
+        /* Push fullscreen button to the right */
+        .video-modal-content .vds-fullscreen-button {
+            margin-left: auto !important;
         }
 
         .video-modal-close {
@@ -852,6 +958,24 @@
             }
         }
     </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "@id": "https://santantoni.org/videos/",
+        "url": "https://santantoni.org/videos/",
+        "name": "Vídeos de Sant Antoni d'Artà",
+        "description": "Recopilatori de vídeos i documentals de Sant Antoni d'Artà des dels anys 80 fins avui. Dimonis, foguerons i beneïdes.",
+        "isPartOf": {
+            "@id": "https://santantoni.org/#website"
+        },
+        "about": {
+            "@type": "Festival",
+            "name": "Sant Antoni d'Artà"
+        },
+        "inLanguage": "ca"
+    }
+    </script>
 </head>
 <body>
     <header>
@@ -861,7 +985,6 @@
         <nav class="nav-links">
             <a href="/videos" class="active">Vídeos</a>
             <a href="/lletra">Lletra</a>
-            <a href="/info">Info 2026</a>
         </nav>
         <button class="theme-toggle" onclick="toggleTheme()" aria-label="Canviar tema">
             <span class="theme-toggle-icon">
@@ -913,7 +1036,11 @@
                     </svg>
                 </button>
                 <div class="cards-container" id="pelicules-container">
-                    <!-- Generat dinàmicament -->
+                    <!-- Skeleton placeholders -->
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
                 </div>
                 <button class="carousel-nav carousel-nav-right" id="carousel-nav-right" aria-label="Següent">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -928,7 +1055,15 @@
                     <h2 class="row-title">Clips</h2>
                 </div>
                 <div class="clips-grid" id="clips-container">
-                    <!-- Generat dinàmicament -->
+                    <!-- Skeleton placeholders -->
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
                 </div>
             </div>
         </section>
@@ -950,46 +1085,69 @@
         <div class="video-modal-wrapper" onclick="event.stopPropagation()">
             <button class="video-modal-close" onclick="closeModal()">&times;</button>
             <div class="video-modal-content">
-                <iframe id="videoFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <media-player id="videoPlayer" crossorigin playsinline>
+                    <media-provider></media-provider>
+                    <media-video-layout thumbnails="" no-gestures no-title></media-video-layout>
+                </media-player>
             </div>
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        // Vidstack Player Setup
+        let player = null;
+
+        // Wait for Vidstack to be ready
+        customElements.whenDefined('media-player').then(() => {
+            player = document.getElementById('videoPlayer');
+        });
+
         // Video Modal Functions
-        function openVideo(videoId) {
+        window.openVideo = function(videoId) {
             const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('videoFrame');
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3`;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            if (player) {
+                // Listen for can-play event before playing
+                const onCanPlay = () => {
+                    player.play();
+                    player.removeEventListener('can-play', onCanPlay);
+                };
+                
+                player.addEventListener('can-play', onCanPlay);
+                player.src = `youtube/${videoId}`;
+            }
         }
 
-        function closeModal(event) {
+        window.closeModal = function(event) {
             if (event && event.target !== event.currentTarget) return;
             const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('videoFrame');
             modal.classList.remove('active');
             document.body.style.overflow = '';
-            // Esperar que acabi l'animació abans de treure el vídeo
-            setTimeout(() => {
-                iframe.src = '';
-            }, 500);
+            
+            if (player) {
+                player.pause();
+                // Clear source after animation
+                setTimeout(() => {
+                    player.src = '';
+                }, 500);
+            }
         }
 
         // Close modal with Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape') window.closeModal();
         });
 
-        function toggleTheme() {
+        window.toggleTheme = function() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-        }
+        };
 
         // Carregar tema guardat o detectar preferència del sistema
         (function() {
@@ -1015,14 +1173,15 @@
                 document.querySelector('.hero-subtitle').textContent = featured.subtitle;
                 document.querySelector('.hero-meta .year').textContent = featured.year;
                 document.querySelector('.hero-meta .duration').textContent = data.pelicules.find(p => p.year === featured.year)?.duration || '';
-                document.querySelector('.btn-play').onclick = () => openVideo(featured.videoId);
+                document.querySelector('.btn-play').onclick = () => window.openVideo(featured.videoId);
                 
                 // Generar Pel·lícules
                 const peliculesContainer = document.getElementById('pelicules-container');
+                peliculesContainer.innerHTML = ''; // Clear skeletons
                 data.pelicules.forEach(peli => {
                     const card = document.createElement('article');
                     card.className = 'video-card';
-                    card.onclick = () => openVideo(peli.videoId);
+                    card.onclick = () => window.openVideo(peli.videoId);
                     card.innerHTML = `
                         <img src="${peli.coverUrl}" alt="Sant Antoni ${peli.year}">
                         <div class="play-icon"></div>
@@ -1036,11 +1195,12 @@
                 
                 // Generar Clips (barrejats aleatòriament)
                 const clipsContainer = document.getElementById('clips-container');
+                clipsContainer.innerHTML = ''; // Clear skeletons
                 const shuffledClips = [...data.clips].sort(() => Math.random() - 0.5);
                 shuffledClips.forEach(clip => {
                     const card = document.createElement('article');
                     card.className = 'video-card';
-                    card.onclick = () => openVideo(clip.videoId);
+                    card.onclick = () => window.openVideo(clip.videoId);
                     card.innerHTML = `
                         <img src="https://img.youtube.com/vi/${clip.videoId}/hqdefault.jpg" alt="Clip Sant Antoni ${clip.year}">
                         <div class="play-icon"></div>
@@ -1057,6 +1217,9 @@
                 
             } catch (error) {
                 console.error('Error carregant dades:', error);
+                // Clear skeletons on error
+                document.getElementById('pelicules-container').innerHTML = '<p style="color: var(--text-secondary); padding: 1rem;">Error carregant vídeos</p>';
+                document.getElementById('clips-container').innerHTML = '';
             }
         }
 
@@ -1099,8 +1262,8 @@
             updateNavButtons();
         }
         
-        // Carregar dades quan la pàgina estigui llesta
-        document.addEventListener('DOMContentLoaded', loadData);
+        // Carregar dades (modules are deferred, so DOM is ready)
+        loadData();
     </script>
 </body>
 </html>
