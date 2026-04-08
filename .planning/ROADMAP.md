@@ -26,8 +26,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Device detection is based on screen width or pointer media queries — no user-agent strings in the code
   4. A visitor on desktop opens a video and sees exactly one loading spinner while the video buffers
   5. The Vidstack built-in spinner remains intact; any duplicate custom spinner is hidden, not removed
-**Plans**: TBD
-**UI hint**: yes
+**Plans:** 1 plan
+
+Plans:
+- [ ] 01-01-PLAN.md — Mobile YouTube iframe + desktop spinner deduplication in videos/index.html
 
 ## Progress
 
@@ -36,4 +38,4 @@ Phases execute in numeric order: 1
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Video Player Fixes | 0/? | Not started | - |
+| 1. Video Player Fixes | 0/1 | Not started | - |
