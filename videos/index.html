@@ -882,6 +882,23 @@
             margin-left: auto !important;
         }
 
+        /* DSK-01: Hide duplicate spinner (MEDIA-SPINNER) injected by media-video-layout.
+           Vidstack renders both DIV.vds-buffering-indicator and MEDIA-SPINNER.vds-buffering-spinner;
+           keep the div, hide the custom element. */
+        .video-modal-content media-spinner {
+            display: none !important;
+        }
+
+        /* MOB-01: YouTube iframe for mobile path */
+        .video-modal-content .yt-mobile-iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+        }
+
         /* YouTube-style play/pause feedback */
         .play-pause-feedback {
             position: absolute;
@@ -1157,6 +1174,9 @@
         let player = null;
         let firstPlay = true;
 
+        // Mobile detection — pointer:coarse = touch/mobile
+        const isMobile = () => window.matchMedia('(pointer: coarse)').matches;
+
         // Wait for Vidstack to be ready
         customElements.whenDefined('media-player').then(() => {
             player = document.getElementById('videoPlayer');
@@ -1191,17 +1211,41 @@
             const modal = document.getElementById('videoModal');
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            
-            if (player) {
-                firstPlay = true;
-                // Listen for can-play event before playing
-                const onCanPlay = () => {
-                    player.play();
-                    player.removeEventListener('can-play', onCanPlay);
-                };
-                
-                player.addEventListener('can-play', onCanPlay);
-                player.src = `youtube/${videoId}`;
+
+            if (isMobile()) {
+                // Mobile: show YouTube iframe, hide Vidstack
+                const content = modal.querySelector('.video-modal-content');
+                content.querySelector('media-player').style.display = 'none';
+                let iframe = content.querySelector('.yt-mobile-iframe');
+                if (!iframe) {
+                    iframe = document.createElement('iframe');
+                    iframe.className = 'yt-mobile-iframe';
+                    iframe.setAttribute('allowfullscreen', '');
+                    iframe.setAttribute('allow', 'autoplay; encrypted-media');
+                    iframe.setAttribute('frameborder', '0');
+                    content.appendChild(iframe);
+                }
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                iframe.style.display = 'block';
+            } else {
+                // Desktop: use Vidstack
+                const content = modal.querySelector('.video-modal-content');
+                const mobileIframe = content.querySelector('.yt-mobile-iframe');
+                if (mobileIframe) {
+                    mobileIframe.style.display = 'none';
+                    mobileIframe.src = '';
+                }
+                content.querySelector('media-player').style.display = '';
+
+                if (player) {
+                    firstPlay = true;
+                    const onCanPlay = () => {
+                        player.play();
+                        player.removeEventListener('can-play', onCanPlay);
+                    };
+                    player.addEventListener('can-play', onCanPlay);
+                    player.src = `youtube/${videoId}`;
+                }
             }
         }
 
@@ -1210,13 +1254,15 @@
             const modal = document.getElementById('videoModal');
             modal.classList.remove('active');
             document.body.style.overflow = '';
-            
+
+            // Stop mobile iframe
+            const mobileIframe = modal.querySelector('.yt-mobile-iframe');
+            if (mobileIframe) mobileIframe.src = '';
+
+            // Stop Vidstack
             if (player) {
                 player.pause();
-                // Clear source after animation
-                setTimeout(() => {
-                    player.src = '';
-                }, 500);
+                setTimeout(() => { player.src = ''; }, 500);
             }
         }
 
