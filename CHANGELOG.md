@@ -1,3 +1,8 @@
+## [0.1.2] - 2026-04-17
+### Added
+- `version.json` at repo root exposing the deployed version for external monitors
+- `.gitignore` to exclude local Claude settings and common OS/tool artifacts
+
 ## [0.1.1] - 2026-04-08
 ### Fixed
 - Mobile video player now shows YouTube iframe (with autoplay) instead of Vidstack on touch devices
