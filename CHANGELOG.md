@@ -1,3 +1,11 @@
+## [0.1.3] - 2026-04-28
+### Changed
+- Migrated hosting from GitHub Pages to Vercel; disabled the GitHub Pages site and removed the `CNAME` file
+- `.gitignore` now excludes `.env.local`
+
+### Added
+- `rig.config.json` for cross-provider env/secret syncing via the rig tool
+
 ## [0.1.2] - 2026-04-17
 ### Added
 - `version.json` at repo root exposing the deployed version for external monitors

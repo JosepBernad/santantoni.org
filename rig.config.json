@@ -1,0 +1,11 @@
+{
+  "envFile": ".env.local",
+  "vercel": {
+    "envs": [
+      "production",
+      "preview",
+      "development"
+    ],
+    "keys": []
+  }
+}
