@@ -579,6 +579,94 @@
             display: none;
         }
 
+        /* Clips filter */
+        .filter-wrap {
+            position: relative;
+        }
+        .filter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid rgba(255,255,255,0.08);
+            font-family: inherit;
+            font-size: 0.85rem;
+            padding: 0.45rem 0.85rem;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        [data-theme="light"] .filter-btn {
+            border-color: rgba(0,0,0,0.1);
+        }
+        .filter-btn:hover {
+            border-color: var(--vermell-foc);
+            color: var(--vermell-foc);
+        }
+        .filter-btn[aria-expanded="true"] {
+            border-color: var(--vermell-foc);
+            color: var(--vermell-foc);
+        }
+        .filter-btn svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+        .filter-btn .chev {
+            transition: transform 0.2s ease;
+        }
+        .filter-btn[aria-expanded="true"] .chev {
+            transform: rotate(180deg);
+        }
+        .filter-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            min-width: 180px;
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 0.35rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+            z-index: 50;
+            display: none;
+        }
+        [data-theme="light"] .filter-menu {
+            border-color: rgba(0,0,0,0.08);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .filter-menu.open {
+            display: block;
+        }
+        .filter-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .filter-option:hover {
+            background: var(--bg-tertiary);
+        }
+        .filter-option.active {
+            color: var(--vermell-foc);
+        }
+        .filter-option .count {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
         /* Clips Grid (no carousel) */
         .clips-grid {
             display: flex;
@@ -901,6 +989,30 @@
         /* Featured Card (larger) */
         .video-card.featured {
             width: 450px;
+        }
+
+        /* Pel·lícules Completes cover frame */
+        #pelicules-container .video-card {
+            box-shadow:
+                inset 0 0 0 2px rgba(255, 255, 255, 0.55),
+                0 6px 20px rgba(0, 0, 0, 0.55);
+        }
+        #pelicules-container .video-card:hover {
+            box-shadow:
+                inset 0 0 0 2px rgba(255, 255, 255, 0.8),
+                0 0 0 2px var(--vermell-foc),
+                0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+        [data-theme="light"] #pelicules-container .video-card {
+            box-shadow:
+                inset 0 0 0 2px rgba(0, 0, 0, 0.3),
+                0 6px 20px rgba(0, 0, 0, 0.18);
+        }
+        [data-theme="light"] #pelicules-container .video-card:hover {
+            box-shadow:
+                inset 0 0 0 2px rgba(0, 0, 0, 0.5),
+                0 0 0 2px var(--vermell-foc),
+                0 20px 40px rgba(0, 0, 0, 0.25);
         }
 
         /* Footer */
@@ -1581,6 +1693,14 @@
             <div class="row" id="clips-section">
                 <div class="row-header">
                     <h2 class="row-title">Clips</h2>
+                    <div class="filter-wrap" id="clips-filter-wrap">
+                        <button class="filter-btn" id="clips-filter-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="clips-filter-menu">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5h18l-7 9v6l-4-2v-4L3 5z"/></svg>
+                            <span class="filter-btn-label">Tots</span>
+                            <svg class="chev" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div class="filter-menu" id="clips-filter-menu" role="menu"></div>
+                    </div>
                 </div>
                 <div class="clips-grid" id="clips-container">
                     <!-- Skeleton placeholders -->
@@ -1660,6 +1780,10 @@
         let clipQueue = [];
         let clipQueueIdx = 0;
 
+        // Clips filter state
+        let allClips = [];
+        let clipsFilter = 'all'; // 'all' | decade start year as string, e.g. '2020'
+
         // Creator → channel URL map (populated from data.json)
         let creatorsMap = {};
 
@@ -1688,12 +1812,26 @@
                 showFeedback();
             });
 
-            // Auto-advance to next part / clip when current ends
+            // Auto-advance to next part / clip when current ends.
+            // Guard: only advance if the modal is actually open and we have a queue,
+            // otherwise a late/stale `ended` event from a torn-down video would
+            // mutate clipQueueIdx and desync the header from the playing video.
             player.addEventListener('ended', () => {
+                const modalOpen = document.getElementById('videoModal').classList.contains('active');
+                if (!modalOpen) return;
                 if (modalMode === 'clip') {
-                    if (clipQueueIdx < clipQueue.length - 1) {
+                    if (clipQueue.length === 0) return;
+                    if (currentPartIdx < currentParts.length - 1) {
+                        currentPartIdx++;
+                        updatePartUI();
+                        playCurrentVideo();
+                    } else if (clipQueueIdx < clipQueue.length - 1) {
                         clipQueueIdx++;
-                        currentCoverScale = clipQueue[clipQueueIdx].coverScale || 1;
+                        const nextClip = clipQueue[clipQueueIdx];
+                        currentCoverScale = nextClip.coverScale || 1;
+                        currentParts = clipParts(nextClip);
+                        currentPartIdx = 0;
+                        updatePartUI();
                         updateRecommendationsUI();
                         playCurrentVideo();
                     }
@@ -1773,19 +1911,27 @@
             return (p && typeof p === 'object' && typeof p.start === 'number') ? p.start : 0;
         }
 
+        function clipParts(clip) {
+            if (!clip) return [];
+            return Array.isArray(clip.videoId) ? clip.videoId : [clip.videoId];
+        }
+
         function currentVideoId() {
-            if (modalMode === 'clip') return clipQueue[clipQueueIdx].videoId;
             return partId(currentParts[currentPartIdx]);
         }
 
         function currentVideoStart() {
-            if (modalMode === 'clip') return 0;
             return partStart(currentParts[currentPartIdx]);
         }
 
         function remainingPlaylistIds() {
-            if (modalMode === 'clip') return clipQueue.slice(clipQueueIdx + 1).map(c => c.videoId);
-            return currentParts.slice(currentPartIdx + 1).map(partId);
+            const tail = currentParts.slice(currentPartIdx + 1).map(partId);
+            if (modalMode === 'clip') {
+                clipQueue.slice(clipQueueIdx + 1).forEach(c => {
+                    clipParts(c).forEach(p => tail.push(partId(p)));
+                });
+            }
+            return tail;
         }
 
         function updateClipHeader() {
@@ -1863,9 +2009,10 @@
                 card.type = 'button';
                 card.className = 'episode-card' + (idx === clipQueueIdx ? ' active' : '');
                 const thumbStyle = clip.coverScale && clip.coverScale !== 1 ? ` style="transform: scale(${clip.coverScale})"` : '';
+                const recThumbId = partId(clipParts(clip)[0]);
                 card.innerHTML = `
                     <div class="episode-thumb">
-                        <img src="https://img.youtube.com/vi/${clip.videoId}/hqdefault.jpg" alt="${clip.title}" loading="lazy"${thumbStyle}>
+                        <img src="https://img.youtube.com/vi/${recThumbId}/hqdefault.jpg" alt="${clip.title}" loading="lazy"${thumbStyle}>
                         <div class="episode-thumb-overlay">
                             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
@@ -1879,6 +2026,9 @@
                     if (idx === clipQueueIdx) return;
                     clipQueueIdx = idx;
                     currentCoverScale = clip.coverScale || 1;
+                    currentParts = clipParts(clip);
+                    currentPartIdx = 0;
+                    updatePartUI();
                     updateRecommendationsUI();
                     playCurrentVideo();
                     scrollActiveRecommendationIntoView();
@@ -1926,11 +2076,20 @@
         }
 
         window.openClip = function(queue, idx) {
+            // Tear down any in-flight playback first so a stale `ended` event
+            // from the previous video cannot mutate clipQueueIdx after we've set it.
+            if (player) {
+                try { player.pause(); } catch (_) {}
+                try { player.src = ''; } catch (_) {}
+            }
+            const existingIframe = document.querySelector('.yt-mobile-iframe');
+            if (existingIframe) existingIframe.src = '';
+
             modalMode = 'clip';
             clipQueue = queue.slice();
             clipQueueIdx = idx;
             currentCoverScale = clipQueue[idx].coverScale || 1;
-            currentParts = [];
+            currentParts = clipParts(clipQueue[idx]);
             currentPartIdx = 0;
 
             const modal = document.getElementById('videoModal');
@@ -1939,6 +2098,7 @@
 
             document.getElementById('videoModalCredit').style.display = 'none';
 
+            updateClipHeader();
             updatePartUI();
             updateRecommendationsUI();
             playCurrentVideo();
@@ -1970,6 +2130,13 @@
                 player.pause();
                 setTimeout(() => { player.src = ''; }, 500);
             }
+
+            // Reset queue state so no stale index can leak into the next session.
+            modalMode = 'pelicula';
+            clipQueue = [];
+            clipQueueIdx = 0;
+            currentParts = [];
+            currentPartIdx = 0;
         }
 
         // Close modal with Escape key
@@ -2046,26 +2213,9 @@
                 });
                 
                 // Generar Clips (barrejats aleatòriament)
-                const clipsContainer = document.getElementById('clips-container');
-                clipsContainer.innerHTML = ''; // Clear skeletons
-                const shuffledClips = [...data.clips].sort(() => Math.random() - 0.5);
-                shuffledClips.forEach((clip, idx) => {
-                    const card = document.createElement('article');
-                    card.className = 'video-card clip-card';
-                    card.onclick = () => window.openClip(shuffledClips, idx);
-                    const imgStyle = buildCoverStyle(clip);
-                    card.innerHTML = `
-                        <div class="card-cover">
-                            <img src="https://img.youtube.com/vi/${clip.videoId}/hqdefault.jpg" alt="Clip Sant Antoni ${clip.year}"${imgStyle}>
-                            <div class="play-icon"></div>
-                        </div>
-                        <div class="card-info-below">
-                            <div class="card-title">${clip.title}</div>
-                            <div class="card-year">${clip.year}</div>
-                        </div>
-                    `;
-                    clipsContainer.appendChild(card);
-                });
+                allClips = [...data.clips].sort(() => Math.random() - 0.5);
+                initClipsFilter();
+                renderClips();
 
                 // Inicialitzar navegació del carrusel
                 initCarouselNav();
@@ -2076,6 +2226,116 @@
                 document.getElementById('pelicules-container').innerHTML = '<p style="color: var(--text-secondary); padding: 1rem;">Error carregant vídeos</p>';
                 document.getElementById('clips-container').innerHTML = '';
             }
+        }
+
+        // Extract numeric year from a clip year value (handles "1982-1983")
+        function clipYearNum(year) {
+            const m = String(year).match(/\d{4}/);
+            return m ? parseInt(m[0], 10) : NaN;
+        }
+
+        function getFilteredClips() {
+            if (clipsFilter === 'all') return allClips;
+            const start = parseInt(clipsFilter, 10);
+            return allClips.filter(c => {
+                const y = clipYearNum(c.year);
+                return y >= start && y < start + 10;
+            });
+        }
+
+        function renderClips() {
+            const clipsContainer = document.getElementById('clips-container');
+            clipsContainer.innerHTML = '';
+            const list = getFilteredClips();
+            if (list.length === 0) {
+                clipsContainer.innerHTML = '<p style="color: var(--text-secondary); padding: 1rem;">No hi ha clips per a aquest filtre.</p>';
+                return;
+            }
+            list.forEach((clip, idx) => {
+                const card = document.createElement('article');
+                card.className = 'video-card clip-card';
+                card.onclick = () => window.openClip(list, idx);
+                const imgStyle = buildCoverStyle(clip);
+                const partsCount = Array.isArray(clip.videoId) ? clip.videoId.length : 1;
+                const partsBadge = partsCount > 1 ? `<div class="parts-badge">${partsCount} parts</div>` : '';
+                const thumbId = partId(clipParts(clip)[0]);
+                card.innerHTML = `
+                    <div class="card-cover">
+                        <img src="https://img.youtube.com/vi/${thumbId}/hqdefault.jpg" alt="Clip Sant Antoni ${clip.year}"${imgStyle}>
+                        ${partsBadge}
+                        <div class="play-icon"></div>
+                    </div>
+                    <div class="card-info-below">
+                        <div class="card-title">${clip.title}</div>
+                        <div class="card-year">${clip.year}</div>
+                    </div>
+                `;
+                clipsContainer.appendChild(card);
+            });
+        }
+
+        function initClipsFilter() {
+            const btn = document.getElementById('clips-filter-btn');
+            const menu = document.getElementById('clips-filter-menu');
+            const wrap = document.getElementById('clips-filter-wrap');
+            const label = btn.querySelector('.filter-btn-label');
+
+            // Compute decades present in the data (newest first)
+            const decadeCounts = new Map();
+            allClips.forEach(c => {
+                const y = clipYearNum(c.year);
+                if (Number.isNaN(y)) return;
+                const d = Math.floor(y / 10) * 10;
+                decadeCounts.set(d, (decadeCounts.get(d) || 0) + 1);
+            });
+            const decades = [...decadeCounts.keys()].sort((a, b) => b - a);
+
+            const options = [
+                { value: 'all', label: 'Tots', count: allClips.length },
+                ...decades.map(d => ({ value: String(d), label: `${d}s`, count: decadeCounts.get(d) }))
+            ];
+
+            function renderMenu() {
+                menu.innerHTML = '';
+                options.forEach(opt => {
+                    const item = document.createElement('button');
+                    item.type = 'button';
+                    item.className = 'filter-option' + (clipsFilter === opt.value ? ' active' : '');
+                    item.setAttribute('role', 'menuitem');
+                    item.innerHTML = `<span>${opt.label}</span><span class="count">${opt.count}</span>`;
+                    item.addEventListener('click', () => {
+                        clipsFilter = opt.value;
+                        label.textContent = opt.label;
+                        closeMenu();
+                        renderClips();
+                        renderMenu();
+                    });
+                    menu.appendChild(item);
+                });
+            }
+
+            function openMenu() {
+                menu.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+            function closeMenu() {
+                menu.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (menu.classList.contains('open')) closeMenu();
+                else openMenu();
+            });
+            document.addEventListener('click', (e) => {
+                if (!wrap.contains(e.target)) closeMenu();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeMenu();
+            });
+
+            renderMenu();
         }
 
         // Carousel Navigation

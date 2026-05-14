@@ -1,3 +1,11 @@
+## [0.3.3] - 2026-05-14
+### Added
+- Clips decade filter on the videos page (`Tots` / `2020s` / `2010s` / …) with counts per decade
+
+### Fixed
+- Clip modal: header chip and bottom-queue active highlight could desync from the playing video on first open. `openClip` now tears down the player before mutating state, sets the header synchronously, and `closeModal` resets queue state so a late/stale Vidstack `ended` event cannot mutate `clipQueueIdx` between sessions
+- `ended` listener now ignores fires when the modal is closed or the clip queue is empty
+
 ## [0.3.2] - 2026-05-14
 ### Changed
 - Forced dark theme site-wide; removed the theme toggle button from all pages (`index`, `videos`, `lletra`, `info`)
