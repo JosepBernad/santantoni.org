@@ -1,3 +1,13 @@
+## [0.3.1] - 2026-05-14
+### Changed
+- Redesigned clip cards: 16:9 cover image with title and year rendered below the cover (no overlay), tighter typography
+- Clips grid is now 2 columns on mobile (≤600px) instead of single column
+- Introduced `--page-pad` CSS variable as the single source of truth for horizontal page padding (3rem desktop, 1.5rem mobile)
+- Shortened homepage `<title>` to "Sant Antoni d'Artà"
+
+### Fixed
+- Removed stray leading `e` character before `<!DOCTYPE html>` in `index.html`
+
 ## [0.3.0] - 2026-05-14
 ### Added
 - Clip autoplay queue: clicking a clip opens a modal that auto-advances through the (shuffled) clip list and shows a "Més clips" recommendations panel below the player
