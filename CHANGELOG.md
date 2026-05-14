@@ -1,3 +1,8 @@
+## [0.6.1] - 2026-05-14
+### Fixed
+- iOS page-transition glitch: removed the scroll-driven `is-condensed` state from `components/site-header.js` and `styles/header.css` so the header keeps a single, stable height instead of momentarily un-condensing on each new page load
+- On mobile (`max-width: 760px`), disabled the `width 0 → 100%` transition on `.hdr-nav a::before` so the active nav underline appears instantly on load instead of sweeping in after navigation
+
 ## [0.6.0] - 2026-05-14
 ### Added
 - `toni.svg` illustration shown on the `lletra` page alongside the lyrics

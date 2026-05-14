@@ -51,7 +51,6 @@ class SiteHeader extends HTMLElement {
             if (!header) { this._ticking = false; return; }
             const y = window.scrollY || window.pageYOffset || 0;
             const d = y - this._lastY;
-            header.classList.toggle('is-condensed', y > 24);
             if (y < 80) {
                 header.classList.remove('is-hidden');
             } else if (d > 8) {

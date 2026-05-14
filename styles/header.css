@@ -10,14 +10,8 @@
     background: rgba(10, 10, 10, 0.85);
     -webkit-backdrop-filter: blur(10px) saturate(140%);
     backdrop-filter: blur(10px) saturate(140%);
-    transition: transform .45s cubic-bezier(.22, .61, .36, 1),
-                background .35s ease,
-                padding .35s ease;
+    transition: transform .45s cubic-bezier(.22, .61, .36, 1);
     will-change: transform;
-}
-
-.hdr.is-condensed {
-    background: rgba(10, 10, 10, 0.92);
 }
 
 .hdr.is-hidden {
@@ -47,11 +41,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
-    transition: padding .35s ease;
-}
-
-.hdr.is-condensed .hdr-inner {
-    padding: calc(var(--hdr-pad-y) * 0.6) 2.5rem;
 }
 
 .hdr-mark {
@@ -122,11 +111,6 @@
     font-size: 1.35rem;
     letter-spacing: .02em;
     color: var(--text-primary);
-    transition: font-size .35s ease;
-}
-
-.hdr.is-condensed .hdr-wordmark {
-    font-size: 1.1rem;
 }
 
 .hdr-date {
@@ -185,9 +169,6 @@
         padding: var(--hdr-pad-y) 1.25rem;
         gap: 1rem;
     }
-    .hdr.is-condensed .hdr-inner {
-        padding: calc(var(--hdr-pad-y) * 0.75) 1.25rem;
-    }
     .hdr-seal {
         width: calc(36px * var(--hdr-logo-scale));
         height: calc(36px * var(--hdr-logo-scale));
@@ -206,6 +187,9 @@
     .hdr-nav {
         gap: 1.1rem;
         font-size: .8rem;
+    }
+    .hdr-nav a::before {
+        transition: none;
     }
 }
 
