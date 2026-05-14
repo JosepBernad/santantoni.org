@@ -1,6 +1,6 @@
 {
   "name": "santantoni-org",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "scripts": {
     "dev": "npx serve . -p 3000"

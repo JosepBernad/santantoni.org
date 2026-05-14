@@ -1,3 +1,11 @@
+## [0.4.1] - 2026-05-14
+### Added
+- Footer GitHub icon now stacks a monospace `v{version}` label below it on all pages (`index`, `info`, `lletra`, `videos`)
+- `--font-mono` CSS variable in `styles/fonts.css` (system monospace stack)
+
+### Changed
+- Rewrote `README.md` with accurate project structure (info, lletra, videos, components, styles), the `npm run dev` script, the `data.json` shape including `videoId` array/object forms and `coverScale` inheritance, and the versioning workflow
+
 ## [0.4.0] - 2026-05-14
 ### Added
 - Centralized font system in `/styles/fonts.css` exposing `--font-heading` (Marcellus) and `--font-body` (Literata) CSS variables; all pages and components consume them via variables instead of hard-coded family names
