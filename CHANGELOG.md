@@ -1,3 +1,9 @@
+## [0.2.1] - 2026-05-14
+### Changed
+- Videos page: "Pel·lícules Completes" row now has a featured red-glow background with gradient borders
+- Film card year overlay moved from centered to top-left and enlarged (4rem; 3.4rem for year ranges)
+- Default to dark mode regardless of OS preference (system `prefers-color-scheme` no longer auto-applies light)
+
 ## [0.2.0] - 2026-05-14
 ### Added
 - Creator attribution on full films: each `pelicula` now has a `creator`, and `data.json` ships a `creators` map of channel URLs
