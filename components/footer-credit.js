@@ -33,7 +33,7 @@ class FooterCredit extends HTMLElement {
                 }
 
                 .label {
-                    font-family: 'Libre Baskerville', serif;
+                    font-family: var(--font-heading);
                     font-size: 0.8125rem;
                     line-height: 1.4;
                     color: var(--text-secondary, #808080);

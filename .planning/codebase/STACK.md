@@ -48,8 +48,9 @@
   - JS: `https://unpkg.com/leaflet@1.9.4/dist/leaflet.js`
 
 **Frontend Assets:**
-- Google Fonts (Literata and Libre Baskerville) - Typography
-  - `https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700`
+- Google Fonts (Literata body, Marcellus headings) - Typography
+  - Centralized in `/styles/fonts.css`; consumed via CSS variables `--font-body` and `--font-heading`
+  - `https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600;700&family=Marcellus`
 
 ## Configuration
 

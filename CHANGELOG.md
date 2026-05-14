@@ -1,3 +1,23 @@
+## [0.4.0] - 2026-05-14
+### Added
+- Centralized font system in `/styles/fonts.css` exposing `--font-heading` (Marcellus) and `--font-body` (Literata) CSS variables; all pages and components consume them via variables instead of hard-coded family names
+- New pel·lícula "Entrevista a Don Toni Gili" (1981, 2 parts) and three 1991 clips: "Ball davant l'Església", "Cavalcada a sa Plaça de s'Aigua", "Beneïdes davant s'Ajuntament"
+- `start` offset support on single-id clips (previously only multi-part entries supported per-part starts)
+- `data-era` attribute on pel·lícula cards (`vintage` / `classic` / `modern`) derived from the year
+
+### Changed
+- Heading font switched from Libre Baskerville to Marcellus
+- Video modal redesigned: title chip, YouTube credit, and close button now live in a flex header above the player instead of absolutely-positioned floating buttons; close button uses transparent background with hover tint
+- "Més clips" panel merged with the parts track into a single unified row; multipart clip parts render first, followed by recommended clips. The "Més clips" label is rendered as pseudo-elements on the first recommendation card so it floats above the row without claiming a slot
+- Recommendation clip cards fade to 55% opacity at rest and restore on hover/focus/active; same fade applied to non-active pel·lícula parts
+- Pel·lícula cover frame moved from `inset box-shadow` to a `::before` pseudo-element border so the frame can animate independently from the outer shadow
+- Tighter spacing on the videos row (`margin-bottom` 2.5rem → 1.5rem) and clip card container (`padding-top` 2rem → 0.5rem)
+- Hero meta on the videos page: `duration` now uses `--text-secondary` (was red, alongside `creator`)
+- Footer collab link copy shortened: "Tens vídeos? Col·labora al projecte →" → "Tens vídeos? Col·labora →"
+
+### Fixed
+- Clip modal: removed redundant `updatePartUI` call on queue advance and short-circuited it in clip mode so multipart-parts UI no longer flickers when chained through the unified recommendations track
+
 ## [0.3.3] - 2026-05-14
 ### Added
 - Clips decade filter on the videos page (`Tots` / `2020s` / `2010s` / …) with counts per decade

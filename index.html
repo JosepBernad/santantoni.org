@@ -24,7 +24,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/fonts.css">
     <script src="/components/footer-credit.js" defer></script>
     <style>
         :root {
@@ -64,7 +64,7 @@
         }
 
         body {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             background-color: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
@@ -90,7 +90,7 @@
         }
 
         .logo {
-            font-family: 'Libre Baskerville', serif;
+            font-family: var(--font-heading);
             font-size: 1.75rem;
             font-weight: 700;
             letter-spacing: 0.02em;
@@ -109,7 +109,7 @@
         }
 
         .nav-links a {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 400;
@@ -241,7 +241,7 @@
         }
 
         .hero-title {
-            font-family: 'Libre Baskerville', serif;
+            font-family: var(--font-heading);
             font-size: 5.5rem;
             line-height: 1;
             letter-spacing: -0.02em;
@@ -268,7 +268,7 @@
             background: var(--vermell-foc);
             color: var(--blanc-pur);
             padding: 1rem 2rem;
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             font-size: 1.05rem;
             font-weight: 600;
             letter-spacing: 0.05em;
@@ -337,7 +337,7 @@
         }
 
         .sections-title {
-            font-family: 'Libre Baskerville', serif;
+            font-family: var(--font-heading);
             font-size: 3rem;
             color: var(--vermell-foc);
             margin-bottom: 0.5rem;
@@ -455,7 +455,7 @@
         }
 
         .card-title {
-            font-family: 'Libre Baskerville', serif;
+            font-family: var(--font-heading);
             font-size: 1.6rem;
             margin-bottom: 0.5rem;
             color: var(--text-primary);
@@ -502,7 +502,7 @@
         }
 
         .about-title {
-            font-family: 'Libre Baskerville', serif;
+            font-family: var(--font-heading);
             font-size: 2.2rem;
             color: var(--vermell-foc);
             margin-bottom: 1.5rem;
@@ -528,10 +528,9 @@
         }
 
         .highlight-number {
-            font-family: 'Libre Baskerville', serif;
+            font-family: var(--font-heading);
             font-size: 3rem;
             color: var(--vermell-foc);
-            font-weight: 700;
         }
 
         .highlight-label {
@@ -591,7 +590,7 @@
         }
 
         .footer-logo {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             font-size: 1.5rem;
             color: var(--vermell-foc);
             margin-bottom: 0.5rem;

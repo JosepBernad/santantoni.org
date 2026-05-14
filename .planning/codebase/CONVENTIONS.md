@@ -78,9 +78,10 @@ if (!isTouchDevice) {
 
 ## Typography
 
-- Primary font: `Literata` (Google Fonts, serif)
-- Secondary font: `Libre Baskerville` (Google Fonts, serif)
-- Both loaded via `<link>` with `preconnect` for performance
+- Body font: `Literata` (Google Fonts, serif) — exposed as `--font-body`
+- Heading font: `Marcellus` (Google Fonts, serif) — exposed as `--font-heading`
+- Defined centrally in `/styles/fonts.css` and consumed via CSS variables; never reference family names directly in component styles
+- Loaded via `<link rel="stylesheet" href="/styles/fonts.css">` with `preconnect` to `fonts.googleapis.com` / `fonts.gstatic.com`
 
 ## Naming
 

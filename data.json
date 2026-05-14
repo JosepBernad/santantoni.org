@@ -61,7 +61,7 @@
         { "id": "RuXvmmN9gEk", "start": 13 },
         { "id": "zT_bgFjGh3I", "start": 13 },
         { "id": "UQklcrMX5OQ", "start": 13 },
-        "ImFxAZXoifM"
+        { "id": "ImFxAZXoifM", "start": 12 }
       ],
       "coverUrl": "https://img.youtube.com/vi/b6NRJYFrWiY/hqdefault.jpg",
       "duration": "50 min",
@@ -111,6 +111,15 @@
       "year": 2025,
       "title": "Acapte",
       "videoId": "UvTicUowC84"
+    },
+    {
+      "year": 1981,
+      "title": "Entrevista a Don Toni Gili",
+      "videoId": [
+        "whdvZ6LeHYo",
+        "-b6B9HO7984"
+      ],
+      "coverScale": 1.05
     },
     {
       "year": 2024,
@@ -200,7 +209,8 @@
     {
       "year": 2004,
       "title": "Ball de Ses Beneïdes",
-      "videoId": "oZonf9O6WFU"
+      "videoId": "oZonf9O6WFU",
+      "start": 4
     },
     {
       "year": 2003,
@@ -212,6 +222,7 @@
       "year": 2002,
       "title": "Ball a l'Església",
       "videoId": "VBJkd67Hkyg",
+      "start": 7,
       "coverScale": 1.03
     },
     {
@@ -219,6 +230,26 @@
       "title": "Ball a s'Ajuntament",
       "videoId": "5jP61NK-TNI",
       "coverScale": 1.09
+    },
+    {
+      "year": 1991,
+      "title": "Ball davant l'Església",
+      "videoId": "b6NRJYFrWiY",
+      "coverScale": 1.06
+    },
+    {
+      "year": 1991,
+      "title": "Cavalcada a sa Plaça de s'Aigua",
+      "videoId": "zT_bgFjGh3I",
+      "start": 13,
+      "coverScale": 1.06
+    },
+    {
+      "year": 1991,
+      "title": "Beneïdes davant s'Ajuntament",
+      "videoId": "ImFxAZXoifM",
+      "start": 12,
+      "coverScale": 1.06
     }
   ]
 }

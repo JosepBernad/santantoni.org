@@ -24,7 +24,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/fonts.css">
     <script src="/components/footer-credit.js" defer></script>
     <!-- Vidstack Player -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack@next/player/styles/base.min.css">
@@ -79,7 +79,7 @@
         }
 
         body {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             background-color: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
@@ -170,7 +170,7 @@
         }
 
         .logo {
-            font-family: 'Libre Baskerville', serif;
+            font-family: var(--font-heading);
             font-size: 1.75rem;
             font-weight: 700;
             letter-spacing: 0.02em;
@@ -192,7 +192,7 @@
         }
 
         .nav-links a {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 400;
@@ -334,7 +334,7 @@
         }
 
         .hero-title {
-            font-family: 'Literata', serif;
+            font-family: var(--font-heading);
             font-size: 5rem;
             line-height: 0.95;
             letter-spacing: 0.02em;
@@ -367,10 +367,14 @@
             gap: 0.4rem;
         }
 
-        .hero-meta .year,
-        .hero-meta .creator {
+        .hero-meta .year {
             color: var(--vermell-brillant);
             font-weight: 700;
+        }
+
+        .hero-meta .creator,
+        .hero-meta .duration {
+            color: var(--text-secondary);
         }
 
         .hero-buttons {
@@ -437,7 +441,7 @@
         }
 
         .row {
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
             overflow: hidden;
             position: relative;
         }
@@ -536,7 +540,7 @@
         }
 
         .row-title {
-            font-family: 'Literata', serif;
+            font-family: var(--font-heading);
             font-size: 1.8rem;
             letter-spacing: 0.05em;
             display: flex;
@@ -568,7 +572,7 @@
         .cards-container {
             display: flex;
             gap: 1rem;
-            padding: 2rem var(--page-pad) 4.25rem;
+            padding: 0.5rem var(--page-pad) 4.25rem;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
@@ -694,6 +698,13 @@
             background: transparent;
             overflow: visible;
             border-radius: 0;
+            transition: opacity 0.2s ease;
+        }
+        .clips-grid:hover .video-card.clip-card {
+            opacity: 0.65;
+        }
+        .clips-grid .video-card.clip-card:hover {
+            opacity: 1;
         }
         .video-card.clip-card::after { display: none; }
         .video-card.clip-card .card-cover {
@@ -721,7 +732,7 @@
             line-height: 1.3;
         }
         .video-card.clip-card .card-year {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             font-size: 0.85rem;
             color: var(--text-secondary);
             text-shadow: none;
@@ -733,7 +744,7 @@
             box-shadow: none;
         }
         .video-card.clip-card:hover .card-cover {
-            box-shadow: 0 0 0 2px var(--vermell-foc), 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 0 0 2px var(--vermell-foc), 0 8px 20px rgba(0,0,0,0.45);
         }
 
         @media (max-width: 1200px) {
@@ -889,7 +900,7 @@
         }
 
         .card-year {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             font-size: 2.2rem;
             color: var(--blanc-pur);
             text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.7);
@@ -902,7 +913,7 @@
             top: 0;
             left: 0.6rem;
             z-index: 2;
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             font-size: 4rem;
             font-weight: 700;
             color: var(--blanc-pur);
@@ -916,6 +927,7 @@
         .card-year-top--range {
             font-size: 3.4rem;
         }
+
 
         @media (max-width: 600px) {
             .card-year-top {
@@ -993,24 +1005,37 @@
 
         /* Pel·lícules Completes cover frame */
         #pelicules-container .video-card {
-            box-shadow:
-                inset 0 0 0 2px rgba(255, 255, 255, 0.55),
-                0 6px 20px rgba(0, 0, 0, 0.55);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+        }
+        #pelicules-container .video-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(255, 255, 255, 0.55);
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 2;
+            transition: border-color 0.3s ease;
+        }
+        #pelicules-container .video-card:hover::before {
+            border-color: rgba(255, 255, 255, 0.85);
         }
         #pelicules-container .video-card:hover {
             box-shadow:
-                inset 0 0 0 2px rgba(255, 255, 255, 0.8),
                 0 0 0 2px var(--vermell-foc),
                 0 20px 40px rgba(0, 0, 0, 0.6);
         }
         [data-theme="light"] #pelicules-container .video-card {
-            box-shadow:
-                inset 0 0 0 2px rgba(0, 0, 0, 0.3),
-                0 6px 20px rgba(0, 0, 0, 0.18);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+        }
+        [data-theme="light"] #pelicules-container .video-card::before {
+            border-color: rgba(0, 0, 0, 0.35);
+        }
+        [data-theme="light"] #pelicules-container .video-card:hover::before {
+            border-color: rgba(0, 0, 0, 0.55);
         }
         [data-theme="light"] #pelicules-container .video-card:hover {
             box-shadow:
-                inset 0 0 0 2px rgba(0, 0, 0, 0.5),
                 0 0 0 2px var(--vermell-foc),
                 0 20px 40px rgba(0, 0, 0, 0.25);
         }
@@ -1065,7 +1090,7 @@
         }
 
         .footer-logo {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             font-size: 1.5rem;
             color: var(--vermell-foc);
             margin-bottom: 0.5rem;
@@ -1133,6 +1158,17 @@
             position: relative;
             width: 100%;
             max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .video-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.75rem;
+            min-height: 44px;
         }
 
         .video-modal-content {
@@ -1351,25 +1387,74 @@
             display: block;
         }
 
-        .recommendations-title {
-            font-family: 'Literata', serif;
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            padding: 0 1rem;
-            margin-bottom: 0.25rem;
-            letter-spacing: 0.04em;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        /* Fade recommendation clip cards at rest; restore on hover.
+           Parts of a multipart clip share the same track but keep full
+           opacity since they do not carry the .rec-clip class. */
+        .episode-card.rec-clip {
+            opacity: 0.55;
+            transition: opacity 0.25s ease;
         }
 
-        .recommendations-title::before {
+        .episode-card.rec-clip:hover,
+        .episode-card.rec-clip:focus-visible,
+        .episode-card.rec-clip.active {
+            opacity: 1;
+        }
+
+        /* Pelicula (full movie) parts: only the selected part stays at
+           full opacity; siblings fade until hovered. */
+        #episodesTrack .episode-card:not(.active) {
+            opacity: 0.55;
+            transition: opacity 0.25s ease;
+        }
+
+        #episodesTrack .episode-card:not(.active):hover,
+        #episodesTrack .episode-card:not(.active):focus-visible {
+            opacity: 1;
+        }
+
+        /* "Més clips" header rendered above the first clip card in the
+           unified track. The small red bar + label sit in the track's
+           padding-top area so the cards remain top-aligned. */
+        #recommendationsTrack {
+            padding-top: 2.1rem;
+        }
+
+        .episode-card.first-rec {
+            position: relative;
+        }
+
+        .episode-card.first-rec::before {
             content: '';
-            display: block;
+            position: absolute;
+            top: -1.55rem;
+            left: 0;
             width: 3px;
             height: 1rem;
             background: var(--vermell-foc);
+            border-radius: 1px;
+            pointer-events: none;
+        }
+
+        .episode-card.first-rec::after {
+            content: 'Més clips';
+            position: absolute;
+            top: -1.7rem;
+            left: 0.65rem;
+            font-family: 'Literata', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--text-primary);
+            line-height: 1;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            .episode-card.first-rec::after {
+                font-size: 0.95rem;
+            }
         }
 
         /* Multi-part badge on cards */
@@ -1434,9 +1519,6 @@
         }
 
         .video-modal-credit {
-            position: absolute;
-            top: -52px;
-            left: 0;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -1447,7 +1529,6 @@
             border-radius: 4px;
             background: rgba(255, 255, 255, 0.08);
             transition: background 0.2s ease;
-            z-index: 10;
         }
 
         .video-modal-credit:hover {
@@ -1467,12 +1548,6 @@
             display: none;
         }
 
-        @media (min-width: 1340px) {
-            .video-modal-credit {
-                left: -56px;
-            }
-        }
-
         @media (max-width: 600px) {
             .video-modal-credit {
                 font-size: 0.85rem;
@@ -1481,9 +1556,6 @@
         }
 
         .video-modal-title {
-            position: absolute;
-            top: -52px;
-            left: 0;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -1492,7 +1564,6 @@
             padding: 0.4rem 0.8rem;
             border-radius: 4px;
             background: rgba(255, 255, 255, 0.08);
-            z-index: 10;
         }
 
         .video-modal-title .modal-title-text {
@@ -1516,10 +1587,10 @@
         }
 
         .video-modal-close {
-            position: absolute;
-            top: -56px;
-            right: 0;
-            background: var(--vermell-foc);
+            margin-left: auto;
+            align-self: flex-end;
+            flex-shrink: 0;
+            background: transparent;
             border: none;
             color: var(--blanc-pur);
             width: 44px;
@@ -1532,15 +1603,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            z-index: 10;
-        }
-
-        @media (min-width: 1340px) {
-            .video-modal-close {
-                top: -56px;
-                right: -56px;
-            }
         }
 
         @media (max-width: 600px) {
@@ -1548,12 +1610,11 @@
                 width: 32px;
                 height: 32px;
                 font-size: 1.3rem;
-                top: -44px;
             }
         }
 
         .video-modal-close:hover {
-            background: var(--vermell-brillant);
+            background: rgba(255, 255, 255, 0.1);
             transform: scale(1.1);
         }
 
@@ -1721,7 +1782,7 @@
         <div class="footer-logo">SANT ANTONI D'ARTÀ</div>
         <p class="footer-text">16 i 17 de Gener · Artà, Mallorca</p>
         <a href="https://docs.google.com/forms/d/1h6vbYXmCvvxjFR4umYMbLnveB5PMXL6miGIOKThD0Og/preview" target="_blank" class="footer-link">
-            Tens vídeos? Col·labora al projecte →
+            Tens vídeos? Col·labora →
         </a>
         <a href="https://github.com/JosepBernad/santantoni.org" target="_blank" rel="noopener" class="footer-github" aria-label="GitHub" data-tooltip="Open Source">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -1732,19 +1793,21 @@
     <!-- Video Modal -->
     <div class="video-modal" id="videoModal" onclick="closeModal(event)">
         <div class="video-modal-wrapper" onclick="event.stopPropagation()">
-            <div class="video-modal-title" id="videoModalTitle" style="display:none">
-                <span class="modal-title-text"></span>
-                <span class="modal-title-year"></span>
+            <div class="video-modal-header">
+                <div class="video-modal-title" id="videoModalTitle" style="display:none">
+                    <span class="modal-title-text"></span>
+                    <span class="modal-title-year"></span>
+                </div>
+                <a class="video-modal-credit" id="videoModalCredit" target="_blank" rel="noopener" style="display:none">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
+                        <path fill="#FF0000" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8z"/>
+                        <path fill="#fff" d="M9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/>
+                    </svg>
+                    <span class="credit-year"></span>
+                    <span class="credit-name"></span>
+                </a>
+                <button class="video-modal-close" onclick="closeModal()">&times;</button>
             </div>
-            <a class="video-modal-credit" id="videoModalCredit" target="_blank" rel="noopener" style="display:none">
-                <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
-                    <path fill="#FF0000" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8z"/>
-                    <path fill="#fff" d="M9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/>
-                </svg>
-                <span class="credit-year"></span>
-                <span class="credit-name"></span>
-            </a>
-            <button class="video-modal-close" onclick="closeModal()">&times;</button>
             <div class="video-modal-content">
                 <media-player id="videoPlayer" crossorigin playsinline>
                     <media-provider></media-provider>
@@ -1759,7 +1822,6 @@
                 <div class="episodes-track" id="episodesTrack"></div>
             </section>
             <section class="recommendations-panel" id="recommendationsPanel" aria-label="Més clips">
-                <h3 class="recommendations-title">Més clips</h3>
                 <div class="episodes-track" id="recommendationsTrack"></div>
             </section>
         </div>
@@ -1823,7 +1885,7 @@
                     if (clipQueue.length === 0) return;
                     if (currentPartIdx < currentParts.length - 1) {
                         currentPartIdx++;
-                        updatePartUI();
+                        updateRecommendationsUI();
                         playCurrentVideo();
                     } else if (clipQueueIdx < clipQueue.length - 1) {
                         clipQueueIdx++;
@@ -1831,7 +1893,6 @@
                         currentCoverScale = nextClip.coverScale || 1;
                         currentParts = clipParts(nextClip);
                         currentPartIdx = 0;
-                        updatePartUI();
                         updateRecommendationsUI();
                         playCurrentVideo();
                     }
@@ -1857,6 +1918,12 @@
         const videoModal = document.getElementById('videoModal');
 
         function updatePartUI() {
+            // In clip mode, parts are rendered inside the unified recommendations track.
+            if (modalMode === 'clip') {
+                episodesPanel.classList.remove('visible');
+                episodesTrack.innerHTML = '';
+                return;
+            }
             if (currentParts.length <= 1) {
                 episodesPanel.classList.remove('visible');
                 episodesTrack.innerHTML = '';
@@ -1913,7 +1980,9 @@
 
         function clipParts(clip) {
             if (!clip) return [];
-            return Array.isArray(clip.videoId) ? clip.videoId : [clip.videoId];
+            if (Array.isArray(clip.videoId)) return clip.videoId;
+            if (typeof clip.start === 'number') return [{ id: clip.videoId, start: clip.start }];
+            return [clip.videoId];
         }
 
         function currentVideoId() {
@@ -2004,10 +2073,45 @@
             recommendationsPanel.classList.add('visible');
             recommendationsTrack.innerHTML = '';
 
+            // Parts of the current clip come first when the clip is multipart.
+            if (currentParts.length > 1) {
+                currentParts.forEach((part, idx) => {
+                    const id = partId(part);
+                    const card = document.createElement('button');
+                    card.type = 'button';
+                    card.className = 'episode-card' + (idx === currentPartIdx ? ' active' : '');
+                    const thumbStyle = currentCoverScale && currentCoverScale !== 1 ? ` style="transform: scale(${currentCoverScale})"` : '';
+                    card.innerHTML = `
+                        <div class="episode-thumb">
+                            <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="Part ${idx + 1}" loading="lazy"${thumbStyle}>
+                            <div class="episode-thumb-overlay">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
+                        <div class="episode-meta">
+                            <span class="episode-label">Part ${idx + 1}</span>
+                        </div>
+                    `;
+                    card.addEventListener('click', () => {
+                        if (idx === currentPartIdx) return;
+                        currentPartIdx = idx;
+                        updateRecommendationsUI();
+                        playCurrentVideo();
+                    });
+                    recommendationsTrack.appendChild(card);
+                });
+            }
+
+            // The "Més clips" header (small bar + label) is rendered as
+            // pseudo-elements on the first clip card, so it floats above
+            // it without claiming a slot in the row.
             clipQueue.forEach((clip, idx) => {
                 const card = document.createElement('button');
                 card.type = 'button';
-                card.className = 'episode-card' + (idx === clipQueueIdx ? ' active' : '');
+                const isFirstRec = idx === 0;
+                card.className = 'episode-card rec-clip'
+                    + (idx === clipQueueIdx ? ' active' : '')
+                    + (isFirstRec ? ' first-rec' : '');
                 const thumbStyle = clip.coverScale && clip.coverScale !== 1 ? ` style="transform: scale(${clip.coverScale})"` : '';
                 const recThumbId = partId(clipParts(clip)[0]);
                 card.innerHTML = `
@@ -2195,6 +2299,11 @@
                 data.pelicules.forEach(peli => {
                     const card = document.createElement('article');
                     card.className = 'video-card';
+                    const yearNum = parseInt(String(peli.year).match(/\d{4}/)?.[0] ?? '0', 10);
+                    const era = yearNum < 1990 ? 'vintage'
+                              : yearNum < 2010 ? 'classic'
+                              : 'modern';
+                    card.dataset.era = era;
                     card.onclick = () => window.openVideo(peli.videoId, peli.creator, peli.year, peli.coverScale);
                     const partsCount = Array.isArray(peli.videoId) ? peli.videoId.length : 1;
                     const partsBadge = partsCount > 1 ? `<div class="parts-badge">${partsCount} parts</div>` : '';

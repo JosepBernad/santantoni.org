@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Literata:wght@400;600;700&family=Marcellus&display=swap');
+
+:root {
+    --font-heading: 'Marcellus', serif;
+    --font-body: 'Literata', serif;
+}

@@ -89,8 +89,8 @@ All external resources loaded via CDN — no local copies:
 |----------|-----|
 | Vidstack player JS | `cdn.jsdelivr.net/npm/vidstack@next` |
 | Vidstack CSS (3 files) | `cdn.jsdelivr.net/npm/vidstack@next` |
-| Literata font | `fonts.googleapis.com` |
-| Libre Baskerville font | `fonts.googleapis.com` |
+| Literata font (body) | `fonts.googleapis.com` |
+| Marcellus font (headings) | `fonts.googleapis.com` |
 
 ## Naming Conventions
 

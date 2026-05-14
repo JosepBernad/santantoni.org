@@ -25,7 +25,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/fonts.css">
     <script src="/components/footer-credit.js" defer></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <style>
@@ -66,7 +66,7 @@
         }
 
         body {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             background-color: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
@@ -91,7 +91,7 @@
         }
 
         .logo {
-            font-family: 'Libre Baskerville', serif;
+            font-family: var(--font-heading);
             font-size: 1.75rem;
             font-weight: 700;
             letter-spacing: 0.02em;
@@ -110,7 +110,7 @@
         }
 
         .nav-links a {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 400;
@@ -210,7 +210,7 @@
         }
 
         .page-title {
-            font-family: 'Libre Baskerville', serif;
+            font-family: var(--font-heading);
             font-size: 4rem;
             color: var(--vermell-foc);
             margin-top: 1.5rem;
@@ -285,7 +285,7 @@
         }
 
         .highlight-title {
-            font-family: 'Literata', serif;
+            font-family: var(--font-heading);
             font-size: 1.6rem;
             color: var(--text-primary);
             letter-spacing: 0.02em;
@@ -347,7 +347,7 @@
             border: none;
             border-radius: 6px;
             padding: 0.35rem 0.6rem;
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             font-weight: 600;
             font-size: 0.8rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -448,7 +448,7 @@
         }
 
         .lightbox-title {
-            font-family: 'Literata', serif;
+            font-family: var(--font-heading);
             font-size: 1.6rem;
             color: var(--blanc-pur);
             margin-bottom: 1rem;
@@ -538,7 +538,7 @@
         }
 
         .section-title {
-            font-family: 'Literata', serif;
+            font-family: var(--font-heading);
             font-size: 2.2rem;
             letter-spacing: 0.02em;
         }
@@ -693,7 +693,7 @@
         }
 
         .footer-logo {
-            font-family: 'Literata', serif;
+            font-family: var(--font-body);
             font-size: 1.5rem;
             color: var(--vermell-foc);
             margin-bottom: 0.5rem;
