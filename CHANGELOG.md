@@ -1,3 +1,16 @@
+## [0.5.0] - 2026-05-14
+### Added
+- Shared `components/site-header.js` web component, with companion `styles/header.css`, consumed by all four pages (`index`, `info`, `lletra`, `videos`) — replaces ~800 lines of duplicated inline header markup/CSS
+- Brand assets `favicon/dimoni.svg` and `favicon/tau-cross.svg` used by the header seal (tau cross at rest, dimoni silhouette on hover)
+- Square branded favicon master at `favicon/favicon-master.svg` (radial fogueró fade matching the header seal, dimoni silhouette at 96% height)
+- Regenerated favicon set from the new master: `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png`, `android-chrome-192x192.png`, `android-chrome-512x512.png`, multi-res `favicon.ico` (16/32/48)
+- Root-level `/favicon.ico` so Google's favicon crawler can find it (it only probes the root path, not `/favicon/favicon.ico`)
+- `<link rel="icon" type="image/svg+xml">` pointing at the master SVG on all pages for crisp scaling in modern browsers
+
+### Changed
+- `favicon/site.webmanifest` now carries proper `name`/`short_name` ("Sant Antoni d'Artà"), `theme_color` `#9B1B30`, and `background_color` `#0A0A0A`
+- `data.json`: added `start` offsets to three single-id clips (2025 Acapte, 2019 Primer Ball, 2009 Primer Ball) so playback skips intros
+
 ## [0.4.1] - 2026-05-14
 ### Added
 - Footer GitHub icon now stacks a monospace `v{version}` label below it on all pages (`index`, `info`, `lletra`, `videos`)

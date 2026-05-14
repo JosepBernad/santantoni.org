@@ -20,11 +20,14 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon-master.svg">
     <link rel="manifest" href="/favicon/site.webmanifest">
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/styles/fonts.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <script src="/components/site-header.js" defer></script>
     <script src="/components/footer-credit.js" defer></script>
     <!-- Vidstack Player -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack@next/player/styles/base.min.css">
@@ -87,196 +90,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem var(--page-pad);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            background: var(--header-bg, rgba(20,20,20,0.98));
-            transition: background 0.3s ease;
-            border-bottom: 1px solid var(--header-border, rgba(255,255,255,0.08));
-        }
-
-
-        /* Theme Toggle */
-        .theme-toggle {
-            position: absolute;
-            right: var(--page-pad);
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding: 0.6rem;
-            border-radius: 4px;
-            background: var(--bg-tertiary);
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
-            color: var(--text-primary);
-            font-family: inherit;
-            outline: none;
-        }
-
-        [data-theme="light"] .theme-toggle {
-            border-color: rgba(0,0,0,0.1);
-        }
-
-        .theme-toggle:hover {
-            background: var(--bg-secondary);
-            border-color: var(--vermell-foc);
-        }
-
-        .theme-toggle-icon {
-            width: 16px;
-            height: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .theme-toggle-icon svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-            transition: transform 0.3s ease;
-        }
-
-        .theme-toggle:hover .theme-toggle-icon svg {
-            transform: rotate(15deg);
-        }
-
-        .icon-moon {
-            display: block;
-        }
-
-        .icon-sun {
-            display: none;
-        }
-
-        [data-theme="light"] .icon-moon {
-            display: none;
-        }
-
-        [data-theme="light"] .icon-sun {
-            display: block;
-        }
-
-        .logo {
-            font-family: var(--font-heading);
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            color: var(--vermell-intens);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            order: 3;
-            width: 100%;
-            margin-top: 0.5rem;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-family: var(--font-body);
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 1rem;
-            letter-spacing: 0.02em;
-            padding: 0.3rem 0;
-            position: relative;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--vermell-foc);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: var(--hover-underline);
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--vermell-foc);
-        }
-
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        /* Enable hover effects only on devices with hover capability */
-        @media (hover: hover) {
-            :root {
-                --hover-underline: 100%;
-            }
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-        }
-
-        .nav-info {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            font-size: 0.9rem;
-            color: var(--gris-fum);
-        }
-
-        .nav-info span {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Viewport stage: hero + first carousel share one screen height on desktop */
-        .viewport-stage {
-            position: relative;
-        }
-
-        @media (min-width: 900px) and (min-height: 700px) {
-            .viewport-stage {
-                display: flex;
-                flex-direction: column;
-                min-height: 100dvh;
-            }
-            .viewport-stage .hero {
-                flex: 1 1 0;
-                min-height: 360px;
-                height: auto;
-            }
-            .viewport-stage .row-featured {
-                flex: 0 0 auto;
-                margin-bottom: 0;
-            }
-            .viewport-stage + .content-section {
-                margin-top: 2.5rem;
-            }
-        }
-
         /* Hero Section */
         .hero {
             position: relative;
@@ -284,40 +97,34 @@
             display: flex;
             align-items: flex-end;
             padding: 0 var(--page-pad) 4rem;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: -35% 0 0 0;
-            background: url('https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg') center/cover;
-            z-index: 0;
-            will-change: transform;
-            transform: translate3d(0, 0, 0);
+            background: linear-gradient(
+                to right,
+                var(--bg-primary) 0%,
+                transparent 50%
+            ),
+            linear-gradient(
+                to top,
+                var(--bg-primary) 0%,
+                transparent 60%
+            ),
+            url('https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg') center/cover;
+            transition: background 0.3s ease;
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            z-index: 1;
             background:
-                linear-gradient(to right, var(--bg-primary) 0%, transparent 50%),
-                linear-gradient(to top, var(--bg-primary) 0%, transparent 60%),
                 radial-gradient(ellipse at 30% 80%, rgba(198, 30, 30, 0.15) 0%, transparent 50%),
                 linear-gradient(to bottom, transparent 60%, var(--bg-primary) 100%);
             transition: background 0.3s ease;
-            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 1;
             max-width: 1000px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .hero-bg { transform: none !important; }
         }
 
         .hero-tag {
@@ -326,19 +133,19 @@
             gap: 0.5rem;
             background: var(--vermell-foc);
             padding: 0.4rem 1rem;
-            font-size: 0.85rem;
+            font-size: 0.875rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
 
         .hero-title {
             font-family: var(--font-heading);
-            font-size: 5rem;
+            font-size: 4.5rem;
             line-height: 0.95;
             letter-spacing: 0.02em;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
             text-shadow: 2px 2px 20px rgba(0,0,0,0.8);
         }
 
@@ -347,9 +154,9 @@
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             line-height: 1.5;
         }
 
@@ -358,7 +165,7 @@
             align-items: center;
             gap: 1.5rem;
             margin-bottom: 2rem;
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
 
         .hero-meta span {
@@ -451,7 +258,7 @@
                 radial-gradient(ellipse at 50% 0%, rgba(155, 27, 48, 0.5) 0%, transparent 70%),
                 radial-gradient(ellipse at 100% 100%, rgba(155, 27, 48, 0.5) 0%, transparent 70%),
                 linear-gradient(180deg, rgba(155, 27, 48, 0.22) 0%, rgba(155, 27, 48, 0.1) 100%);
-            padding: 1rem 0 0;
+            padding: 2rem 0 2.25rem;
             border-top: 1px solid rgba(155, 27, 48, 0.55);
             border-bottom: 1px solid rgba(155, 27, 48, 0.55);
             box-shadow:
@@ -572,7 +379,7 @@
         .cards-container {
             display: flex;
             gap: 1rem;
-            padding: 0.5rem var(--page-pad) 4.25rem;
+            padding: 1.25rem var(--page-pad);
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
@@ -1632,32 +1439,20 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .nav-links a {
-                font-size: 0.9rem;
-            }
-
-            .nav-info {
-                display: none;
-            }
-
             .hero {
                 padding-bottom: 3rem;
             }
 
             .hero-title {
-                font-size: 3rem;
+                font-size: 2.625rem;
             }
 
             .hero-subtitle {
-                font-size: 1rem;
+                font-size: 1.125rem;
+            }
+
+            .hero-meta {
+                font-size: 0.9375rem;
             }
 
             .hero-buttons {
@@ -1703,62 +1498,49 @@
     </script>
 </head>
 <body>
-    <header>
-        <a href="/" class="logo">
-            Sant Antoni d'Artà
-        </a>
-        <nav class="nav-links">
-            <a href="/videos" class="active">Vídeos</a>
-            <a href="/lletra">Lletra</a>
-        </nav>
-    </header>
+    <site-header active="videos"></site-header>
 
     <main>
-        <div class="viewport-stage">
-            <section class="hero">
-                <div class="hero-bg" id="heroBg"></div>
-                <div class="hero-content">
-                    <h1 class="hero-title"></h1>
-                    <p class="hero-subtitle"></p>
-                    <div class="hero-meta">
-                        <span class="creator"></span>
-                        <span class="duration"></span>
-                    </div>
-                    <div class="hero-buttons">
-                        <a href="javascript:void(0)" class="btn btn-play">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                            Reproduir
-                        </a>
-                    </div>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title"></h1>
+                <p class="hero-subtitle"></p>
+                <div class="hero-meta">
+                    <span class="duration"></span>
                 </div>
-            </section>
-
-            <!-- Peŀlícules completes -->
-            <div class="row row-featured">
-                <div class="row-header">
-                    <h2 class="row-title">Pel<span class="punt-volat">·</span>lícules Completes</h2>
+                <div class="hero-buttons">
+                    <a href="javascript:void(0)" class="btn btn-play">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        Reproduir
+                    </a>
                 </div>
-                <button class="carousel-nav carousel-nav-left" id="carousel-nav-left" aria-label="Anterior">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-                    </svg>
-                </button>
-                <div class="cards-container" id="pelicules-container">
-                    <!-- Skeleton placeholders -->
-                    <div class="skeleton-card"></div>
-                    <div class="skeleton-card"></div>
-                    <div class="skeleton-card"></div>
-                    <div class="skeleton-card"></div>
-                </div>
-                <button class="carousel-nav carousel-nav-right" id="carousel-nav-right" aria-label="Següent">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
-                    </svg>
-                </button>
             </div>
+        </section>
 
+        <!-- Peŀlícules completes -->
+        <div class="row row-featured">
+            <div class="row-header">
+                <h2 class="row-title">Pel<span class="punt-volat">·</span>lícules Completes</h2>
+            </div>
+            <button class="carousel-nav carousel-nav-left" id="carousel-nav-left" aria-label="Anterior">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+            <div class="cards-container" id="pelicules-container">
+                <!-- Skeleton placeholders -->
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+            </div>
+            <button class="carousel-nav carousel-nav-right" id="carousel-nav-right" aria-label="Següent">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                </svg>
+            </button>
         </div>
 
         <section class="content-section">
@@ -1858,6 +1640,39 @@
         // Clips filter state
         let allClips = [];
         let clipsFilter = 'all'; // 'all' | decade start year as string, e.g. '2020'
+
+        // Pelicules cache (populated from data.json) — used by the share-link deep-link resolver
+        let allPelicules = [];
+
+        // Sync `?peli=<videoId>` or `?clip=<videoId>` so the current player state is shareable.
+        // Two distinct params disambiguate the case where the same YouTube id appears
+        // in both a pelicula and a clip (e.g. -b6B9HO7984 is part 3 of the 1981 pel·lícula
+        // AND part 2 of the "Entrevista a Don Toni Gili" clip).
+        // Uses replaceState so auto-advance and part changes don't spam history.
+        const SHARE_PARAMS = ['peli', 'clip'];
+        function setShareUrl(videoId, kind) {
+            if (!videoId) return;
+            const url = new URL(window.location.href);
+            const keep = kind === 'clip' ? 'clip' : 'peli';
+            const drop = keep === 'clip' ? 'peli' : 'clip';
+            let changed = false;
+            if (url.searchParams.has(drop)) { url.searchParams.delete(drop); changed = true; }
+            if (url.searchParams.get(keep) !== videoId) {
+                url.searchParams.set(keep, videoId);
+                changed = true;
+            }
+            if (!changed) return;
+            history.replaceState(null, '', url.pathname + (url.search ? url.search : '') + url.hash);
+        }
+        function clearShareUrl() {
+            const url = new URL(window.location.href);
+            let changed = false;
+            for (const p of SHARE_PARAMS) {
+                if (url.searchParams.has(p)) { url.searchParams.delete(p); changed = true; }
+            }
+            if (!changed) return;
+            history.replaceState(null, '', url.pathname + (url.search ? url.search : '') + url.hash);
+        }
 
         // Creator → channel URL map (populated from data.json)
         let creatorsMap = {};
@@ -2034,6 +1849,7 @@
             const content = modal.querySelector('.video-modal-content');
             const videoId = currentVideoId();
             const startAt = currentVideoStart();
+            setShareUrl(videoId, modalMode === 'clip' ? 'clip' : 'peli');
 
             if (isMobile()) {
                 // Mobile: YouTube iframe (with playlist for remaining items so YT auto-advances)
@@ -2226,6 +2042,7 @@
             const modal = document.getElementById('videoModal');
             modal.classList.remove('active');
             document.body.style.overflow = '';
+            clearShareUrl();
 
             // Reset episodes panel
             episodesPanel.classList.remove('visible');
@@ -2270,16 +2087,6 @@
             }
         });
 
-        window.toggleTheme = function() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        };
-
-        document.documentElement.setAttribute('data-theme', 'dark');
 
         // Build inline style for a card cover image based on optional coverScale.
         // coverScale: number (e.g. 1.18) zooms the image so letterbox bars get cropped out.
@@ -2297,13 +2104,15 @@
                 // Creator channel URLs
                 creatorsMap = data.creators || {};
 
+                // Cache pelicules for the share-link resolver
+                allPelicules = data.pelicules || [];
+
                 // Actualitzar Hero
                 const featured = data.featured;
                 document.querySelector('.hero-title').textContent = featured.title;
                 document.querySelector('.hero-subtitle').textContent = featured.subtitle;
                 const featuredPeli = data.pelicules.find(p => p.year === featured.year);
                 document.querySelector('.hero-meta .duration').textContent = featuredPeli?.duration || '';
-                document.querySelector('.hero-meta .creator').textContent = featuredPeli?.creator || '';
                 document.querySelector('.btn-play').onclick = () => window.openVideo(featured.videoId, featuredPeli?.creator, featuredPeli?.year, featuredPeli?.coverScale);
                 
                 // Generar Pel·lícules
@@ -2341,7 +2150,10 @@
 
                 // Inicialitzar navegació del carrusel
                 initCarouselNav();
-                
+
+                // If the page was opened with `?v=<youtubeId>`, auto-open that video.
+                tryOpenFromUrl();
+
             } catch (error) {
                 console.error('Error carregant dades:', error);
                 // Clear skeletons on error
@@ -2363,6 +2175,52 @@
                 const y = clipYearNum(c.year);
                 return y >= start && y < start + 10;
             });
+        }
+
+        // Resolve `?peli=<id>` or `?clip=<id>` and open the matching entry.
+        // The param name says which list to search, so an id present in both
+        // (e.g. -b6B9HO7984) resolves unambiguously to whichever the sharer was watching.
+        // Multi-part items open at the part that actually contains the id, not always part 1.
+        function tryOpenFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const clipId = params.get('clip');
+            const peliId = params.get('peli');
+
+            if (clipId) {
+                const clipList = getFilteredClips();
+                for (let i = 0; i < clipList.length; i++) {
+                    const parts = clipParts(clipList[i]);
+                    const partIdx = parts.findIndex(p => partId(p) === clipId);
+                    if (partIdx >= 0) {
+                        window.openClip(clipList, i);
+                        if (partIdx > 0) {
+                            currentPartIdx = partIdx;
+                            updateRecommendationsUI();
+                            playCurrentVideo();
+                        }
+                        return;
+                    }
+                }
+            } else if (peliId) {
+                for (const peli of allPelicules) {
+                    const parts = Array.isArray(peli.videoId) ? peli.videoId : [peli.videoId];
+                    const partIdx = parts.findIndex(id => id === peliId);
+                    if (partIdx >= 0) {
+                        window.openVideo(peli.videoId, peli.creator, peli.year, peli.coverScale);
+                        if (partIdx > 0) {
+                            currentPartIdx = partIdx;
+                            updatePartUI();
+                            playCurrentVideo();
+                        }
+                        return;
+                    }
+                }
+            } else {
+                return;
+            }
+
+            // Param present but id not found (stale/removed) — strip it so the page stays clean.
+            clearShareUrl();
         }
 
         function renderClips() {
@@ -2498,32 +2356,6 @@
             // Actualitzar botons inicialment
             updateNavButtons();
         }
-        
-        // Parallax on hero background
-        (function initParallax() {
-            const heroBg = document.getElementById('heroBg');
-            const hero = document.querySelector('.hero');
-            if (!heroBg || !hero) return;
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-            let ticking = false;
-            function update() {
-                const rect = hero.getBoundingClientRect();
-                // Only translate while hero is intersecting the viewport
-                if (rect.bottom > 0 && rect.top < window.innerHeight) {
-                    const offset = Math.max(0, -rect.top) * 0.3;
-                    heroBg.style.transform = `translate3d(0, ${offset}px, 0)`;
-                }
-                ticking = false;
-            }
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    requestAnimationFrame(update);
-                    ticking = true;
-                }
-            }, { passive: true });
-            update();
-        })();
 
         // Carregar dades (modules are deferred, so DOM is ready)
         loadData();

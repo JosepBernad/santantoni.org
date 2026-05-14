@@ -20,11 +20,14 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon-master.svg">
     <link rel="manifest" href="/favicon/site.webmanifest">
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/styles/fonts.css">
+    <link rel="stylesheet" href="/styles/header.css">
+    <script src="/components/site-header.js" defer></script>
     <script src="/components/footer-credit.js" defer></script>
     <style>
         :root {
@@ -71,139 +74,6 @@
             min-height: 100vh;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 3rem;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            background: var(--header-bg, rgba(20,20,20,0.98));
-            transition: background 0.3s ease;
-            border-bottom: 1px solid var(--header-border, rgba(255,255,255,0.08));
-        }
-
-        .logo {
-            font-family: var(--font-heading);
-            font-size: 1.75rem;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            color: var(--vermell-intens);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            order: 3;
-            width: 100%;
-            margin-top: 0.5rem;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-family: var(--font-body);
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 400;
-            font-size: 1rem;
-            letter-spacing: 0.02em;
-            padding: 0.3rem 0;
-            position: relative;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--vermell-foc);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: var(--hover-underline);
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--vermell-foc);
-        }
-
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        /* Enable hover effects only on devices with hover capability */
-        @media (hover: hover) {
-            :root {
-                --hover-underline: 100%;
-            }
-        }
-
-
-        /* Theme Toggle */
-        .theme-toggle {
-            position: absolute;
-            right: 3rem;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding: 0.6rem;
-            border-radius: 4px;
-            background: var(--bg-tertiary);
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
-            color: var(--text-primary);
-            font-family: inherit;
-            outline: none;
-        }
-
-        [data-theme="light"] .theme-toggle {
-            border-color: rgba(0,0,0,0.1);
-        }
-
-        .theme-toggle:hover {
-            background: var(--bg-secondary);
-            border-color: var(--vermell-foc);
-        }
-
-        .theme-toggle-icon {
-            width: 16px;
-            height: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .theme-toggle-icon svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-            transition: transform 0.3s ease;
-        }
-
-        .theme-toggle:hover .theme-toggle-icon svg {
-            transform: rotate(15deg);
-        }
-
-        .icon-moon { display: block; }
-        .icon-sun { display: none; }
-        [data-theme="light"] .icon-moon { display: none; }
-        [data-theme="light"] .icon-sun { display: block; }
 
         /* Main Content */
         main {
@@ -413,26 +283,6 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            header {
-                padding: 1rem 1.5rem;
-            }
-
-            .theme-toggle {
-                right: 1.5rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .nav-links a {
-                font-size: 0.9rem;
-            }
-
             main {
                 padding: 8rem 1.5rem 3rem;
             }
@@ -468,13 +318,7 @@
     </script>
 </head>
 <body>
-    <header>
-        <a href="/" class="logo">Sant Antoni d'Artà</a>
-        <nav class="nav-links">
-            <a href="/videos">Vídeos</a>
-            <a href="/lletra" class="active">Lletra</a>
-        </nav>
-    </header>
+    <site-header active="lletra"></site-header>
 
     <main>
         <h1 class="page-title">Lletra de Completes</h1>
@@ -588,16 +432,6 @@
             }
         })();
 
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            html.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-
-        document.documentElement.setAttribute('data-theme', 'dark');
     </script>
 </body>
 </html>
