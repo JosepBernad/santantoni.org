@@ -1,3 +1,7 @@
+## [0.6.3] - 2026-05-14
+### Changed
+- Footer version chip now reads from `/version.json` at runtime: `components/footer-credit.js` fetches the file on connect and overwrites every `.footer-version` span with `v${version}`. The hardcoded spans on `index.html`, `info/index.html`, `lletra/index.html`, and `videos/index.html` were bumped to `v0.6.2` as a no-FOUC fallback if the fetch fails. Single source of truth is now `version.json`.
+
 ## [0.6.2] - 2026-05-14
 ### Fixed
 - Mobile clip modal: opening a clip could play the next clip in the queue instead of the one whose title and active card were shown. Prepended the current `videoId` to the `playlist=` param so the YouTube embed plays the intended clip even on mobile browsers that ignore the URL-path video when a playlist is present.

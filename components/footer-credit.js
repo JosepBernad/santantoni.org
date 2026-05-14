@@ -1,5 +1,18 @@
+async function hydrateFooterVersion() {
+    const targets = document.querySelectorAll('.footer-version');
+    if (!targets.length) return;
+    try {
+        const res = await fetch('/version.json', { cache: 'no-cache' });
+        if (!res.ok) return;
+        const { version } = await res.json();
+        if (!version) return;
+        targets.forEach(el => { el.textContent = `v${version}`; });
+    } catch {}
+}
+
 class FooterCredit extends HTMLElement {
     connectedCallback() {
+        hydrateFooterVersion();
         const shadow = this.attachShadow({ mode: 'open' });
         shadow.innerHTML = `
             <style>
