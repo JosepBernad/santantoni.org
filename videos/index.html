@@ -1626,6 +1626,33 @@
         let player = null;
         let firstPlay = true;
 
+        // Mobile YouTube IFrame Player API state. We drive playback ourselves
+        // (one video at a time, listening for ENDED) instead of relying on
+        // YT's `playlist=` URL param — that way the title chip and active
+        // recommendation card stay in sync when the next clip auto-starts.
+        let ytApiReady = false;
+        let ytPlayer = null;
+        let ytPlayerReady = false;
+        let pendingMobilePlay = null;
+
+        (function loadYouTubeIframeApi() {
+            if (window.YT && window.YT.Player) { ytApiReady = true; return; }
+            if (document.querySelector('script[data-yt-iframe-api]')) return;
+            const tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            tag.setAttribute('data-yt-iframe-api', '');
+            document.head.appendChild(tag);
+        })();
+
+        window.onYouTubeIframeAPIReady = function() {
+            ytApiReady = true;
+            if (pendingMobilePlay) {
+                const fn = pendingMobilePlay;
+                pendingMobilePlay = null;
+                fn();
+            }
+        };
+
         // Multi-part state (pelicula mode)
         let currentParts = [];
         let currentPartIdx = 0;
@@ -1702,33 +1729,7 @@
             });
 
             // Auto-advance to next part / clip when current ends.
-            // Guard: only advance if the modal is actually open and we have a queue,
-            // otherwise a late/stale `ended` event from a torn-down video would
-            // mutate clipQueueIdx and desync the header from the playing video.
-            player.addEventListener('ended', () => {
-                const modalOpen = document.getElementById('videoModal').classList.contains('active');
-                if (!modalOpen) return;
-                if (modalMode === 'clip') {
-                    if (clipQueue.length === 0) return;
-                    if (currentPartIdx < currentParts.length - 1) {
-                        currentPartIdx++;
-                        updateRecommendationsUI();
-                        playCurrentVideo();
-                    } else if (clipQueueIdx < clipQueue.length - 1) {
-                        clipQueueIdx++;
-                        const nextClip = clipQueue[clipQueueIdx];
-                        currentCoverScale = nextClip.coverScale || 1;
-                        currentParts = clipParts(nextClip);
-                        currentPartIdx = 0;
-                        updateRecommendationsUI();
-                        playCurrentVideo();
-                    }
-                } else if (currentPartIdx < currentParts.length - 1) {
-                    currentPartIdx++;
-                    updatePartUI();
-                    playCurrentVideo();
-                }
-            });
+            player.addEventListener('ended', handleVideoEnded);
 
             function showFeedback() {
                 feedback.classList.remove('animate');
@@ -1743,6 +1744,38 @@
         const recommendationsPanel = document.getElementById('recommendationsPanel');
         const recommendationsTrack = document.getElementById('recommendationsTrack');
         const videoModal = document.getElementById('videoModal');
+
+        // Shared between Vidstack's `ended` event (desktop) and the YouTube
+        // IFrame API's onStateChange ENDED (mobile). Re-running playCurrentVideo
+        // for the next item is what keeps the title chip, active recommendation
+        // card, and share URL in sync as auto-advance progresses.
+        // Guard: only advance if the modal is actually open and we have a queue,
+        // otherwise a late/stale `ended` event from a torn-down video would
+        // mutate clipQueueIdx and desync the header from the playing video.
+        function handleVideoEnded() {
+            const modalOpen = document.getElementById('videoModal').classList.contains('active');
+            if (!modalOpen) return;
+            if (modalMode === 'clip') {
+                if (clipQueue.length === 0) return;
+                if (currentPartIdx < currentParts.length - 1) {
+                    currentPartIdx++;
+                    updateRecommendationsUI();
+                    playCurrentVideo();
+                } else if (clipQueueIdx < clipQueue.length - 1) {
+                    clipQueueIdx++;
+                    const nextClip = clipQueue[clipQueueIdx];
+                    currentCoverScale = nextClip.coverScale || 1;
+                    currentParts = clipParts(nextClip);
+                    currentPartIdx = 0;
+                    updateRecommendationsUI();
+                    playCurrentVideo();
+                }
+            } else if (currentPartIdx < currentParts.length - 1) {
+                currentPartIdx++;
+                updatePartUI();
+                playCurrentVideo();
+            }
+        }
 
         function updatePartUI() {
             // In clip mode, parts are rendered inside the unified recommendations track.
@@ -1820,16 +1853,6 @@
             return partStart(currentParts[currentPartIdx]);
         }
 
-        function remainingPlaylistIds() {
-            const tail = currentParts.slice(currentPartIdx + 1).map(partId);
-            if (modalMode === 'clip') {
-                clipQueue.slice(clipQueueIdx + 1).forEach(c => {
-                    clipParts(c).forEach(p => tail.push(partId(p)));
-                });
-            }
-            return tail;
-        }
-
         function updateClipHeader() {
             const titleEl = document.getElementById('videoModalTitle');
             if (modalMode === 'clip' && clipQueue[clipQueueIdx]) {
@@ -1851,28 +1874,72 @@
             setShareUrl(videoId, modalMode === 'clip' ? 'clip' : 'peli');
 
             if (isMobile()) {
-                // Mobile: YouTube iframe (with playlist for remaining items so YT auto-advances)
+                // Mobile: drive playback through the YouTube IFrame Player API so
+                // we get an ENDED state-change we can hook into (and so loading
+                // the next clip ourselves updates the title chip / active card).
                 content.querySelector('media-player').style.display = 'none';
-                let iframe = content.querySelector('.yt-mobile-iframe');
-                if (!iframe) {
-                    iframe = document.createElement('iframe');
-                    iframe.className = 'yt-mobile-iframe';
-                    iframe.setAttribute('allowfullscreen', '');
-                    iframe.setAttribute('allow', 'autoplay; encrypted-media');
-                    iframe.setAttribute('frameborder', '0');
-                    content.appendChild(iframe);
-                }
-                const remaining = remainingPlaylistIds().join(',');
-                const playlistParam = remaining ? `&playlist=${remaining}` : '';
-                const startParam = startAt > 0 ? `&start=${startAt}` : '';
-                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1${startParam}${playlistParam}`;
-                iframe.style.display = 'block';
+
+                const playMobile = () => {
+                    if (!ytPlayer) {
+                        let host = content.querySelector('.yt-mobile-host');
+                        if (!host) {
+                            host = document.createElement('div');
+                            host.className = 'yt-mobile-host';
+                            content.appendChild(host);
+                        }
+                        ytPlayer = new YT.Player(host, {
+                            videoId: videoId,
+                            playerVars: {
+                                autoplay: 1,
+                                playsinline: 1,
+                                rel: 0,
+                                modestbranding: 1,
+                                start: startAt > 0 ? startAt : 0,
+                            },
+                            events: {
+                                onReady: () => {
+                                    ytPlayerReady = true;
+                                    try {
+                                        const ifr = ytPlayer.getIframe();
+                                        ifr.classList.add('yt-mobile-iframe');
+                                        ifr.style.display = 'block';
+                                    } catch (_) {}
+                                },
+                                onStateChange: (e) => {
+                                    if (e.data === YT.PlayerState.ENDED) handleVideoEnded();
+                                },
+                            },
+                        });
+                        // Apply our class synchronously too so the iframe isn't
+                        // briefly visible at the default 640×360 before onReady.
+                        try {
+                            const ifr = ytPlayer.getIframe();
+                            if (ifr) {
+                                ifr.classList.add('yt-mobile-iframe');
+                                ifr.style.display = 'block';
+                            }
+                        } catch (_) {}
+                    } else {
+                        try {
+                            ytPlayer.loadVideoById({ videoId: videoId, startSeconds: startAt > 0 ? startAt : 0 });
+                        } catch (_) {}
+                        try {
+                            const ifr = ytPlayer.getIframe();
+                            if (ifr) ifr.style.display = 'block';
+                        } catch (_) {}
+                    }
+                };
+
+                if (ytApiReady) playMobile();
+                else pendingMobilePlay = playMobile;
             } else {
                 // Desktop: Vidstack
-                const mobileIframe = content.querySelector('.yt-mobile-iframe');
-                if (mobileIframe) {
-                    mobileIframe.style.display = 'none';
-                    mobileIframe.src = '';
+                if (ytPlayer) {
+                    try { ytPlayer.stopVideo(); } catch (_) {}
+                    try {
+                        const ifr = ytPlayer.getIframe();
+                        if (ifr) ifr.style.display = 'none';
+                    } catch (_) {}
                 }
                 content.querySelector('media-player').style.display = '';
 
@@ -2014,8 +2081,9 @@
                 try { player.pause(); } catch (_) {}
                 try { player.src = ''; } catch (_) {}
             }
-            const existingIframe = document.querySelector('.yt-mobile-iframe');
-            if (existingIframe) existingIframe.src = '';
+            if (ytPlayer) {
+                try { ytPlayer.stopVideo(); } catch (_) {}
+            }
 
             modalMode = 'clip';
             clipQueue = queue.slice();
@@ -2054,9 +2122,11 @@
             // Reset clip title chip
             document.getElementById('videoModalTitle').style.display = 'none';
 
-            // Stop mobile iframe
-            const mobileIframe = modal.querySelector('.yt-mobile-iframe');
-            if (mobileIframe) mobileIframe.src = '';
+            // Stop mobile YouTube player and drop any deferred first-time play
+            if (ytPlayer) {
+                try { ytPlayer.stopVideo(); } catch (_) {}
+            }
+            pendingMobilePlay = null;
 
             // Stop Vidstack
             if (player) {

@@ -1,3 +1,8 @@
+## [0.6.2] - 2026-05-14
+### Fixed
+- Mobile clip modal: opening a clip could play the next clip in the queue instead of the one whose title and active card were shown. Prepended the current `videoId` to the `playlist=` param so the YouTube embed plays the intended clip even on mobile browsers that ignore the URL-path video when a playlist is present.
+- Mobile clip modal: when YouTube auto-advanced to the next clip, the title chip and active recommendation card stayed pinned to the previous clip. Replaced the iframe + `playlist=` approach with the YouTube IFrame Player API: playback is now driven one video at a time, `ENDED` state changes route through a shared `handleVideoEnded` (also used by desktop Vidstack), and each advance re-runs `playCurrentVideo` so the header, active card, and share URL update in lockstep with the playing video
+
 ## [0.6.1] - 2026-05-14
 ### Fixed
 - iOS page-transition glitch: removed the scroll-driven `is-condensed` state from `components/site-header.js` and `styles/header.css` so the header keeps a single, stable height instead of momentarily un-condensing on each new page load
