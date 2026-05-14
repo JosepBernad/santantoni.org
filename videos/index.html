@@ -245,6 +245,28 @@
             gap: 0.5rem;
         }
 
+        /* Viewport stage: hero + first carousel share one screen height on desktop */
+        .viewport-stage {
+            position: relative;
+        }
+
+        @media (min-width: 900px) and (min-height: 700px) {
+            .viewport-stage {
+                display: flex;
+                flex-direction: column;
+                min-height: 100dvh;
+            }
+            .viewport-stage .hero {
+                flex: 1 1 0;
+                min-height: 360px;
+                height: auto;
+            }
+            .viewport-stage .row-featured {
+                flex: 0 0 auto;
+                margin-bottom: 0;
+            }
+        }
+
         /* Hero Section */
         .hero {
             position: relative;
@@ -252,34 +274,40 @@
             display: flex;
             align-items: flex-end;
             padding: 0 3rem 4rem;
-            background: linear-gradient(
-                to right,
-                var(--bg-primary) 0%,
-                transparent 50%
-            ),
-            linear-gradient(
-                to top,
-                var(--bg-primary) 0%,
-                transparent 60%
-            ),
-            url('https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg') center/cover;
-            transition: background 0.3s ease;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: -35% 0 0 0;
+            background: url('https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg') center/cover;
+            z-index: 0;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
         }
 
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: 
+            z-index: 1;
+            background:
+                linear-gradient(to right, var(--bg-primary) 0%, transparent 50%),
+                linear-gradient(to top, var(--bg-primary) 0%, transparent 60%),
                 radial-gradient(ellipse at 30% 80%, rgba(198, 30, 30, 0.15) 0%, transparent 50%),
                 linear-gradient(to bottom, transparent 60%, var(--bg-primary) 100%);
             transition: background 0.3s ease;
+            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             max-width: 1000px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-bg { transform: none !important; }
         }
 
         .hero-tag {
@@ -395,7 +423,7 @@
         .content-section {
             position: relative;
             z-index: 10;
-            padding: 0 0 4rem;
+            padding: 2.5rem 0 4rem;
         }
 
         .row {
@@ -409,7 +437,7 @@
                 radial-gradient(ellipse at 50% 0%, rgba(155, 27, 48, 0.5) 0%, transparent 70%),
                 radial-gradient(ellipse at 100% 100%, rgba(155, 27, 48, 0.5) 0%, transparent 70%),
                 linear-gradient(180deg, rgba(155, 27, 48, 0.22) 0%, rgba(155, 27, 48, 0.1) 100%);
-            padding: 2rem 0 2.25rem;
+            padding: 1rem 0 0;
             border-top: 1px solid rgba(155, 27, 48, 0.55);
             border-bottom: 1px solid rgba(155, 27, 48, 0.55);
             box-shadow:
@@ -513,6 +541,14 @@
             background: var(--vermell-foc);
         }
 
+        .row-title .punt-volat {
+            display: inline-block;
+            margin: 0 -0.4em;
+            letter-spacing: 0;
+            font-size: 0.85em;
+            transform: translateY(0.05em);
+        }
+
         .row-subtitle {
             color: var(--text-secondary);
             font-size: 0.9rem;
@@ -521,7 +557,7 @@
         .cards-container {
             display: flex;
             gap: 1rem;
-            padding: 1.25rem 3rem;
+            padding: 2rem 3rem 4.25rem;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
@@ -1104,10 +1140,6 @@
             line-height: 1.2;
         }
 
-        [data-theme="light"] .episode-label {
-            color: var(--text-primary);
-        }
-
         .episode-card.active .episode-label {
             color: var(--vermell-brillant);
         }
@@ -1122,6 +1154,37 @@
             .episode-card {
                 flex: 0 0 140px;
             }
+        }
+
+        /* Recommendations panel (clips autoplay queue) */
+        .recommendations-panel {
+            display: none;
+            margin-top: 1.5rem;
+        }
+
+        .recommendations-panel.visible {
+            display: block;
+        }
+
+        .recommendations-title {
+            font-family: 'Literata', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            padding: 0 1rem;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .recommendations-title::before {
+            content: '';
+            display: block;
+            width: 3px;
+            height: 1rem;
+            background: var(--vermell-foc);
         }
 
         /* Multi-part badge on cards */
@@ -1210,6 +1273,15 @@
             font-weight: 600;
         }
 
+        .video-modal-credit .credit-year {
+            color: var(--text-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .video-modal-credit .credit-year:empty {
+            display: none;
+        }
+
         @media (min-width: 1340px) {
             .video-modal-credit {
                 left: -56px;
@@ -1218,6 +1290,41 @@
 
         @media (max-width: 600px) {
             .video-modal-credit {
+                font-size: 0.85rem;
+                padding: 0.3rem 0.6rem;
+            }
+        }
+
+        .video-modal-title {
+            position: absolute;
+            top: -52px;
+            left: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--blanc-camisa);
+            font-size: 0.95rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            z-index: 10;
+        }
+
+        .video-modal-title .modal-title-text {
+            font-weight: 600;
+        }
+
+        .video-modal-title .modal-title-year {
+            color: var(--text-secondary);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .video-modal-title .modal-title-year:empty {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .video-modal-title {
                 font-size: 0.85rem;
                 padding: 0.3rem 0.6rem;
             }
@@ -1312,7 +1419,7 @@
             }
 
             .cards-container {
-                padding: 1.25rem 1.5rem;
+                padding: 2rem 1.5rem 4.25rem;
             }
 
             .video-card {
@@ -1383,30 +1490,31 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1 class="hero-title"></h1>
-                <p class="hero-subtitle"></p>
-                <div class="hero-meta">
-                    <span class="creator"></span>
-                    <span class="duration"></span>
+        <div class="viewport-stage">
+            <section class="hero">
+                <div class="hero-bg" id="heroBg"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title"></h1>
+                    <p class="hero-subtitle"></p>
+                    <div class="hero-meta">
+                        <span class="creator"></span>
+                        <span class="duration"></span>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="javascript:void(0)" class="btn btn-play">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                            Reproduir
+                        </a>
+                    </div>
                 </div>
-                <div class="hero-buttons">
-                    <a href="javascript:void(0)" class="btn btn-play">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M8 5v14l11-7z"/>
-                        </svg>
-                        Reproduir
-                    </a>
-                </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="content-section">
-            <!-- Pel·lícules completes -->
+            <!-- Peŀlícules completes -->
             <div class="row row-featured">
                 <div class="row-header">
-                    <h2 class="row-title">Pel·lícules Completes</h2>
+                    <h2 class="row-title">Pel<span class="punt-volat">·</span>lícules Completes</h2>
                 </div>
                 <button class="carousel-nav carousel-nav-left" id="carousel-nav-left" aria-label="Anterior">
                     <svg viewBox="0 0 24 24" fill="currentColor">
@@ -1427,8 +1535,11 @@
                 </button>
             </div>
 
+        </div>
+
+        <section class="content-section">
             <!-- Clips -->
-            <div class="row">
+            <div class="row" id="clips-section">
                 <div class="row-header">
                     <h2 class="row-title">Clips</h2>
                 </div>
@@ -1462,11 +1573,16 @@
     <!-- Video Modal -->
     <div class="video-modal" id="videoModal" onclick="closeModal(event)">
         <div class="video-modal-wrapper" onclick="event.stopPropagation()">
+            <div class="video-modal-title" id="videoModalTitle" style="display:none">
+                <span class="modal-title-text"></span>
+                <span class="modal-title-year"></span>
+            </div>
             <a class="video-modal-credit" id="videoModalCredit" target="_blank" rel="noopener" style="display:none">
                 <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
                     <path fill="#FF0000" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8z"/>
                     <path fill="#fff" d="M9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/>
                 </svg>
+                <span class="credit-year"></span>
                 <span class="credit-name"></span>
             </a>
             <button class="video-modal-close" onclick="closeModal()">&times;</button>
@@ -1483,6 +1599,10 @@
             <section class="episodes-panel" id="episodesPanel" aria-label="Parts del vídeo">
                 <div class="episodes-track" id="episodesTrack"></div>
             </section>
+            <section class="recommendations-panel" id="recommendationsPanel" aria-label="Més clips">
+                <h3 class="recommendations-title">Més clips</h3>
+                <div class="episodes-track" id="recommendationsTrack"></div>
+            </section>
         </div>
     </div>
 
@@ -1491,9 +1611,15 @@
         let player = null;
         let firstPlay = true;
 
-        // Multi-part state
+        // Multi-part state (pelicula mode)
         let currentParts = [];
         let currentPartIdx = 0;
+        let currentCoverScale = 1;
+
+        // Clip queue state (clip autoplay/recommendations)
+        let modalMode = 'pelicula'; // 'pelicula' | 'clip'
+        let clipQueue = [];
+        let clipQueueIdx = 0;
 
         // Creator → channel URL map (populated from data.json)
         let creatorsMap = {};
@@ -1523,12 +1649,19 @@
                 showFeedback();
             });
 
-            // Auto-advance to next part when current ends
+            // Auto-advance to next part / clip when current ends
             player.addEventListener('ended', () => {
-                if (currentPartIdx < currentParts.length - 1) {
+                if (modalMode === 'clip') {
+                    if (clipQueueIdx < clipQueue.length - 1) {
+                        clipQueueIdx++;
+                        currentCoverScale = clipQueue[clipQueueIdx].coverScale || 1;
+                        updateRecommendationsUI();
+                        playCurrentVideo();
+                    }
+                } else if (currentPartIdx < currentParts.length - 1) {
                     currentPartIdx++;
                     updatePartUI();
-                    playCurrentPart();
+                    playCurrentVideo();
                 }
             });
 
@@ -1542,6 +1675,8 @@
         // Episodes panel refs
         const episodesPanel = document.getElementById('episodesPanel');
         const episodesTrack = document.getElementById('episodesTrack');
+        const recommendationsPanel = document.getElementById('recommendationsPanel');
+        const recommendationsTrack = document.getElementById('recommendationsTrack');
         const videoModal = document.getElementById('videoModal');
 
         function updatePartUI() {
@@ -1554,13 +1689,15 @@
             episodesPanel.classList.add('visible');
 
             episodesTrack.innerHTML = '';
-            currentParts.forEach((id, idx) => {
+            currentParts.forEach((part, idx) => {
+                const id = partId(part);
                 const card = document.createElement('button');
                 card.type = 'button';
                 card.className = 'episode-card' + (idx === currentPartIdx ? ' active' : '');
+                const thumbStyle = currentCoverScale && currentCoverScale !== 1 ? ` style="transform: scale(${currentCoverScale})"` : '';
                 card.innerHTML = `
                     <div class="episode-thumb">
-                        <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="Part ${idx + 1}" loading="lazy">
+                        <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="Part ${idx + 1}" loading="lazy"${thumbStyle}>
                         <div class="episode-thumb-overlay">
                             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
@@ -1573,7 +1710,7 @@
                     if (idx === currentPartIdx) return;
                     currentPartIdx = idx;
                     updatePartUI();
-                    playCurrentPart();
+                    playCurrentVideo();
                     scrollActiveIntoView();
                 });
                 episodesTrack.appendChild(card);
@@ -1589,13 +1726,50 @@
             }
         }
 
-        function playCurrentPart() {
+        function partId(p) {
+            return (p && typeof p === 'object') ? p.id : p;
+        }
+
+        function partStart(p) {
+            return (p && typeof p === 'object' && typeof p.start === 'number') ? p.start : 0;
+        }
+
+        function currentVideoId() {
+            if (modalMode === 'clip') return clipQueue[clipQueueIdx].videoId;
+            return partId(currentParts[currentPartIdx]);
+        }
+
+        function currentVideoStart() {
+            if (modalMode === 'clip') return 0;
+            return partStart(currentParts[currentPartIdx]);
+        }
+
+        function remainingPlaylistIds() {
+            if (modalMode === 'clip') return clipQueue.slice(clipQueueIdx + 1).map(c => c.videoId);
+            return currentParts.slice(currentPartIdx + 1).map(partId);
+        }
+
+        function updateClipHeader() {
+            const titleEl = document.getElementById('videoModalTitle');
+            if (modalMode === 'clip' && clipQueue[clipQueueIdx]) {
+                const clip = clipQueue[clipQueueIdx];
+                titleEl.querySelector('.modal-title-text').textContent = clip.title || '';
+                titleEl.querySelector('.modal-title-year').textContent = clip.year != null ? clip.year : '';
+                titleEl.style.display = '';
+            } else {
+                titleEl.style.display = 'none';
+            }
+        }
+
+        function playCurrentVideo() {
+            updateClipHeader();
             const modal = document.getElementById('videoModal');
             const content = modal.querySelector('.video-modal-content');
-            const videoId = currentParts[currentPartIdx];
+            const videoId = currentVideoId();
+            const startAt = currentVideoStart();
 
             if (isMobile()) {
-                // Mobile: YouTube iframe (with playlist for remaining parts so YT auto-advances)
+                // Mobile: YouTube iframe (with playlist for remaining items so YT auto-advances)
                 content.querySelector('media-player').style.display = 'none';
                 let iframe = content.querySelector('.yt-mobile-iframe');
                 if (!iframe) {
@@ -1606,9 +1780,10 @@
                     iframe.setAttribute('frameborder', '0');
                     content.appendChild(iframe);
                 }
-                const remaining = currentParts.slice(currentPartIdx + 1).join(',');
+                const remaining = remainingPlaylistIds().join(',');
                 const playlistParam = remaining ? `&playlist=${remaining}` : '';
-                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1${playlistParam}`;
+                const startParam = startAt > 0 ? `&start=${startAt}` : '';
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1${startParam}${playlistParam}`;
                 iframe.style.display = 'block';
             } else {
                 // Desktop: Vidstack
@@ -1622,6 +1797,9 @@
                 if (player) {
                     firstPlay = true;
                     const onCanPlay = () => {
+                        if (startAt > 0) {
+                            try { player.currentTime = startAt; } catch (_) {}
+                        }
                         player.play();
                         player.removeEventListener('can-play', onCanPlay);
                     };
@@ -1631,10 +1809,62 @@
             }
         }
 
+        function updateRecommendationsUI() {
+            if (modalMode !== 'clip' || clipQueue.length === 0) {
+                recommendationsPanel.classList.remove('visible');
+                recommendationsTrack.innerHTML = '';
+                return;
+            }
+
+            recommendationsPanel.classList.add('visible');
+            recommendationsTrack.innerHTML = '';
+
+            clipQueue.forEach((clip, idx) => {
+                const card = document.createElement('button');
+                card.type = 'button';
+                card.className = 'episode-card' + (idx === clipQueueIdx ? ' active' : '');
+                const thumbStyle = clip.coverScale && clip.coverScale !== 1 ? ` style="transform: scale(${clip.coverScale})"` : '';
+                card.innerHTML = `
+                    <div class="episode-thumb">
+                        <img src="https://img.youtube.com/vi/${clip.videoId}/hqdefault.jpg" alt="${clip.title}" loading="lazy"${thumbStyle}>
+                        <div class="episode-thumb-overlay">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="episode-meta">
+                        <span class="episode-label">${clip.title}</span>
+                        <span class="episode-sublabel">${clip.year}</span>
+                    </div>
+                `;
+                card.addEventListener('click', () => {
+                    if (idx === clipQueueIdx) return;
+                    clipQueueIdx = idx;
+                    currentCoverScale = clip.coverScale || 1;
+                    updateRecommendationsUI();
+                    playCurrentVideo();
+                    scrollActiveRecommendationIntoView();
+                });
+                recommendationsTrack.appendChild(card);
+            });
+
+            scrollActiveRecommendationIntoView();
+        }
+
+        function scrollActiveRecommendationIntoView() {
+            const active = recommendationsTrack.querySelector('.episode-card.active');
+            if (active) {
+                active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        }
+
         // Video Modal Functions
-        window.openVideo = function(videoId, creator) {
+        window.openVideo = function(videoId, creator, year, coverScale) {
+            modalMode = 'pelicula';
             currentParts = Array.isArray(videoId) ? videoId.slice() : [videoId];
             currentPartIdx = 0;
+            currentCoverScale = coverScale || 1;
+            clipQueue = [];
+            clipQueueIdx = 0;
 
             const modal = document.getElementById('videoModal');
             modal.classList.add('active');
@@ -1644,6 +1874,7 @@
             if (creator) {
                 const url = (creatorsMap && creatorsMap[creator]) || `https://www.youtube.com/results?search_query=${encodeURIComponent(creator)}`;
                 credit.href = url;
+                credit.querySelector('.credit-year').textContent = year != null ? year : '';
                 credit.querySelector('.credit-name').textContent = creator;
                 credit.style.display = '';
             } else {
@@ -1651,7 +1882,27 @@
             }
 
             updatePartUI();
-            playCurrentPart();
+            updateRecommendationsUI();
+            playCurrentVideo();
+        }
+
+        window.openClip = function(queue, idx) {
+            modalMode = 'clip';
+            clipQueue = queue.slice();
+            clipQueueIdx = idx;
+            currentCoverScale = clipQueue[idx].coverScale || 1;
+            currentParts = [];
+            currentPartIdx = 0;
+
+            const modal = document.getElementById('videoModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            document.getElementById('videoModalCredit').style.display = 'none';
+
+            updatePartUI();
+            updateRecommendationsUI();
+            playCurrentVideo();
         }
 
         window.closeModal = function(event) {
@@ -1663,6 +1914,13 @@
             // Reset episodes panel
             episodesPanel.classList.remove('visible');
             episodesTrack.innerHTML = '';
+
+            // Reset recommendations panel
+            recommendationsPanel.classList.remove('visible');
+            recommendationsTrack.innerHTML = '';
+
+            // Reset clip title chip
+            document.getElementById('videoModalTitle').style.display = 'none';
 
             // Stop mobile iframe
             const mobileIframe = modal.querySelector('.yt-mobile-iframe');
@@ -1684,7 +1942,7 @@
         document.getElementById('videoModalCredit').addEventListener('click', (e) => {
             if (e.shiftKey && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault();
-                const videoId = currentParts[currentPartIdx];
+                const videoId = currentVideoId();
                 if (videoId) window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank', 'noopener');
             }
         });
@@ -1706,6 +1964,13 @@
             }
         })();
 
+        // Build inline style for a card cover image based on optional coverScale.
+        // coverScale: number (e.g. 1.18) zooms the image so letterbox bars get cropped out.
+        function buildCoverStyle(item) {
+            if (!item.coverScale || item.coverScale === 1) return '';
+            return ` style="transform: scale(${item.coverScale})"`;
+        }
+
         // Carregar dades dinàmicament
         async function loadData() {
             try {
@@ -1722,7 +1987,7 @@
                 const featuredPeli = data.pelicules.find(p => p.year === featured.year);
                 document.querySelector('.hero-meta .duration').textContent = featuredPeli?.duration || '';
                 document.querySelector('.hero-meta .creator').textContent = featuredPeli?.creator || '';
-                document.querySelector('.btn-play').onclick = () => window.openVideo(featured.videoId, featuredPeli?.creator);
+                document.querySelector('.btn-play').onclick = () => window.openVideo(featured.videoId, featuredPeli?.creator, featuredPeli?.year, featuredPeli?.coverScale);
                 
                 // Generar Pel·lícules
                 const peliculesContainer = document.getElementById('pelicules-container');
@@ -1730,11 +1995,12 @@
                 data.pelicules.forEach(peli => {
                     const card = document.createElement('article');
                     card.className = 'video-card';
-                    card.onclick = () => window.openVideo(peli.videoId, peli.creator);
+                    card.onclick = () => window.openVideo(peli.videoId, peli.creator, peli.year, peli.coverScale);
                     const partsCount = Array.isArray(peli.videoId) ? peli.videoId.length : 1;
                     const partsBadge = partsCount > 1 ? `<div class="parts-badge">${partsCount} parts</div>` : '';
+                    const imgStyle = buildCoverStyle(peli);
                     card.innerHTML = `
-                        <img src="${peli.coverUrl}" alt="Sant Antoni ${peli.year}">
+                        <img src="${peli.coverUrl}" alt="Sant Antoni ${peli.year}"${imgStyle}>
                         ${partsBadge}
                         <div class="card-year-top${String(peli.year).includes('-') ? ' card-year-top--range' : ''}">${peli.year}</div>
                         <div class="play-icon"></div>
@@ -1750,12 +2016,13 @@
                 const clipsContainer = document.getElementById('clips-container');
                 clipsContainer.innerHTML = ''; // Clear skeletons
                 const shuffledClips = [...data.clips].sort(() => Math.random() - 0.5);
-                shuffledClips.forEach(clip => {
+                shuffledClips.forEach((clip, idx) => {
                     const card = document.createElement('article');
                     card.className = 'video-card';
-                    card.onclick = () => window.openVideo(clip.videoId);
+                    card.onclick = () => window.openClip(shuffledClips, idx);
+                    const imgStyle = buildCoverStyle(clip);
                     card.innerHTML = `
-                        <img src="https://img.youtube.com/vi/${clip.videoId}/hqdefault.jpg" alt="Clip Sant Antoni ${clip.year}">
+                        <img src="https://img.youtube.com/vi/${clip.videoId}/hqdefault.jpg" alt="Clip Sant Antoni ${clip.year}"${imgStyle}>
                         <div class="play-icon"></div>
                         <div class="card-info">
                             <div class="card-year">${clip.year}</div>
@@ -1815,6 +2082,32 @@
             updateNavButtons();
         }
         
+        // Parallax on hero background
+        (function initParallax() {
+            const heroBg = document.getElementById('heroBg');
+            const hero = document.querySelector('.hero');
+            if (!heroBg || !hero) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            let ticking = false;
+            function update() {
+                const rect = hero.getBoundingClientRect();
+                // Only translate while hero is intersecting the viewport
+                if (rect.bottom > 0 && rect.top < window.innerHeight) {
+                    const offset = Math.max(0, -rect.top) * 0.3;
+                    heroBg.style.transform = `translate3d(0, ${offset}px, 0)`;
+                }
+                ticking = false;
+            }
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(update);
+                    ticking = true;
+                }
+            }, { passive: true });
+            update();
+        })();
+
         // Carregar dades (modules are deferred, so DOM is ready)
         loadData();
     </script>

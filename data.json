@@ -42,28 +42,31 @@
       ],
       "coverUrl": "https://img.youtube.com/vi/W4l_PoaV6m8/hqdefault.jpg",
       "duration": "33 min",
-      "creator": "Miquel Mestre"
+      "creator": "Miquel Mestre",
+      "coverScale": 1.05
     },
     {
       "year": 1999,
       "videoId": "Kej3paDpAHk",
       "coverUrl": "https://img.youtube.com/vi/Kej3paDpAHk/hqdefault.jpg",
       "duration": "55 min",
-      "creator": "Miquel Mestre"
+      "creator": "Miquel Mestre",
+      "coverScale": 1.4
     },
     {
       "year": 1991,
       "videoId": [
         "b6NRJYFrWiY",
-        "Qc8I_f29QQg",
-        "RuXvmmN9gEk",
-        "zT_bgFjGh3I",
-        "UQklcrMX5OQ",
+        { "id": "Qc8I_f29QQg", "start": 13 },
+        { "id": "RuXvmmN9gEk", "start": 13 },
+        { "id": "zT_bgFjGh3I", "start": 13 },
+        { "id": "UQklcrMX5OQ", "start": 13 },
         "ImFxAZXoifM"
       ],
       "coverUrl": "https://img.youtube.com/vi/b6NRJYFrWiY/hqdefault.jpg",
       "duration": "50 min",
-      "creator": "Miquel Mestre"
+      "creator": "Miquel Mestre",
+      "coverScale": 1.06
     },
     {
       "year": 1990,
@@ -77,14 +80,16 @@
       "videoId": "DgY8muZRBEo",
       "coverUrl": "https://img.youtube.com/vi/DgY8muZRBEo/hqdefault.jpg",
       "duration": "34 min",
-      "creator": "Miquel Mestre"
+      "creator": "Miquel Mestre",
+      "coverScale": 1.13
     },
     {
       "year": "1982-1983",
       "videoId": "7e6Mn0i5oqQ",
       "coverUrl": "https://img.youtube.com/vi/7e6Mn0i5oqQ/hqdefault.jpg",
       "duration": "61 min",
-      "creator": "Miquel Mestre"
+      "creator": "Miquel Mestre",
+      "coverScale": 1.4
     },
     {
       "year": 1981,
@@ -97,7 +102,8 @@
       ],
       "coverUrl": "https://img.youtube.com/vi/whdvZ6LeHYo/hqdefault.jpg",
       "duration": "18 min",
-      "creator": "Miquel Mestre"
+      "creator": "Miquel Mestre",
+      "coverScale": 1.05
     }
   ],
   "clips": [
@@ -143,7 +149,7 @@
     },
     {
       "year": 2017,
-      "title": "Xisco Mosca IB3",
+      "title": "Entrevista Xisco Mosca IB3",
       "videoId": "L4ew7sLD4us"
     },
     {
@@ -199,17 +205,20 @@
     {
       "year": 2003,
       "title": "Acapte",
-      "videoId": "einDULuDinw"
+      "videoId": "einDULuDinw",
+      "coverScale": 1.11
     },
     {
       "year": 2002,
       "title": "Ball a l'Església",
-      "videoId": "VBJkd67Hkyg"
+      "videoId": "VBJkd67Hkyg",
+      "coverScale": 1.03
     },
     {
       "year": 1999,
       "title": "Ball a s'Ajuntament",
-      "videoId": "5jP61NK-TNI"
+      "videoId": "5jP61NK-TNI",
+      "coverScale": 1.09
     }
   ]
 }

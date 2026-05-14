@@ -1,3 +1,22 @@
+## [0.3.0] - 2026-05-14
+### Added
+- Clip autoplay queue: clicking a clip opens a modal that auto-advances through the (shuffled) clip list and shows a "Més clips" recommendations panel below the player
+- Clip modal title chip showing the clip title and year at the top-left of the player
+- `coverScale` per video (films and clips) to zoom the thumbnail and crop letterbox bars — applied to card images, modal credit context, and recommendations/episodes panels
+- Per-part start offset for multi-part films: `videoId` entries may now be `{ "id": "...", "start": 13 }` so each part can begin at a given second (works on desktop Vidstack and mobile via YouTube `start` param)
+- Hero parallax: the videos-page hero background scrolls slower than the page (respects `prefers-reduced-motion`)
+- Viewport-stage layout on desktop: the hero and the "Pel·lícules Completes" carousel are sized to share one screen height
+- Year alongside the creator name in the modal credit chip
+
+### Changed
+- "Pel·lícules Completes" row title now renders the punt volat as a tighter inline glyph (`<span class="punt-volat">·</span>`) for better typographic spacing
+- Renamed `playCurrentPart` → `playCurrentVideo` and unified the modal state machine around a `modalMode` of `'pelicula'` or `'clip'`
+- Films row now sits inside the viewport-stage container above the rest of the content section; clips row gets the standard content padding
+- Cards container gets more vertical breathing room (`2rem 3rem 4.25rem`) so card hover/scale doesn't clip against the row edge
+
+### Fixed
+- Light-mode `.episode-label` override removed (was overriding the active-part red highlight)
+
 ## [0.2.1] - 2026-05-14
 ### Changed
 - Videos page: "Pel·lícules Completes" row now has a featured red-glow background with gradient borders
