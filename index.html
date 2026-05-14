@@ -25,6 +25,7 @@ e<!DOCTYPE html>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Literata:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <script src="/components/footer-credit.js" defer></script>
     <style>
         :root {
             --vermell-foc: #9B1B30;
@@ -82,15 +83,15 @@ e<!DOCTYPE html>
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            justify-content: center;
             background: var(--header-bg, rgba(20,20,20,0.98));
             transition: background 0.3s ease;
             border-bottom: 1px solid var(--header-border, rgba(255,255,255,0.08));
         }
 
         .logo {
-            margin-right: auto;
             font-family: 'Libre Baskerville', serif;
-            font-size: 2.8rem;
+            font-size: 1.75rem;
             font-weight: 700;
             letter-spacing: 0.02em;
             color: var(--vermell-intens);
@@ -102,6 +103,7 @@ e<!DOCTYPE html>
             width: 100%;
             margin-top: 0.5rem;
             display: flex;
+            justify-content: center;
             gap: 2rem;
             align-items: center;
         }
@@ -111,7 +113,7 @@ e<!DOCTYPE html>
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 400;
-            font-size: 1.1rem;
+            font-size: 1rem;
             letter-spacing: 0.02em;
             padding: 0.3rem 0;
             position: relative;
@@ -143,6 +145,10 @@ e<!DOCTYPE html>
 
         /* Theme Toggle */
         .theme-toggle {
+            position: absolute;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -247,12 +253,46 @@ e<!DOCTYPE html>
         .hero-subtitle {
             font-size: 1.4rem;
             color: rgba(255,255,255,0.85);
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             line-height: 1.6;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             text-shadow: 1px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--vermell-foc);
+            color: var(--blanc-pur);
+            padding: 1rem 2rem;
+            font-family: 'Literata', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            box-shadow: 0 6px 20px rgba(155,27,48,0.4);
+            transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .hero-cta:hover {
+            background: var(--vermell-brillant);
+            box-shadow: 0 12px 30px rgba(155,27,48,0.55);
+            transform: translateY(-4px);
+        }
+
+        .hero-cta svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .scroll-indicator {
@@ -504,7 +544,7 @@ e<!DOCTYPE html>
         /* Footer */
         footer {
             position: relative;
-            padding: 3rem;
+            padding: 3rem 3rem 1.5rem;
             text-align: center;
             background: var(--bg-primary);
             border-top: 1px solid rgba(255,255,255,0.05);
@@ -529,6 +569,27 @@ e<!DOCTYPE html>
             fill: currentColor;
         }
 
+        .footer-github::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: calc(100% + 0.6rem);
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 0.4rem 0.65rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-github:hover::before {
+            opacity: 1;
+        }
+
         .footer-logo {
             font-family: 'Literata', serif;
             font-size: 1.5rem;
@@ -547,8 +608,12 @@ e<!DOCTYPE html>
                 padding: 1rem 1.5rem;
             }
 
+            .theme-toggle {
+                right: 1.5rem;
+            }
+
             .logo {
-                font-size: 1.7rem;
+                font-size: 1.5rem;
             }
 
             .nav-links {
@@ -668,6 +733,10 @@ e<!DOCTYPE html>
                 <span class="hero-badge">16 i 17 de gener · Artà, Mallorca</span>
                 <h1 class="hero-title">Sant Antoni d'Artà</h1>
                 <p class="hero-subtitle">Dimonis, foguerons i beneïdes.</p>
+                <a href="/videos" class="hero-cta">
+                    <svg viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4" fill="currentColor" stroke="none"/></svg>
+                    Mira els vídeos
+                </a>
             </div>
             <div class="scroll-indicator">
                 <span>Descobreix</span>
@@ -745,9 +814,10 @@ e<!DOCTYPE html>
     <footer>
         <div class="footer-logo">SANT ANTONI D'ARTÀ</div>
         <p class="footer-text">16 i 17 de Gener · Artà, Mallorca</p>
-        <a href="https://github.com/JosepBernad/santantoni.org" target="_blank" rel="noopener" class="footer-github" aria-label="GitHub">
+        <a href="https://github.com/JosepBernad/santantoni.org" target="_blank" rel="noopener" class="footer-github" aria-label="GitHub" data-tooltip="Open Source">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
+        <footer-credit></footer-credit>
     </footer>
 
     <script>

@@ -1,4 +1,9 @@
 {
+  "creators": {
+    "Marta Mas": "https://www.youtube.com/@martamassoler5544",
+    "Gaspar Caballero": "https://www.youtube.com/@elsodelsilenci8292",
+    "Miquel Mestre": "https://www.youtube.com/@mimegi"
+  },
   "featured": {
     "year": 2026,
     "title": "Sant Antoni 2026",
@@ -11,31 +16,88 @@
       "year": 2026,
       "videoId": "xoqIP16AU0g",
       "coverUrl": "https://img.youtube.com/vi/xoqIP16AU0g/hqdefault.jpg",
-      "duration": "58 min"
+      "duration": "58 min",
+      "creator": "Marta Mas"
     },
     {
       "year": 2025,
       "videoId": "iWGhiAcHitM",
       "coverUrl": "https://uh.gsstatic.es/sfAttachPlugin/2695437.jpg",
-      "duration": "39 min"
+      "duration": "39 min",
+      "creator": "Marta Mas"
     },
     {
       "year": 2022,
       "videoId": "uZOVksYWdwk",
       "coverUrl": "https://img.youtube.com/vi/uZOVksYWdwk/hqdefault.jpg",
-      "duration": "23 min"
+      "duration": "23 min",
+      "creator": "Gaspar Caballero"
     },
     {
-      "year": 2009,
-      "videoId": "xXuIj5rj-gQ",
-      "coverUrl": "https://img.youtube.com/vi/xXuIj5rj-gQ/hqdefault.jpg",
-      "duration": "4 min"
+      "year": 2002,
+      "videoId": [
+        "W4l_PoaV6m8",
+        "8WurZsw3mV0",
+        "j3hr2PilCTA"
+      ],
+      "coverUrl": "https://img.youtube.com/vi/W4l_PoaV6m8/hqdefault.jpg",
+      "duration": "33 min",
+      "creator": "Miquel Mestre"
+    },
+    {
+      "year": 1999,
+      "videoId": "Kej3paDpAHk",
+      "coverUrl": "https://img.youtube.com/vi/Kej3paDpAHk/hqdefault.jpg",
+      "duration": "55 min",
+      "creator": "Miquel Mestre"
+    },
+    {
+      "year": 1991,
+      "videoId": [
+        "b6NRJYFrWiY",
+        "Qc8I_f29QQg",
+        "RuXvmmN9gEk",
+        "zT_bgFjGh3I",
+        "UQklcrMX5OQ",
+        "ImFxAZXoifM"
+      ],
+      "coverUrl": "https://img.youtube.com/vi/b6NRJYFrWiY/hqdefault.jpg",
+      "duration": "50 min",
+      "creator": "Miquel Mestre"
+    },
+    {
+      "year": 1990,
+      "videoId": "Mkc09yiSIJg",
+      "coverUrl": "https://img.youtube.com/vi/Mkc09yiSIJg/hqdefault.jpg",
+      "duration": "5 min",
+      "creator": "Miquel Mestre"
+    },
+    {
+      "year": 1984,
+      "videoId": "DgY8muZRBEo",
+      "coverUrl": "https://img.youtube.com/vi/DgY8muZRBEo/hqdefault.jpg",
+      "duration": "34 min",
+      "creator": "Miquel Mestre"
+    },
+    {
+      "year": "1982-1983",
+      "videoId": "7e6Mn0i5oqQ",
+      "coverUrl": "https://img.youtube.com/vi/7e6Mn0i5oqQ/hqdefault.jpg",
+      "duration": "61 min",
+      "creator": "Miquel Mestre"
     },
     {
       "year": 1981,
-      "videoId": "WfAfAAF4IO0",
-      "coverUrl": "https://img.youtube.com/vi/WfAfAAF4IO0/hqdefault.jpg",
-      "duration": "7 min"
+      "videoId": [
+        "whdvZ6LeHYo",
+        "Lk8h8gcU57s",
+        "-b6B9HO7984",
+        "ZD-6qxBSfec",
+        "SNkdXD4S1CU"
+      ],
+      "coverUrl": "https://img.youtube.com/vi/whdvZ6LeHYo/hqdefault.jpg",
+      "duration": "18 min",
+      "creator": "Miquel Mestre"
     }
   ],
   "clips": [
@@ -53,11 +115,6 @@
       "year": 2023,
       "title": "Ball a Sa Plaça",
       "videoId": "4OVC4PPMlo8"
-    },
-    {
-      "year": 2020,
-      "title": "Conversa Miquel Montoro i Borja Viejo",
-      "videoId": "qBjLP6Kk4m0"
     },
     {
       "year": 2019,
@@ -78,6 +135,11 @@
       "year": 2017,
       "title": "Ball a nes Coll de n'Abrines",
       "videoId": "Anb5j7czrww"
+    },
+    {
+      "year": 2017,
+      "title": "Darrer ball Xisco Mosca",
+      "videoId": "I1HT1pkWhQg"
     },
     {
       "year": 2017,
@@ -148,31 +210,6 @@
       "year": 1999,
       "title": "Ball a s'Ajuntament",
       "videoId": "5jP61NK-TNI"
-    },
-    {
-      "year": 1981,
-      "title": "Entrevista a Don Toni Gili | Miquel Mestre",
-      "videoId": "whdvZ6LeHYo"
-    },
-    {
-      "year": 1981,
-      "title": "Beneïdes",
-      "videoId": "WfAfAAF4IO0"
-    },
-    {
-      "year": 1981,
-      "title": "A Na Crema",
-      "videoId": "Lk8h8gcU57s"
-    },
-    {
-      "year": 1981,
-      "title": "Gloses i Foguerons",
-      "videoId": "ZD-6qxBSfec"
-    },
-    {
-      "year": 1981,
-      "title": "Ballant al Fogueró",
-      "videoId": "SNkdXD4S1CU"
     }
   ]
 }

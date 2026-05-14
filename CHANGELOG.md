@@ -1,3 +1,27 @@
+## [0.2.0] - 2026-05-14
+### Added
+- Creator attribution on full films: each `pelicula` now has a `creator`, and `data.json` ships a `creators` map of channel URLs
+- Multi-part video support: `videoId` can be a list of YouTube IDs, with a streaming-style episodes tray in the modal that auto-advances on `ended` (mobile uses the YouTube `playlist` param)
+- Video modal credit chip linking to the creator's channel (Cmd/Ctrl+Shift opens the current part on YouTube directly)
+- Eight more historical full films (2002, 1999, 1991, 1990, 1984, 1982–1983, 1981 — Miquel Mestre archive) plus the 2017 "Darrer ball Xisco Mosca" clip
+- Hero call-to-action button on the homepage linking to `/videos`
+- `<footer-credit>` web component (in `components/footer-credit.js`) and the Josep Bernad branding SVGs, embedded on every page
+- "Open Source" tooltip on the footer GitHub icon
+- `card-year-top` overlay and multi-part badge on film cards
+- `Pel·lícules Completes` row header on the videos page
+
+### Changed
+- Header layout: centered logo and nav links, smaller logo (1.75rem), theme toggle absolutely positioned on the right
+- Videos page hero meta now shows creator + duration instead of year + "Artà"
+- Film card info footer shows creator instead of year (year moved to a large top overlay)
+- Video modal scrolls when content overflows (`align-items: safe center`, `overflow-y: auto`) and uses tighter mobile padding/close-button sizing
+- Lletra font controls moved up (`bottom: 5rem` desktop, `4.5rem` mobile) to clear the new footer credit
+- Footer bottom padding reduced (`1.5rem`) to tighten the credit section
+
+### Removed
+- 2009 short clip and standalone 1981 clips (merged into the multi-part 1981 entry)
+- "Conversa Miquel Montoro i Borja Viejo" clip
+
 ## [0.1.3] - 2026-04-28
 ### Changed
 - Migrated hosting from GitHub Pages to Vercel; disabled the GitHub Pages site and removed the `CNAME` file
