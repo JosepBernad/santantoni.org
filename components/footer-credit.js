@@ -21,7 +21,7 @@ class FooterCredit extends HTMLElement {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    gap: 0.6rem;
+                    gap: 0.5rem;
                     width: fit-content;
                     margin: 0 auto;
                     opacity: 0.65;
@@ -34,19 +34,21 @@ class FooterCredit extends HTMLElement {
 
                 .label {
                     font-family: 'Libre Baskerville', serif;
-                    font-size: 0.85rem;
+                    font-size: 0.8125rem;
+                    line-height: 1.4;
                     color: var(--text-secondary, #808080);
                 }
 
                 .heart {
-                    margin-left: 0.6em;
-                    font-size: 1.3em;
+                    margin-left: 0.5em;
+                    font-size: 1.15em;
                     vertical-align: -0.1em;
                 }
 
                 img {
-                    height: 48px;
+                    height: 32px;
                     width: auto;
+                    display: block;
                     filter: brightness(0) invert(1);
                 }
 

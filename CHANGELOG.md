@@ -1,3 +1,10 @@
+## [0.3.2] - 2026-05-14
+### Changed
+- Forced dark theme site-wide; removed the theme toggle button from all pages (`index`, `videos`, `lletra`, `info`)
+- Footer credit: smaller Josep Bernad logo (48px → 32px), tighter gap, slightly smaller label, smaller heart glyph
+- Hero subtitle copy on the homepage rendered at higher opacity (0.85 → 0.98) for better legibility
+- Carousel nav button hover on the videos page now uses white background with dark icon (was red), matching both dark and light themes
+
 ## [0.3.1] - 2026-05-14
 ### Changed
 - Redesigned clip cards: 16:9 cover image with title and year rendered below the cover (no overlay), tighter typography
