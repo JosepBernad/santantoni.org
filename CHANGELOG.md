@@ -1,3 +1,15 @@
+## [0.6.0] - 2026-05-14
+### Added
+- `toni.svg` illustration shown on the `lletra` page alongside the lyrics
+- Two-column layout on `lletra` (≥1000px): lyrics on the left, sticky full-height Toni illustration on the right; falls back to single-column with the illustration below on narrower viewports
+
+### Changed
+- Replaced all pure-white (`#FFFFFF` / `#fff` / `white`) solid colors with the off-white `--blanc-camisa` (`#F5F5F5`) across `index.html`, `info/index.html`, `lletra/index.html`, and `videos/index.html`: tooltip text, play/pause feedback fill, media-player controls color, and the YouTube credit logo's play triangle (SVG attribute — inlined as `#F5F5F5` since CSS variables don't apply there)
+- Inactive light-theme `--bg-secondary` switched from `#FFFFFF` to `var(--blanc-camisa)` for consistency
+
+### Removed
+- Unused `--blanc-pur` CSS custom property (replaced by `--blanc-camisa` at every call site)
+
 ## [0.5.0] - 2026-05-14
 ### Added
 - Shared `components/site-header.js` web component, with companion `styles/header.css`, consumed by all four pages (`index`, `info`, `lletra`, `videos`) — replaces ~800 lines of duplicated inline header markup/CSS

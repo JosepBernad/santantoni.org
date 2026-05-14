@@ -38,7 +38,6 @@
             --negre-dimoni: #141414;
             --negre-suau: #1F1F1F;
             --blanc-camisa: #F5F5F5;
-            --blanc-pur: #FFFFFF;
             --gris-fum: #808080;
             
             --bg-primary: var(--negre-nit);
@@ -52,7 +51,7 @@
 
         [data-theme="light"] {
             --bg-primary: #F8F5F2;
-            --bg-secondary: #FFFFFF;
+            --bg-secondary: var(--blanc-camisa);
             --bg-tertiary: #EDE8E3;
             --text-primary: #1A1A1A;
             --text-secondary: #666666;
@@ -109,7 +108,7 @@
             align-items: center;
             gap: 0.5rem;
             background: var(--vermell-foc);
-            color: var(--blanc-pur);
+            color: var(--blanc-camisa);
             padding: 0.5rem 1.2rem;
             font-size: 0.9rem;
             font-weight: 600;
@@ -125,7 +124,7 @@
             line-height: 1;
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
-            color: var(--blanc-pur);
+            color: var(--blanc-camisa);
             text-shadow: 2px 4px 30px rgba(0,0,0,0.8);
         }
 
@@ -145,7 +144,7 @@
             align-items: center;
             gap: 0.6rem;
             background: var(--vermell-foc);
-            color: var(--blanc-pur);
+            color: var(--blanc-camisa);
             padding: 1rem 2rem;
             font-family: var(--font-body);
             font-size: 1.05rem;
@@ -309,7 +308,7 @@
         .card-icon svg {
             width: 24px;
             height: 24px;
-            fill: var(--blanc-pur);
+            fill: var(--blanc-camisa);
         }
 
         .card-content {
@@ -466,7 +465,7 @@
             top: 50%;
             transform: translateY(-50%);
             background: rgba(0, 0, 0, 0.85);
-            color: #fff;
+            color: var(--blanc-camisa);
             padding: 0.4rem 0.65rem;
             border-radius: 4px;
             font-size: 0.75rem;

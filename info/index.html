@@ -40,7 +40,6 @@
             --negre-dimoni: #141414;
             --negre-suau: #1F1F1F;
             --blanc-camisa: #F5F5F5;
-            --blanc-pur: #FFFFFF;
             --gris-fum: #808080;
             
             --bg-primary: var(--negre-nit);
@@ -54,7 +53,7 @@
 
         [data-theme="light"] {
             --bg-primary: #F8F5F2;
-            --bg-secondary: #FFFFFF;
+            --bg-secondary: var(--blanc-camisa);
             --bg-tertiary: #EDE8E3;
             --text-primary: #1A1A1A;
             --text-secondary: #666666;
@@ -210,14 +209,14 @@
 
         .custom-marker {
             background: var(--vermell-foc);
-            border: 3px solid var(--blanc-pur);
+            border: 3px solid var(--blanc-camisa);
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
 
         .map-tooltip {
             background: var(--vermell-foc);
-            color: var(--blanc-pur);
+            color: var(--blanc-camisa);
             border: none;
             border-radius: 6px;
             padding: 0.35rem 0.6rem;
@@ -237,7 +236,7 @@
         }
 
         .map-tooltip a:hover {
-            color: var(--blanc-pur);
+            color: var(--blanc-camisa);
             text-decoration: underline;
         }
 
@@ -324,7 +323,7 @@
         .lightbox-title {
             font-family: var(--font-heading);
             font-size: 1.6rem;
-            color: var(--blanc-pur);
+            color: var(--blanc-camisa);
             margin-bottom: 1rem;
             text-align: center;
         }
@@ -343,7 +342,7 @@
             right: 0;
             background: none;
             border: none;
-            color: var(--blanc-pur);
+            color: var(--blanc-camisa);
             font-size: 2rem;
             cursor: pointer;
             opacity: 0.7;
@@ -362,7 +361,7 @@
             transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.1);
             border: none;
-            color: var(--blanc-pur);
+            color: var(--blanc-camisa);
             font-size: 2rem;
             cursor: pointer;
             padding: 1rem 1.2rem;
@@ -564,7 +563,7 @@
             top: 50%;
             transform: translateY(-50%);
             background: rgba(0, 0, 0, 0.85);
-            color: #fff;
+            color: var(--blanc-camisa);
             padding: 0.4rem 0.65rem;
             border-radius: 4px;
             font-size: 0.75rem;

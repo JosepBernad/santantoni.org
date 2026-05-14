@@ -38,7 +38,6 @@
             --negre-dimoni: #141414;
             --negre-suau: #1F1F1F;
             --blanc-camisa: #F5F5F5;
-            --blanc-pur: #FFFFFF;
             --gris-fum: #808080;
             
             --bg-primary: var(--negre-nit);
@@ -53,7 +52,7 @@
 
         [data-theme="light"] {
             --bg-primary: #F8F5F2;
-            --bg-secondary: #FFFFFF;
+            --bg-secondary: var(--blanc-camisa);
             --bg-tertiary: #EDE8E3;
             --text-primary: #1A1A1A;
             --text-secondary: #666666;
@@ -80,6 +79,12 @@
             padding: 8rem 3rem 4rem;
             max-width: 1000px;
             margin: 0 auto;
+        }
+
+        @media (min-width: 1000px) {
+            main {
+                max-width: 1400px;
+            }
         }
 
         .page-title {
@@ -201,6 +206,57 @@
             }
         }
 
+        /* Two-column layout (lyrics + Toni illustration) */
+        .lyrics-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .toni-frame {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4rem;
+            width: 100%;
+        }
+
+        .toni-illustration {
+            pointer-events: none;
+            user-select: none;
+            width: 100%;
+            max-width: 360px;
+            max-height: 70vh;
+            height: auto;
+            object-fit: contain;
+        }
+
+        @media (min-width: 1000px) {
+            .lyrics-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                align-items: start;
+                gap: 3rem;
+            }
+
+            .lyrics-layout .lyrics-column {
+                grid-column: 1;
+            }
+
+            .toni-frame {
+                grid-column: 2;
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                margin-top: 0;
+            }
+
+            .toni-illustration {
+                max-width: none;
+                max-height: 90vh;
+            }
+        }
+
         /* Decorative */
         .divider {
             width: 60px;
@@ -255,7 +311,7 @@
             top: 50%;
             transform: translateY(-50%);
             background: rgba(0, 0, 0, 0.85);
-            color: #fff;
+            color: var(--blanc-camisa);
             padding: 0.4rem 0.65rem;
             border-radius: 4px;
             font-size: 0.75rem;
@@ -295,6 +351,7 @@
                 font-size: 1.1rem;
             }
         }
+
     </style>
     <script type="application/ld+json">
     {
@@ -321,10 +378,11 @@
     <site-header active="lletra"></site-header>
 
     <main>
+        <div class="lyrics-layout">
+        <div class="lyrics-column">
         <h1 class="page-title">Lletra de Completes</h1>
         <p class="page-subtitle">Cançó de Sant Antoni d'Artà</p>
         <div class="divider"></div>
-
         <div class="lyrics-container">
             <div class="stanza">
                 <p>Habitants i moradors</p>
@@ -374,6 +432,11 @@
                 <p>i, ara, per acabar</p>
                 <p>diguem: <span class="highlight-visca">Visca Sant Antoni!</span></p>
             </div>
+        </div>
+        </div>
+        <div class="toni-frame">
+            <img class="toni-illustration" src="/toni.svg" alt="" aria-hidden="true">
+        </div>
         </div>
     </main>
 
