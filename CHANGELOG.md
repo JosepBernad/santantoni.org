@@ -1,3 +1,9 @@
+## [0.6.4] - 2026-05-14
+### Changed
+- `/videos` hero image swapped from a hot-linked `casafari.com` URL to the self-hosted `/images/hero-dimoni.webp` (Dani Alvarez, *Sant Antoni a Artà 2015*, CC BY-NC-ND 2.0)
+- Added a press-photo-style attribution caption in the bottom-right of the `/videos` hero (`videos/index.html`): small red rule + uppercase credit line + license link to `creativecommons.org`, with a responsive shrink under 768px. Gradients/overlays on the hero left untouched
+- New `images/` folder at the repo root with `hero-dimoni.webp` (69 KB) as the first asset
+
 ## [0.6.3] - 2026-05-14
 ### Changed
 - Footer version chip now reads from `/version.json` at runtime: `components/footer-credit.js` fetches the file on connect and overwrites every `.footer-version` span with `v${version}`. The hardcoded spans on `index.html`, `info/index.html`, `lletra/index.html`, and `videos/index.html` were bumped to `v0.6.2` as a no-FOUC fallback if the fetch fails. Single source of truth is now `version.json`.

@@ -106,7 +106,7 @@
                 var(--bg-primary) 0%,
                 transparent 60%
             ),
-            url('https://www.casafari.com/wp-content/uploads/2018/03/sant-antoni-fiesta-arta-mallorca.jpg') center/cover;
+            url('/images/hero-dimoni.webp') center/cover;
             transition: background 0.3s ease;
         }
 
@@ -186,6 +186,48 @@
         .hero-buttons {
             display: flex;
             gap: 1rem;
+        }
+
+        .hero-credit {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 2rem;
+            z-index: 1;
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            line-height: 1.5;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-align: right;
+            color: rgba(245,245,245,0.55);
+        }
+
+        .hero-credit::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 2px;
+            margin-left: auto;
+            margin-bottom: 0.5rem;
+            background: var(--vermell-foc);
+        }
+
+        .hero-credit strong {
+            color: rgba(245,245,245,0.9);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-credit a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(245,245,245,0.35);
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .hero-credit a:hover {
+            color: rgba(245,245,245,0.95);
+            border-bottom-color: rgba(245,245,245,0.8);
         }
 
         .btn {
@@ -1458,6 +1500,18 @@
                 flex-direction: column;
             }
 
+            .hero-credit {
+                bottom: 1rem;
+                right: 1rem;
+                font-size: 0.6rem;
+                letter-spacing: 0.06em;
+            }
+
+            .hero-credit::before {
+                width: 20px;
+                margin-bottom: 0.35rem;
+            }
+
             .video-card {
                 width: 250px;
             }
@@ -1516,6 +1570,10 @@
                     </a>
                 </div>
             </div>
+            <aside class="hero-credit">
+                Foto <strong>Dani Alvarez</strong> · Sant Antoni a Artà, 2015<br>
+                <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-ND 2.0</a>
+            </aside>
         </section>
 
         <!-- Peŀlícules completes -->
